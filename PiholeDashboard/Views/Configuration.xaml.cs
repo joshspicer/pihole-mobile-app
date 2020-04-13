@@ -5,32 +5,37 @@ using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
 using PiholeDashboard.Models;
+using System.Collections;
 
 namespace PiholeDashboard.Views
 {
-    // Learn more about making custom code visible in the Xamarin.Forms previewer
-    // by visiting https://aka.ms/xamarinforms-previewer
     [DesignTimeVisible(false)]
     public partial class NewItemPage : ContentPage
     {
-        public Item Item { get; set; }
+        public PiHoleConfig config { get; set; }
 
         public NewItemPage()
         {
             InitializeComponent();
 
-            Item = new Item
-            {
-                Text = "Item name",
-                Description = "This is an item description."
-            };
+            config = new PiHoleConfig();
 
             BindingContext = this;
         }
 
         async void Save_Clicked(object sender, EventArgs e)
         {
-            MessagingCenter.Send(this, "AddItem", Item);
+            var keys = new List<string>() { "ApiKey", "Uri" };
+            foreach (var k in keys)
+            {
+                // Save 
+                if (App.Current.Properties.ContainsKey(k))
+                    App.Current.Properties[k] = k == "ApiKey" ? config.ApiKey : config.Uri;
+                else
+                    App.Current.Properties.Add(k, k == "ApiKey" ? config.ApiKey : config.Uri);
+            }
+
+            // Pop this model.
             await Navigation.PopModalAsync();
         }
 

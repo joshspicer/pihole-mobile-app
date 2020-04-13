@@ -1,7 +1,6 @@
 ﻿using System;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
-using PiholeDashboard.Services;
 using PiholeDashboard.Views;
 
 namespace PiholeDashboard
@@ -13,7 +12,6 @@ namespace PiholeDashboard
         {
             InitializeComponent();
 
-            DependencyService.Register<MockDataStore>();
             MainPage = new AppShell();
         }
 

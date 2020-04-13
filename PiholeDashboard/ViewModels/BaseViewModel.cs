@@ -6,13 +6,11 @@ using System.Runtime.CompilerServices;
 using Xamarin.Forms;
 
 using PiholeDashboard.Models;
-using PiholeDashboard.Services;
 
 namespace PiholeDashboard.ViewModels
 {
     public class BaseViewModel : INotifyPropertyChanged
     {
-        public IDataStore<Item> DataStore => DependencyService.Get<IDataStore<Item>>();
 
         bool isBusy = false;
         public bool IsBusy
@@ -26,6 +24,22 @@ namespace PiholeDashboard.ViewModels
         {
             get { return title; }
             set { SetProperty(ref title, value); }
+        }
+
+
+        string uri = string.Empty;
+        public string Uri
+        {
+            get { return uri; }
+            set { SetProperty(ref uri, value); }
+        }
+
+
+        string apikey = string.Empty;
+        public string ApiKey
+        {
+            get { return apikey; }
+            set { SetProperty(ref apikey, value); }
         }
 
         protected bool SetProperty<T>(ref T backingStore, T value,

@@ -1,0 +1,31 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:controls="clr-namespace:PiholeDashboard.Controls"  xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:d="http://xamarin.com/schemas/2014/forms/design" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" mc:Ignorable="d" x:Class="PiholeDashboard.Views.DashboardPage" Title="{Binding Title}" x:Name="BrowseItemsPage">
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Add" Clicked="AddItem_Clicked" />
+    </ContentPage.ToolbarItems>
+        <StackLayout Margin="10" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
+            <StackLayout Padding="0,0,0,30">
+                <Label Text="Connected To:" d:Text="{Binding .}" LineBreakMode="NoWrap" Style="{DynamicResource ListItemTextStyle}" FontSize="24" />
+                <Label Text="{Binding config.Uri}" d:Text="Item descripton" LineBreakMode="NoWrap" Style="{DynamicResource ListItemDetailTextStyle}" FontSize="16" />
+                <Label Text="Api Key:" d:Text="{Binding .}" LineBreakMode="NoWrap" Style="{DynamicResource ListItemTextStyle}" FontSize="24" />
+                <Label Text="{Binding config.ApiKey}" d:Text="{Binding .}" LineBreakMode="NoWrap" Style="{DynamicResource ListItemTextStyle}" FontSize="16" />
+            </StackLayout>
+            <Button Text="Refresh!" TextColor="Black" Clicked="RefreshData_Clicked" BackgroundColor="LightBlue"/>
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+
+                <Label Text="{Binding summary.dns_queries_all_types}" Grid.Row="0" Grid.Column="0" />
+                <controls:SummaryComponent Text="aaaaahhh" Grid.Row="0" Grid.Column="1"/>
+                <!--<Label Text="Queries Blocked" Grid.Row="0" Grid.Column="1" />-->
+                <Label Text="Percent Blocked" Grid.Row="1" Grid.Column="0" />
+                <Label Text="Blacklisted Domains" Grid.Row="1" Grid.Column="1" />
+            </Grid>
+        </StackLayout>
+</ContentPage>
