@@ -11,6 +11,7 @@ using PiholeDashboard.Models;
 using PiholeDashboard.Views;
 using PiholeDashboard.ViewModels;
 using System.Net.Http;
+using System.Globalization;
 
 namespace PiholeDashboard.Views
 {
@@ -41,7 +42,8 @@ namespace PiholeDashboard.Views
         {
             try
             {
-                var res = await _client.GetAsync("http://localhost/admin/api.php?summary");
+                var uri = $"http://{App.Current.Properties["Uri"]}/admin/api.php?summary";
+                var res = await _client.GetAsync(uri);
 
                 if (res.IsSuccessStatusCode)
                 {

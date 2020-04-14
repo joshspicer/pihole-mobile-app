@@ -1,15 +1,15 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:controls="clr-namespace:PiholeDashboard.Controls"  xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:d="http://xamarin.com/schemas/2014/forms/design" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" mc:Ignorable="d" x:Class="PiholeDashboard.Views.DashboardPage" Title="{Binding Title}" x:Name="BrowseItemsPage">
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:local="clr-namespace:PiholeDashboard" xmlns:controls="clr-namespace:PiholeDashboard.Controls"  xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:d="http://xamarin.com/schemas/2014/forms/design" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" mc:Ignorable="d" x:Class="PiholeDashboard.Views.DashboardPage" Title="{Binding Title}" x:Name="BrowseItemsPage">
     <ContentPage.ToolbarItems>
         <ToolbarItem Text="Add" Clicked="AddItem_Clicked" />
     </ContentPage.ToolbarItems>
+       <ContentPage.Resources>
+        <ResourceDictionary>
+            <local:APIKeyConcatConverter x:Key="KeyConcat" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
     <StackLayout Margin="10" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
-        <StackLayout Padding="0,0,0,30">
-            <Label Text="Connected To:" d:Text="{Binding .}" LineBreakMode="NoWrap" Style="{DynamicResource ListItemTextStyle}" FontSize="24" />
-            <Label Text="{Binding config.Uri}" d:Text="Item descripton" LineBreakMode="NoWrap" Style="{DynamicResource ListItemDetailTextStyle}" FontSize="16" />
-            <Label Text="Api Key:" d:Text="{Binding .}" LineBreakMode="NoWrap" Style="{DynamicResource ListItemTextStyle}" FontSize="24" />
-            <Label Text="{Binding config.ApiKey}" d:Text="{Binding .}" LineBreakMode="NoWrap" Style="{DynamicResource ListItemTextStyle}" FontSize="16" />
-        </StackLayout>
+        <Label Text="PiHole Dashboard" FontSize="30" Padding="0,0,0,15"/>
         <Button Text="Refresh!" TextColor="Black" Clicked="RefreshData_Clicked" BackgroundColor="LightBlue"/>
         <Grid>
             <Grid.RowDefinitions>
@@ -24,24 +24,29 @@
             <controls:SummaryComponent
                     MyVal="{Binding summary.dns_queries_all_types}"
                     Heading="Total Queries"
-                    BgColor="Blue"
+                    BgColor="Green"
                     Grid.Row="0" Grid.Column="0"/>
             <controls:SummaryComponent
                     MyVal="{Binding summary.ads_blocked_today}"
                     Heading="Ads Blocked Today"
-                    BgColor="Red"
+                    BgColor="Blue"
                     Grid.Row="0" Grid.Column="1"/>
             <controls:SummaryComponent
                     MyVal="{Binding summary.ads_percentage_today, StringFormat='{0:F0}%'}"
                     Heading="Percentage Blocked"
-                    BgColor="Green"
+                    BgColor="DarkOrange"
                     Grid.Row="1" Grid.Column="0"/>
             <controls:SummaryComponent
                     MyVal="{Binding summary.unique_domains}"
                     Heading="Unique Domains"
-                    BgColor="Yellow"
+                    BgColor="Red"
                     Grid.Row="1" Grid.Column="1"/>
-
         </Grid>
+          <StackLayout Padding="0,0,0,0">
+            <Label FontAttributes="Bold" Text="Connected To" LineBreakMode="NoWrap"  FontSize="16" />
+            <Label Text="{Binding config.Uri}" d:Text="Item descripton" LineBreakMode="NoWrap" FontSize="12" />
+            <Label FontAttributes="Bold" Text="API Key" LineBreakMode="NoWrap" FontSize="15" />
+            <Label Text="{Binding config.ApiKey,Converter={StaticResource KeyConcat }}"   FontSize="16" />
+        </StackLayout>
     </StackLayout>
 </ContentPage>   
