@@ -7,15 +7,15 @@ namespace PiholeDashboard.Controls
     public partial class SummaryComponent : ContentView
     {
 
+        // HEADING
         public static readonly BindableProperty TextProperty =
             BindableProperty.Create(
-                nameof(Text),
+                nameof(Heading),
                 typeof(string),
                 typeof(SummaryComponent),
-                default(string),
-                Xamarin.Forms.BindingMode.OneWay);
+                default(string));
 
-        public string Text
+        public string Heading
         {
             get
             {
@@ -28,9 +28,45 @@ namespace PiholeDashboard.Controls
             }
         }
 
+
+        // VALUE
+        public static readonly BindableProperty MyValProperty =
+            BindableProperty.Create("MyVal", typeof(string),
+                typeof(SummaryComponent), string.Empty);
+
+        public string MyVal
+        {
+            get { return (string)GetValue(MyValProperty); }
+            set { SetValue(MyValProperty, value); }
+        }
+
+
+        // COLOR
+        public static readonly BindableProperty ColorProperty =
+     BindableProperty.Create(
+         nameof(BgColor),
+         typeof(Color),
+         typeof(SummaryComponent),
+         default(Color),
+         Xamarin.Forms.BindingMode.TwoWay);
+
+        public Color BgColor
+        {
+            get
+            {
+                return (Color)GetValue(ColorProperty);
+            }
+
+            set
+            {
+                SetValue(ColorProperty, value);
+            }
+        }
+
         public SummaryComponent()
         {
             InitializeComponent();
+            _context.BindingContext = this;
         }
     }
 }

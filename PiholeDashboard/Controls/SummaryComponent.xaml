@@ -1,6 +1,11 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
 <ContentView xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="PiholeDashboard.Controls.SummaryComponent">
     <ContentView.Content>
-        <Label Text="{Binding Text}" />
+        <Grid x:Name="_context">
+            <StackLayout  BackgroundColor="{Binding BgColor}" WidthRequest="100" HeightRequest="100">
+                <Label x:Name="labelHeader" FontSize="15" TextColor="LightGray" Padding="10,5,0,0"  Text="{Binding Heading}"  />
+                <Label x:Name="labelValue" FontSize="35" TextColor="LightGray" Padding="10,10,0,0"  Text="{Binding MyVal}" />
+            </StackLayout>
+        </Grid>
     </ContentView.Content>
 </ContentView>
