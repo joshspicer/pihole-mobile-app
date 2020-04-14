@@ -1,5 +1,5 @@
 # pihole-dashboard
-Xamarin Forms Shell app to manage your local Pihole 
+A simple [Xamarin Forms Shell](https://docs.microsoft.com/en-us/xamarin/xamarin-forms/app-fundamentals/shell/) app to manage your local [Pi-hole](https://pi-hole.net/) instance. 
 
 <kbd>
   <img width=250 src="Screenshots/1.png">
