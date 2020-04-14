@@ -4,6 +4,9 @@ using Xamarin.Forms;
 
 namespace PiholeDashboard
 {
+    /// <summary>
+    /// Obfuscates the displayed API key.
+    /// </summary>
     public class APIKeyConcatConverter : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
@@ -15,7 +18,7 @@ namespace PiholeDashboard
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            return "nope";
+            throw new NotImplementedException();
         }
     }
 }

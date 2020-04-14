@@ -3,7 +3,7 @@
     <ContentPage.ToolbarItems>
         <ToolbarItem Text="Add" Clicked="AddItem_Clicked" />
     </ContentPage.ToolbarItems>
-       <ContentPage.Resources>
+    <ContentPage.Resources>
         <ResourceDictionary>
             <local:APIKeyConcatConverter x:Key="KeyConcat" />
         </ResourceDictionary>
@@ -42,7 +42,7 @@
                     BgColor="Red"
                     Grid.Row="1" Grid.Column="1"/>
         </Grid>
-          <StackLayout Padding="0,0,0,0">
+        <StackLayout Padding="0,0,0,0">
             <Label FontAttributes="Bold" Text="Connected To" LineBreakMode="NoWrap"  FontSize="16" />
             <Label Text="{Binding config.Uri}" d:Text="Item descripton" LineBreakMode="NoWrap" FontSize="12" />
             <Label FontAttributes="Bold" Text="API Key" LineBreakMode="NoWrap" FontSize="15" />

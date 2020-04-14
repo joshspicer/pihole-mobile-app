@@ -1,17 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Xamarin.Forms;
-using Xamarin.Forms.Xaml;
 using Newtonsoft.Json;
 using PiholeDashboard.Models;
-using PiholeDashboard.Views;
-using PiholeDashboard.ViewModels;
 using System.Net.Http;
-using System.Globalization;
 
 namespace PiholeDashboard.Views
 {
