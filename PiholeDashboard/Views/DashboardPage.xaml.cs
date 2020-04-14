@@ -55,7 +55,7 @@ namespace PiholeDashboard.Views
                 else
                 {
                     string errStr = "Error fetching Pihole Summary";
-                    await DisplayAlert("Error!", errStr, "ok :(");
+                    await DisplayAlert($"Error ({res.StatusCode})", errStr, "ok :(");
                     Console.WriteLine($"{errStr}");
                 }
             }
