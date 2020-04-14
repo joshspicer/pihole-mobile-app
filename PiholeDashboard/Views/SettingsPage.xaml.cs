@@ -8,8 +8,6 @@ using Xamarin.Forms.Xaml;
 
 namespace PiholeDashboard.Views
 {
-    // Learn more about making custom code visible in the Xamarin.Forms previewer
-    // by visiting https://aka.ms/xamarinforms-previewer
     [DesignTimeVisible(false)]
     public partial class SettingsPage : ContentPage
     {
@@ -23,10 +21,9 @@ namespace PiholeDashboard.Views
             BindingContext = this;
         }
 
-        async void Disable10_Clicked(object sender, EventArgs e)
-        {
-            await DisableHelper("10");
-        }
+        async void Disable10_Clicked(object sender, EventArgs e) => await DisableHelper("10");
+        async void Disable60_Clicked(object sender, EventArgs e) => await DisableHelper("60");
+        async void Disable300_Clicked(object sender, EventArgs e) => await DisableHelper("300");
 
         // Generic disable Pihole Helper.
         async Task DisableHelper(string duration)
