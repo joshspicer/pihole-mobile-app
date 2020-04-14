@@ -13,8 +13,6 @@ namespace PiholeDashboard.Views
         public PiHoleConfig config { get; } = new PiHoleConfig();
         public Summary summary { get; private set; } = new Summary();
 
-        HttpClient _client = new HttpClient();
-
         public DashboardPage()
         {
             InitializeComponent();
@@ -35,6 +33,9 @@ namespace PiholeDashboard.Views
             try
             {
                 var uri = $"http://{App.Current.Properties["Uri"]}/admin/api.php?summary";
+
+                HttpClient _client = new HttpClient();
+                _client.Timeout = TimeSpan.FromSeconds(5);
                 var res = await _client.GetAsync(uri);
 
                 if (res.IsSuccessStatusCode)

@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:local="clr-namespace:PiholeDashboard" xmlns:controls="clr-namespace:PiholeDashboard.Controls"  xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:d="http://xamarin.com/schemas/2014/forms/design" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" mc:Ignorable="d" x:Class="PiholeDashboard.Views.DashboardPage" Title="{Binding Title}" x:Name="BrowseItemsPage">
     <ContentPage.ToolbarItems>
-        <ToolbarItem Text="Add" Clicked="AddItem_Clicked" />
+        <ToolbarItem Text="Set Credentials" Clicked="AddItem_Clicked" />
     </ContentPage.ToolbarItems>
     <ContentPage.Resources>
         <ResourceDictionary>
@@ -9,8 +9,8 @@
         </ResourceDictionary>
     </ContentPage.Resources>
     <StackLayout Margin="10" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
-        <Label Text="PiHole Dashboard" FontSize="30" Padding="0,0,0,15"/>
-        <Button Text="Refresh!" TextColor="Black" Clicked="RefreshData_Clicked" BackgroundColor="LightBlue"/>
+        <Label Text="PiHole Dashboard" FontSize="34" Padding="0,0,0,15"/>
+        <Button Text="Refresh!" Margin="0,0,0,30" TextColor="Black" Clicked="RefreshData_Clicked" BackgroundColor="LightBlue"/>
         <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition Height="*" />
@@ -42,11 +42,11 @@
                     BgColor="Red"
                     Grid.Row="1" Grid.Column="1"/>
         </Grid>
-        <StackLayout Padding="0,0,0,0">
-            <Label FontAttributes="Bold" Text="Connected To" LineBreakMode="NoWrap"  FontSize="16" />
+        <StackLayout Padding="0,10,0,0">
+            <Label FontAttributes="Bold" Text="Address" LineBreakMode="NoWrap"  FontSize="16" />
             <Label Text="{Binding config.Uri}" d:Text="Item descripton" LineBreakMode="NoWrap" FontSize="12" />
-            <Label FontAttributes="Bold" Text="API Key" LineBreakMode="NoWrap" FontSize="15" />
-            <Label Text="{Binding config.ApiKey,Converter={StaticResource KeyConcat }}"   FontSize="16" />
+            <Label FontAttributes="Bold" Text="API Key" LineBreakMode="NoWrap" FontSize="16" />
+            <Label Text="{Binding config.ApiKey,Converter={StaticResource KeyConcat }}"   FontSize="12" />
         </StackLayout>
     </StackLayout>
 </ContentPage>   

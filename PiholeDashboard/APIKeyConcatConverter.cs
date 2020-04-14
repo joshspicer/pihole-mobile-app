@@ -13,7 +13,7 @@ namespace PiholeDashboard
         {
             string input = (string)value;
             int len = input.Length;
-            return $"{input.Substring(0, 10)}XXXXXXXXX";
+            return $"{input.Substring(0, Math.Min(len / 2, 10))}XXXXXXXXX";
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)

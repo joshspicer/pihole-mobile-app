@@ -9,8 +9,8 @@ namespace PiholeDashboard.Models
 
         public PiHoleConfig()
         {
-            Uri = "example.com:80";
-            ApiKey = "xxxx";
+            Uri = "";
+            ApiKey = "";
         }
     }
 }

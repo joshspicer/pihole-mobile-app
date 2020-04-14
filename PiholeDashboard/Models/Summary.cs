@@ -34,6 +34,5 @@ public class Summary
 
     public Summary()
     {
-        dns_queries_all_types = "...";
     }
 }

@@ -2,7 +2,9 @@
 using System.ComponentModel;
 using System.Net.Http;
 using System.Threading.Tasks;
+using System.Windows.Input;
 using Newtonsoft.Json;
+using Xamarin.Essentials;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -11,14 +13,16 @@ namespace PiholeDashboard.Views
     [DesignTimeVisible(false)]
     public partial class SettingsPage : ContentPage
     {
-
-        HttpClient _client = new HttpClient();
-
-
         public SettingsPage()
         {
             InitializeComponent();
             BindingContext = this;
+        }
+
+        async void Github_Clicked(object sender, EventArgs e)
+        {
+            var url = "https://joshspicer.com/pihole";
+            await Launcher.OpenAsync(url);
         }
 
         async void Disable10_Clicked(object sender, EventArgs e) => await DisableHelper("10");
@@ -33,12 +37,18 @@ namespace PiholeDashboard.Views
                 var dest = App.Current.Properties["Uri"];
                 var auth = App.Current.Properties["ApiKey"];
                 var uri = $"http://{dest}/admin/api.php?disable={duration}&auth={auth}";
+
+                HttpClient _client = new HttpClient();
+                _client.Timeout = TimeSpan.FromSeconds(5);
                 var res = await _client.GetAsync(uri);
 
                 if (res.IsSuccessStatusCode)
                 {
                     var content = await res.Content.ReadAsStringAsync();
-                    await DisplayAlert("Success", $"PiHole disabled for {duration} seconds", "nice!");
+                    if (!content.Contains("Not"))
+                    {
+                        await DisplayAlert("Success", $"PiHole disabled for {duration} seconds", "nice!");
+                    }
                 }
                 else
                 {
