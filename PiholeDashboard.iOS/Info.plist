@@ -5,13 +5,10 @@
 	<key>UIDeviceFamily</key>
 	<array>
 		<integer>1</integer>
-		<integer>2</integer>
 	</array>
 	<key>UISupportedInterfaceOrientations</key>
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>
-		<string>UIInterfaceOrientationLandscapeLeft</string>
-		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
 	<key>UISupportedInterfaceOrientations~ipad</key>
 	<array>
@@ -21,23 +18,25 @@
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
 	<key>MinimumOSVersion</key>
-	<string>8.0</string>
+	<string>11.0</string>
 	<key>CFBundleDisplayName</key>
-	<string>PiholeDashboard</string>
+	<string>Pi ContrHOLE</string>
 	<key>CFBundleIdentifier</key>
-	<string>com.joshspicer.piholedashboard.PiholeDashboard</string>
-	<key>CFBundleVersion</key>
-	<string>1.0</string>
+	<string>com.joshspicer.piholedashboard</string>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
 	<key>CFBundleName</key>
 	<string>PiholeDashboard</string>
 	<key>NSAppTransportSecurity</key>
 	<dict>
-		<key>NSAllowsArbitraryLoads</key>
+		<key>NSAllowsLocalNetworking</key>
 		<true/>
 	</dict>
 	<key>XSAppIconAssets</key>
 	<string>Assets.xcassets/AppIcon.appiconset</string>
+	<key>CFBundleShortVersionString</key>
+	<string>1</string>
+	<key>CFBundleVersion</key>
+	<string>4</string>
 </dict>
 </plist>
