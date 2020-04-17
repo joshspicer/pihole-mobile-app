@@ -13,7 +13,7 @@ A simple [Xamarin Forms Shell](https://docs.microsoft.com/en-us/xamarin/xamarin-
 
 ## Usage
 
-## App Store (iPhone)
+### App Store (iPhone)
 
 This app is available on the iOS app store under the name [Pi ContrHOLE](https://apps.apple.com/us/app/pi-contrhole/id1507963158).  
 
