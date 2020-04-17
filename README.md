@@ -11,6 +11,16 @@ A simple [Xamarin Forms Shell](https://docs.microsoft.com/en-us/xamarin/xamarin-
   <img width=250 src="Screenshots/3.png">
 </kbd>
 
+## Usage
+
+## App Store (iPhone)
+
+This app is available on the iOS app store under the name [Pi ContrHOLE](https://apps.apple.com/us/app/pi-contrhole/id1507963158).  
+
+### Build yourself (iPhone/Android)
+
+Download, [Visual Studio 2019 (Mac/Windows)](https://visualstudio.microsoft.com/), open the `.sln` file, and build for the appropriate device (ios/android).
+
 ## Note
 
 You will need the `WEBPASSWORD` found under `/etc/pihole/setupVars.conf` for anything in "Settings".
