@@ -1,13 +1,13 @@
-Pi ContrHOLE is an unofficial, open-source app developed by a fan of the Pi-Hole project.
+Pi ContrHOLE is an unofficial, open-source, and FREE app developed by a fan of the Pi-Hole project.
 
 Features:
 - Connect to PiHole anywhere on your local network by IP address
-- See quick stats about your cumulative ads block, percentage blocked, etc..
-- Store instance API key
+- See quick stats about your cumulative ads filtered, percentage filtered, etc..
+- Store app session key
 - Quickly toggle settings on your local instance
 - Disable PiHole quickly to debug network DNS issues
 
-You will need the WEBPASSWORD found under /etc/pihole/setupVars.conf to modify any settings.  The API token for this app is NOT the one found in the web GUI, nor is it your login password.
+You will need to enter your WEBPASSWORD found under /etc/pihole/setupVars.conf to modify any settings.  The API token for this app is NOT the one found in the web GUI, nor is it your login password. 
 
 NOTE: You must already have a pi-hole instance running on your local network.  For more info check out the Pi-Hole project at https://pi-hole.net/.  
 
@@ -15,6 +15,8 @@ Testing with versions:
 Pi-hole v4.4 
 Web Interface v4.3.3 
 FTL v4.3.1
+
+If you have any problems, please raise an issue on Github via the "Support URL" link.
 
 ===
 
