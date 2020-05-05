@@ -13,6 +13,12 @@ namespace PiholeDashboard
         {
             string input = (string)value;
             int len = input.Length;
+
+            if (len == 0)
+            {
+                return $"No Key Provided.";
+            }
+
             return $"{input.Substring(0, Math.Min(len / 2, 10))}XXXXXXXXX";
         }
 

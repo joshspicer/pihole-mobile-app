@@ -25,6 +25,13 @@ namespace PiholeDashboard.Views
 
         async void Save_Clicked(object sender, EventArgs e)
         {
+            if (!config.Uri.ToLower().Contains("http"))
+            {
+                var txt = "Please specify a protocol (either HTTP or HTTPS) in your URI!";
+                await DisplayAlert($"Warning", txt, "Ok");
+                return;
+            }
+
             var keys = new List<string>() { "ApiKey", "Uri" };
             foreach (var k in keys)
             {
