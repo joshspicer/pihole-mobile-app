@@ -23,6 +23,8 @@
             </StackLayout>
         </StackLayout>
         <StackLayout Grid.Row="1">
+             <Button Margin="0,15,0,0"  Text="Enable Pi-Hole" Clicked="Enable_Clicked" BackgroundColor="Green" TextColor="White" />
+
             <Button Margin="0,10,0,0" Text="Disable for 10 Seconds" Clicked="Disable10_Clicked" BackgroundColor="{StaticResource Primary}" TextColor="White" />
             <Button Margin="0,10,0,0" Text="Disable for 60 Seconds" Clicked="Disable60_Clicked" BackgroundColor="{StaticResource Primary}" TextColor="White" />
             <Button Margin="0,10,0,0" Text="Disable for 5 Minutes"  Clicked="Disable300_Clicked" BackgroundColor="{StaticResource Primary}" TextColor="White" />

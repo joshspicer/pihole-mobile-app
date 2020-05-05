@@ -6,10 +6,9 @@
     </ContentPage.ToolbarItems>
     <ContentPage.Content>
         <StackLayout Spacing="20" Padding="15">
-            <Label Text="URI"  FontSize="Medium" />
-            <Entry Keyboard="Url" Placeholder="joshspicer.com:80" IsSpellCheckEnabled="False" IsTextPredictionEnabled="false" Text ="{Binding config.Uri}" FontSize="Small" />
-
-            <Label Text="API KEY" FontSize="Medium" />
+            <Label Text="Full URI"  FontSize="Medium" />
+            <Entry Keyboard="Url" Placeholder="http://joshspicer.com:80" IsSpellCheckEnabled="False" IsTextPredictionEnabled="false" Text ="{Binding config.Uri}" FontSize="Small" />
+            <Label Text="WEBPASSWORD (API Key)" FontSize="Medium" />
             <Entry  Keyboard="Url" IsSpellCheckEnabled="False" Placeholder="WEBPASSWORD from /etc/pihole/setupVars.conf" IsTextPredictionEnabled="false"  Text="{Binding config.ApiKey}" FontSize="Small" />
         </StackLayout>
     </ContentPage.Content>

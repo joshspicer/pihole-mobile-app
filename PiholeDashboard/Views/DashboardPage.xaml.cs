@@ -32,7 +32,7 @@ namespace PiholeDashboard.Views
         {
             try
             {
-                var uri = $"http://{App.Current.Properties["Uri"]}/admin/api.php?summary";
+                var uri = $"{App.Current.Properties["Uri"]}/admin/api.php?summary";
 
                 HttpClient _client = new HttpClient();
                 _client.Timeout = TimeSpan.FromSeconds(5);
@@ -54,7 +54,7 @@ namespace PiholeDashboard.Views
             }
             catch (Exception err)
             {
-                string errStr = "Could not connect to PiHole service";
+                string errStr = "Could not connect to PiHole service. Ensure your complete URI is displayed below.";
                 await DisplayAlert("Error!", errStr, "ok :(");
                 Console.WriteLine($"{errStr}: {err}");
             }
