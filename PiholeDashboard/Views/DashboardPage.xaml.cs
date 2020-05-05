@@ -54,7 +54,7 @@ namespace PiholeDashboard.Views
             }
             catch (Exception err)
             {
-                string errStr = "Could not connect to PiHole service. Ensure your complete URI is displayed below.";
+                string errStr = "Could not connect to PiHole service. Ensure your complete URI is displayed below (including the protocol HTTP or HTTPS).";
                 await DisplayAlert("Error!", errStr, "ok :(");
                 Console.WriteLine($"{errStr}: {err}");
             }
