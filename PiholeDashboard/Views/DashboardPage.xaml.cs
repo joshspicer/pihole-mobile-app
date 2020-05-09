@@ -32,7 +32,11 @@ namespace PiholeDashboard.Views
         {
             try
             {
-                var uri = $"{App.Current.Properties["Uri"]}/admin/api.php?summary";
+                //var uri = $"{App.Current.Properties["Uri"]}/admin/api.php?summary";
+                var uri = $"{App.Current.Properties["Uri"]}/admin/api.php?summaryRaw&getQuerySources&topClientsBlocked&auth";
+                uri += App.Current.Properties.ContainsKey("ApiKey") ? $"={App.Current.Properties["ApiKey"]}" : "";
+
+                Console.WriteLine($"URI === {uri}");
 
                 HttpClient _client = new HttpClient();
                 _client.Timeout = TimeSpan.FromSeconds(5);

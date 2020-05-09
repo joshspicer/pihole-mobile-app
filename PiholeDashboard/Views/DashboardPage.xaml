@@ -22,22 +22,22 @@
             </Grid.ColumnDefinitions>
 
             <controls:SummaryComponent
-                    MyVal="{Binding summary.dns_queries_all_types}"
+                    MyVal="{Binding summary.dns_queries_all_types, StringFormat='{0:N0}'}"
                     Heading="Total Queries"
                     BgColor="Green"
                     Grid.Row="0" Grid.Column="0"/>
             <controls:SummaryComponent
-                    MyVal="{Binding summary.ads_blocked_today}"
+                    MyVal="{Binding summary.ads_blocked_today, StringFormat='{0:N0}'}"
                     Heading="Ads Blocked Today"
                     BgColor="Blue"
                     Grid.Row="0" Grid.Column="1"/>
             <controls:SummaryComponent
-                    MyVal="{Binding summary.ads_percentage_today, StringFormat='{0:F0}%'}"
+                    MyVal="{Binding summary.ads_percentage_today, StringFormat='{0:N2}%'}"
                     Heading="Percentage Blocked"
                     BgColor="DarkOrange"
                     Grid.Row="1" Grid.Column="0"/>
             <controls:SummaryComponent
-                    MyVal="{Binding summary.unique_domains}"
+                    MyVal="{Binding summary.unique_domains, StringFormat='{0:N0}'}"
                     Heading="Unique Domains"
                     BgColor="Red"
                     Grid.Row="1" Grid.Column="1"/>
