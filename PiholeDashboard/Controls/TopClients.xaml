@@ -9,20 +9,19 @@
             <ListView x:Name="ItemsListView" VerticalOptions="Center" SeparatorVisibility="None" SelectionMode="None"  ItemsSource="{Binding Clients}">
                 <ListView.ItemTemplate>
                     <DataTemplate>
-                        <ViewCell>
+                        <ViewCell IsEnabled="False">
                             <ViewCell.View>
-                                <StackLayout Margin="15,20,5,0">
-                                    <Grid>
-                                        <Grid.RowDefinitions>
-                                            <RowDefinition Height="Auto" />
-                                        </Grid.RowDefinitions>
-                                        <Grid.ColumnDefinitions>
-                                            <ColumnDefinition Width="*" />
-                                            <ColumnDefinition Width="0.5*" />
-                                        </Grid.ColumnDefinitions>
-                                        <Label x:Name="ip_address" Text="{Binding Key}" Grid.Row="1" Grid.Column="0"  />
-                                        <Label x:Name="activity_count" Text="{Binding Value}" Grid.Row="1" Grid.Column="1"   />
-                                    </Grid>
+                                <StackLayout Margin="15">
+                                    <Frame CornerRadius="10" 
+                                           HasShadow="False"
+                                           IsClippedToBounds="True"
+                                           BorderColor="DarkGray"
+                                           HorizontalOptions="FillAndExpand">
+                                        <StackLayout HorizontalOptions="FillAndExpand" Orientation="Horizontal">
+                                            <Label x:Name="ip_address" Text="{Binding Key}" />
+                                            <Label x:Name="activity_count" Text="{Binding Value}" />
+                                        </StackLayout>
+                                    </Frame>
                                 </StackLayout>
                             </ViewCell.View>
                         </ViewCell>
@@ -30,8 +29,6 @@
                     </DataTemplate>
                 </ListView.ItemTemplate>
             </ListView>
-
-
         </Grid>
     </ContentView.Content>
 </ContentView>

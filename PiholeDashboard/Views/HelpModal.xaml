@@ -1,12 +1,12 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="PiholeDashboard.Views.HelpModal">
-     <ContentPage.ToolbarItems>
+    <ContentPage.ToolbarItems>
         <ToolbarItem Text="Close Help" Clicked="Close_Clicked" />
     </ContentPage.ToolbarItems>
     <ContentPage.Content>
         <ScrollView>
-        <StackLayout x:Name="helpView" >
-            <Frame CornerRadius="10"
+            <StackLayout x:Name="helpView" >
+                <Frame CornerRadius="10"
                        HasShadow="False"
                        x:Name="helpView1"
                        HorizontalOptions="CenterAndExpand"
@@ -15,19 +15,38 @@
                        IsClippedToBounds="True"
                        BackgroundColor="{Binding BgColor}"
                        >
-                <StackLayout>
-                    <Label x:Name="uriHelpHeader"
+                    <StackLayout>
+                        <Label x:Name="uriHelpHeader"
                            FontSize="Header" FontAttributes="Bold"
                            TextColor="Black"
                            Padding="10,10,0,0"
                            Text="Pi-Hole Uri" />
-                    <Label x:Name="uriHelpDetail"
+                        <Label x:Name="uriHelpDetail"
                            FontSize="Header" TextColor="Black"
-                           Padding="10,10,0,0"
-                           Text="The Pi-Hole URI is the beginning of whatever you use to connect to the Pi-Hole web interface. For example if you enter http://192.168.1.200:8181/admin to access the web interface, you should enter http://192.168.1.200:8181 above.  You can test the API by visiting http://YOUR_PI_IP/admin/api.php?summary. If you see data on the screen, your pi-hole is setup correctly. If the page does not load, please check the configuration of your pi-hole and check your firewalls settings." />
-                </StackLayout>
-            </Frame>
-            <Frame CornerRadius="10"
+                           Padding="10,10,0,0">
+                            <Label.Text>
+The Pi-Hole URI is the beginning of whatever you use to connect to the Pi-Hole web interface. For example if you enter:
+
+http://192.168.1.200:8181/admin
+
+to access the web interface, you should enter:
+
+http://192.168.1.200:8181
+
+into PiContrHOLE.
+
+You can test the API by visiting:
+
+http://YOUR_PI_IP/admin/api.php?summary.
+
+If you see data on the screen, your pi-hole is setup correctly.
+
+If the page does not load, please check the configuration of your pi-hole and check your firewalls settings.
+                            </Label.Text>
+                        </Label>
+                    </StackLayout>
+                </Frame>
+                <Frame CornerRadius="10"
                        HasShadow="False"
                        x:Name="helpView2"
                        HorizontalOptions="CenterAndExpand"
@@ -36,22 +55,29 @@
                        IsClippedToBounds="True"
                        BackgroundColor="{Binding BgColor}"
                        >
-                <StackLayout>
-                    <Label x:Name="apiHelpHeader"
+                    <StackLayout>
+                        <Label x:Name="apiHelpHeader"
                            FontSize="Header"
                            FontAttributes="Bold"
                            TextColor="Black"
                            Padding="10,10,0,0"
                            Text="WEBPASSWORD (API Key)" />
-                    <Label x:Name="apiHelpDetail"
+                        <Label x:Name="apiHelpDetail"
                            FontSize="Header"
                            TextColor="Black"
                            Padding="10,10,0,0"
-                           Text="Due to pi-hole limitations, this app does NOT support the API key generated from the webapp.  Instead, you'll need to connect to your pi-hole over SSH (or physically), navigate to the /etc/pihole/setupVars.conf file, and copy the WEBPASSWORD entry.  Enter just the key after the WEBPASSWORD=" />
+                           >
+                            <Label.Text>
+Due to pi-hole limitations, this app does NOT support the API key generated from the webapp.
 
-                </StackLayout>
-            </Frame>
-            <Frame CornerRadius="10"
+Instead, you'll need to connect to your pi-hole over SSH (or physically), navigate to the /etc/pihole/setupVars.conf file,
+and copy the WEBPASSWORD entry.  Enter just the key after the WEBPASSWORD=
+                            </Label.Text>
+                        </Label>
+
+                    </StackLayout>
+                </Frame>
+                <Frame CornerRadius="10"
                        HasShadow="False"
                        x:Name="helpView3"
                        HorizontalOptions="CenterAndExpand"
@@ -60,21 +86,21 @@
                        IsClippedToBounds="True"
                        BackgroundColor="{Binding BgColor}"
                        >
-                <StackLayout>
-                    <Label x:Name="moreInfoHelpHeader"
+                    <StackLayout>
+                        <Label x:Name="moreInfoHelpHeader"
                            FontSize="Header"
                            FontAttributes="Bold"
                            TextColor="Black"
                            Padding="10,10,0,0"
                            Text="Raise an Issue" />
-                    <Label x:Name="moreInfoHelpDetail"
+                        <Label x:Name="moreInfoHelpDetail"
                            FontSize="Header"
                            TextColor="Black"
                            Padding="10,10,0,0"
-                           Text="Visit github.com/joshspicer/pihole-mobile-app and open an issue if you think you've discovered a bug.  Please provide detailed steps. " />
-                </StackLayout>
-            </Frame>
-        </StackLayout>
-            </ScrollView>
+                           Text="Visit github.com/joshspicer/pihole-mobile-app and open an issue if you think you've discovered a bug.  Thanks! " />
+                    </StackLayout>
+                </Frame>
+            </StackLayout>
+        </ScrollView>
     </ContentPage.Content>
 </ContentPage>
