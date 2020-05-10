@@ -14,21 +14,21 @@ public class GravityLastUpdated
 
 public class Summary
 {
-    public string domains_being_blocked { get; set; }
-    public string dns_queries_today { get; set; }
-    public string ads_blocked_today { get; set; }
-    public string ads_percentage_today { get; set; }
-    public string unique_domains { get; set; }
-    public string queries_forwarded { get; set; }
-    public string queries_cached { get; set; }
-    public string clients_ever_seen { get; set; }
-    public string unique_clients { get; set; }
-    public string dns_queries_all_types { get; set; }
-    public string reply_NODATA { get; set; }
-    public string reply_NXDOMAIN { get; set; }
-    public string reply_CNAME { get; set; }
-    public string reply_IP { get; set; }
-    public string privacy_level { get; set; }
+    public int domains_being_blocked { get; set; }
+    public int dns_queries_today { get; set; }
+    public int ads_blocked_today { get; set; }
+    public double ads_percentage_today { get; set; }
+    public int unique_domains { get; set; }
+    public int queries_forwarded { get; set; }
+    public int queries_cached { get; set; }
+    public int clients_ever_seen { get; set; }
+    public int unique_clients { get; set; }
+    public int dns_queries_all_types { get; set; }
+    public int reply_NODATA { get; set; }
+    public int reply_NXDOMAIN { get; set; }
+    public int reply_CNAME { get; set; }
+    public int reply_IP { get; set; }
+    public int privacy_level { get; set; }
     public string status { get; set; }
     public GravityLastUpdated gravity_last_updated { get; set; }
 

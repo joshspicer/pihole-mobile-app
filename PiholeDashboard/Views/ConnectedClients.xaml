@@ -1,0 +1,25 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"  xmlns:controls="clr-namespace:PiholeDashboard.Controls"  x:Class="PiholeDashboard.Views.ConnectedClients">
+    <ContentPage.Content>
+        <StackLayout Padding="0,10,0,0" HorizontalOptions="FillAndExpand">
+            <Label HorizontalTextAlignment="Center" Text="Active Clients" FontSize="28" Padding="0,0,0,5"/>
+            <Label HorizontalTextAlignment="Center" FontAttributes="Bold" Text="Past 24 Hours" FontSize="12" Padding="0,0,0,5"/>
+            <Button Text="Refresh!" Margin="0,0,0,20" TextColor="Black" Clicked="RefreshData_Clicked" BackgroundColor="LightBlue"/>
+
+            <StackLayout Padding="22">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="0*" />
+                    </Grid.ColumnDefinitions>
+                    <Label FontAttributes="Bold" AnchorX="1" HorizontalOptions="Start" HorizontalTextAlignment="Start" Text="Host IP Address" FontSize="15"/>
+                    <Label FontAttributes="Bold" HorizontalOptions="End" HorizontalTextAlignment="End" Text="# of Requests" FontSize="15"/>
+                </Grid>
+            </StackLayout>
+            <controls:TopClients Clients="{Binding topSources}" />
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

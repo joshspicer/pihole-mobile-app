@@ -6,6 +6,7 @@ using Xamarin.Forms.Xaml;
 
 using PiholeDashboard.Models;
 using System.Collections;
+using System.Threading.Tasks;
 
 namespace PiholeDashboard.Views
 {
@@ -23,12 +24,26 @@ namespace PiholeDashboard.Views
             BindingContext = this;
         }
 
+        async Task ErrorAlert(string customMsg)
+        {
+            var wantsHelp = await DisplayAlert("Error", customMsg, "Open Help", "OK");
+            if (wantsHelp)
+            {
+                await Navigation.PushModalAsync(new NavigationPage(new HelpModal()));
+            }
+        }
+
+        async void OpenHelp_Clicked(object sneder, EventArgs e)
+        {
+            await Navigation.PushModalAsync(new NavigationPage(new HelpModal()));
+        }
+
         async void Save_Clicked(object sender, EventArgs e)
         {
             if (!config.Uri.ToLower().Contains("http"))
             {
-                var txt = "Please specify a protocol (either HTTP or HTTPS) in your URI!";
-                await DisplayAlert($"Warning", txt, "Ok");
+                var txt = "Please specify a protocol (HTTP/HTTPS) in your URI!";
+                await ErrorAlert(txt);
                 return;
             }
 

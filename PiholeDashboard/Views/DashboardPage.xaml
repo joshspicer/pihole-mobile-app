@@ -6,11 +6,18 @@
     <ContentPage.Resources>
         <ResourceDictionary>
             <local:APIKeyConcatConverter x:Key="KeyConcat" />
+            <local:Capitalize x:Key="Capitalize" />
+
         </ResourceDictionary>
     </ContentPage.Resources>
     <StackLayout Margin="10" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
         <Label Text="PiHole Dashboard" FontSize="34" Padding="0,0,0,15"/>
-        <Button Text="Refresh!" Margin="0,0,0,30" TextColor="Black" Clicked="RefreshData_Clicked" BackgroundColor="LightBlue"/>
+        <Button Text="Refresh!" Margin="0,0,0,20" TextColor="Black" Clicked="RefreshData_Clicked" BackgroundColor="LightBlue"/>
+        <StackLayout Padding="5,0,0,10" Orientation="Horizontal" HorizontalOptions="Start"  >
+            <controls:StatusIndicator Status="{Binding summary.status}" />
+                <!--<Label FontSize="20" Text="Status:"/>-->
+                <Label FontAttributes="Bold" FontSize="20" Text="{Binding summary.status, Converter={StaticResource Capitalize }}" />
+        </StackLayout>
         <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition Height="*" />
@@ -22,22 +29,22 @@
             </Grid.ColumnDefinitions>
 
             <controls:SummaryComponent
-                    MyVal="{Binding summary.dns_queries_all_types}"
+                    MyVal="{Binding summary.dns_queries_all_types, StringFormat='{0:N0}'}"
                     Heading="Total Queries"
                     BgColor="Green"
                     Grid.Row="0" Grid.Column="0"/>
             <controls:SummaryComponent
-                    MyVal="{Binding summary.ads_blocked_today}"
+                    MyVal="{Binding summary.ads_blocked_today, StringFormat='{0:N0}'}"
                     Heading="Ads Blocked Today"
                     BgColor="Blue"
                     Grid.Row="0" Grid.Column="1"/>
             <controls:SummaryComponent
-                    MyVal="{Binding summary.ads_percentage_today, StringFormat='{0:F0}%'}"
+                    MyVal="{Binding summary.ads_percentage_today, StringFormat='{0:N2}%'}"
                     Heading="Percentage Blocked"
                     BgColor="DarkOrange"
                     Grid.Row="1" Grid.Column="0"/>
             <controls:SummaryComponent
-                    MyVal="{Binding summary.unique_domains}"
+                    MyVal="{Binding summary.unique_domains, StringFormat='{0:N0}'}"
                     Heading="Unique Domains"
                     BgColor="Red"
                     Grid.Row="1" Grid.Column="1"/>
@@ -49,4 +56,6 @@
             <Label Text="{Binding config.ApiKey,Converter={StaticResource KeyConcat }}"   FontSize="12" />
         </StackLayout>
     </StackLayout>
-</ContentPage>   
+</ContentPage>
+
+

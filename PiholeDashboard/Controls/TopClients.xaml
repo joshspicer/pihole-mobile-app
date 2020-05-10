@@ -1,0 +1,37 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentView xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="PiholeDashboard.Controls.TopClients">
+    <ContentView.Content>
+        <Grid x:Name="_context">
+            <ListView BackgroundColor="White" IsPullToRefreshEnabled="False" x:Name="ItemsListView" VerticalOptions="Center" HasUnevenRows="True" SeparatorVisibility="None" SelectionMode="None"  ItemsSource="{Binding Clients}">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell IsEnabled="False">
+                            <ViewCell.View>
+                                <StackLayout Padding="15,0,15,10">
+                                    <Frame CornerRadius="10"
+                                           HasShadow="False"
+                                           Margin="0,0,0,0"
+                                           BorderColor="DarkGray"
+                                           HorizontalOptions="FillAndExpand">
+                                        <Grid>
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="Auto" />
+                                        </Grid.RowDefinitions>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="*" />
+                                            <ColumnDefinition Width="0.2*" />
+                                        </Grid.ColumnDefinitions>
+                                        <Label x:Name="ip_address" FontAttributes="Bold" Text="{Binding Key}" Grid.Row="1" Grid.Column="0"  />
+                                        <Label x:Name="activity_count" Text="{Binding Value, StringFormat='{0:N0}'}" Grid.Row="1" Grid.Column="1"   />
+                                    </Grid>
+                                    </Frame>
+                                </StackLayout>
+                            </ViewCell.View>
+                        </ViewCell>
+
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </Grid>
+    </ContentView.Content>
+</ContentView>
