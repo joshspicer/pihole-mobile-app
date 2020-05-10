@@ -11,6 +11,7 @@ namespace PiholeDashboard
 
         public App()
         {
+
             InitializeComponent();
 
             MainPage = new AppShell();

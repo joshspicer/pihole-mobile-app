@@ -2,7 +2,7 @@
 <ContentView xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="PiholeDashboard.Controls.TopClients">
     <ContentView.Content>
         <Grid x:Name="_context">
-            <ListView IsPullToRefreshEnabled="False" x:Name="ItemsListView" VerticalOptions="Center" HasUnevenRows="True" SeparatorVisibility="None" SelectionMode="None"  ItemsSource="{Binding Clients}">
+            <ListView BackgroundColor="White" IsPullToRefreshEnabled="False" x:Name="ItemsListView" VerticalOptions="Center" HasUnevenRows="True" SeparatorVisibility="None" SelectionMode="None"  ItemsSource="{Binding Clients}">
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <ViewCell IsEnabled="False">

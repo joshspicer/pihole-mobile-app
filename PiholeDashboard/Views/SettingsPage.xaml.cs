@@ -22,6 +22,25 @@ namespace PiholeDashboard.Views
             await Launcher.OpenAsync(url);
         }
 
+        async Task ErrorAlert(string customMsg)
+        {
+            var wantsHelp = await DisplayAlert("Error", customMsg, "Open Help", "OK");
+            if (wantsHelp)
+            {
+                await Navigation.PushModalAsync(new NavigationPage(new HelpModal()));
+            }
+        }
+
+        async Task SuccessAlert(string customMsg)
+        {
+            await DisplayAlert("Success", customMsg, "Nice!");
+        }
+
+        async void Help_Clicked(object sneder, EventArgs e)
+        {
+            await Navigation.PushModalAsync(new NavigationPage(new HelpModal()));
+        }
+
         async void Disable10_Clicked(object sender, EventArgs e) => await ModifyHelper("disable", "10");
         async void Disable60_Clicked(object sender, EventArgs e) => await ModifyHelper("disable", "60");
         async void Disable300_Clicked(object sender, EventArgs e) => await ModifyHelper("disable", "300");
@@ -54,30 +73,30 @@ namespace PiholeDashboard.Views
                         switch (operation)
                         {
                             case "disable":
-                                if (duration != null && duration != "") 
-                                    await DisplayAlert("Success", $"Pi-Hole disabled for {duration} seconds", "nice!");
+                                if (duration != null && duration != "")
+                                    await SuccessAlert($"Pi-Hole disabled for {duration} seconds");
                                 else
-                                    await DisplayAlert("Success", $"Pi-Hole disabled.", "nice!");
+                                    await SuccessAlert($"Pi-Hole disabled.");
                                 return;
                             case "enable":
-                                await DisplayAlert("Success", $"Pi-Hole re-enabled.", "nice!");
+                                await SuccessAlert($"Pi-Hole re-enabled.");
                                 return;
                             default:
-                                await DisplayAlert("Error", $"Unspecified Error", "ok :(");
+                                await ErrorAlert("Unspecified Error (err=0)");
                                 return;
                         }
                     }
                 }
 
                 // If we get here, there's an error (maybe incorrect API key)
-                string errStr = "Error disabling Pihole.  Ensure your complete URI and WEBPASSWORD token are entered correctly.";
-                await DisplayAlert($"Error ({res.StatusCode})", errStr, "ok :(");
+                string errStr = "Error toggling Pi-hole. Please check your WEBPASSWORD. (err=1)";
+                await ErrorAlert(errStr);
                 Console.WriteLine($"Error with uri:{uri} ERR: {errStr}");
             }
             catch (Exception err)
             {
-                string errStr = "Could not connect to PiHole service. Ensure your complete URI and WEBPASSWORD token are entered.";
-                await DisplayAlert("Error!", errStr, "ok :(");
+                string errStr = "Could not connect to Pi-Hole service (err=2)";
+                await ErrorAlert(errStr);
                 Console.WriteLine($"{errStr}: {err}");
             }
         }

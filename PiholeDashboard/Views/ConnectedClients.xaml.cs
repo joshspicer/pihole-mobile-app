@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Net.Http;
+using System.Threading.Tasks;
 using Newtonsoft.Json.Linq;
 using Xamarin.Forms;
 
@@ -19,6 +20,15 @@ namespace PiholeDashboard.Views
             BindingContext = this;
         }
 
+        async Task ErrorAlert(string customMsg)
+        {
+            var wantsHelp = await DisplayAlert("Error", customMsg, "Open Help", "OK");
+            if (wantsHelp)
+            {
+                await Navigation.PushModalAsync(new NavigationPage(new HelpModal()));
+            }
+        }
+
         async void RefreshData_Clicked(object sender, EventArgs e)
         {
             try
@@ -34,25 +44,25 @@ namespace PiholeDashboard.Views
                     var content = await res.Content.ReadAsStringAsync();
 
                     JObject o = JObject.Parse(content);
-                    var aa = o["top_sources"];
-                    var bb = aa.ToObject(typeof(Dictionary<string, int>)) as Dictionary<string, int>;
+                    var topSourcesJson = o["top_sources"];
+                    var topSourcesAsDict = topSourcesJson.ToObject(typeof(Dictionary<string, int>)) as Dictionary<string, int>;
 
-                    topSources = bb;
+                    topSources = topSourcesAsDict;
 
                     // Property Changed!
                     OnPropertyChanged(nameof(topSources));
                 }
                 else
                 {
-                    string errStr = "Error fetching Pihole Summary";
-                    await DisplayAlert($"Error", errStr, "ok :(");
+                    string errStr = "Error fetching Pihole Summary (err=5)";
+                    await ErrorAlert(errStr);
                     Console.WriteLine($"{errStr}");
                 }
             }
             catch (Exception err)
             {
-                string errStr = "Could not fetch Connected Devices. Ensure your complete URI is displayed below (including the protocol HTTP or HTTPS).";
-                await DisplayAlert("Error!", errStr, "ok :(");
+                string errStr = "Could not fetch connected devices. Ensure your URI/WEBPASSWORD are complete and correct. (err=6)";
+                await ErrorAlert(errStr);
                 Console.WriteLine($"{errStr}: {err}");
                 
             }

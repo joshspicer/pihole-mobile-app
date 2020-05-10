@@ -6,6 +6,7 @@ using PiholeDashboard.Models;
 using System.Net.Http;
 using System.Collections.Generic;
 using Newtonsoft.Json.Linq;
+using System.Threading.Tasks;
 
 namespace PiholeDashboard.Views
 {
@@ -24,6 +25,14 @@ namespace PiholeDashboard.Views
             OnPropertyChanged(nameof(config));
         }
 
+        async Task ErrorAlert(string customMsg)
+        {
+            var wantsHelp = await DisplayAlert("Error", customMsg, "Open Help", "OK");
+            if (wantsHelp)
+            {
+                await Navigation.PushModalAsync(new NavigationPage(new HelpModal()));
+            }
+        }
 
         async void AddItem_Clicked(object sender, EventArgs e)
         {
@@ -49,15 +58,15 @@ namespace PiholeDashboard.Views
                 }
                 else
                 {
-                    string errStr = "Error fetching Pihole Summary";
-                    await DisplayAlert($"Error", errStr, "ok :(");
+                    string errStr = "Error fetching Pihole Summary (err=3)";
+                    await ErrorAlert(errStr);
                     Console.WriteLine($"{errStr}");
                 }
             }
             catch (Exception err)
             {
-                string errStr = "Could not connect to PiHole service. Ensure your complete URI is displayed below (including the protocol HTTP or HTTPS).";
-                await DisplayAlert("Error!", errStr, "ok :(");
+                string errStr = "Could not connect to PiHole service. Ensure your URI is correct. (err=4)";
+                await ErrorAlert(errStr);
                 Console.WriteLine($"{errStr}: {err}");
             }
         }

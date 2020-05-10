@@ -2,6 +2,8 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:d="http://xamarin.com/schemas/2014/forms/design" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" mc:Ignorable="d" x:Class="PiholeDashboard.Views.SettingsPage" Title="{Binding Title}">
     <ContentPage.ToolbarItems>
         <ToolbarItem Text="Github" Clicked="Github_Clicked" />
+                <ToolbarItem Text="Help" Clicked="Help_Clicked" />
+
     </ContentPage.ToolbarItems>
     <ContentPage.Resources>
         <ResourceDictionary>

@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="PiholeDashboard.Views.HelpModal">
     <ContentPage.ToolbarItems>
-        <ToolbarItem Text="Close Help" Clicked="Close_Clicked" />
+        <ToolbarItem Text="Close" Clicked="Close_Clicked" />
     </ContentPage.ToolbarItems>
     <ContentPage.Content>
         <ScrollView>
@@ -42,11 +42,19 @@ to access the web interface, you should enter:
 
 &lt;br&gt;&lt;br&gt;
 
-into PiContrHOLE. You can test the API by visiting:
+into PiContrHOLE.
 
 &lt;br&gt;&lt;br&gt;
 
-&lt;code&gt; http://YOUR_PI_IP/admin/api.php?summary. &lt;/code&gt;
+Ensure you're entering the correct protocol (HTTP/HTTPS) and (if necessary) ports.
+
+&lt;br&gt;&lt;br&gt;
+
+You can test the API by visiting:
+
+&lt;br&gt;&lt;br&gt;
+
+&lt;code&gt; http://YOUR_PI_IP/admin/api.php?summary &lt;/code&gt;
 
 &lt;br&gt;&lt;br&gt;
 
@@ -54,7 +62,7 @@ If you see data on the screen, your pi-hole is setup correctly.
 
 &lt;br&gt;&lt;br&gt;
 
-If the page does not load, please check the configuration of your pi-hole and check your firewalls settings.
+If the page does not load, please check the configuration of your pi-hole and check your firewall settings.
                             </Label.Text>
                         </Label>
                     </StackLayout>
@@ -121,7 +129,17 @@ and copy the WEBPASSWORD entry.  Enter *just* the key after the &lt;code&gt; WEB
                            TextColor="Black"
                            TextType="Html"
                            Padding="10,10,0,0"
-                           Text="Visit github.com/joshspicer/pihole-mobile-app and open an issue if you think you've discovered a bug.  Thanks! " />
+                          >
+                            <Label.Text>
+This app officially support Pi-Hole v4.4.
+
+&lt;br&gt;&lt;br&gt;
+
+Visit &lt;code&gt;github.com/joshspicer/pihole-mobile-app &lt;/code&gt;for additional resources and to open an issue!  Thanks!
+
+
+                            </Label.Text>
+                            </Label>
                     </StackLayout>
                 </Frame>
             </StackLayout>
