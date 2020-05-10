@@ -1,7 +1,8 @@
-﻿using System;
-using Xamarin.Forms;
-using Xamarin.Forms.Xaml;
-using PiholeDashboard.Views;
+﻿using Xamarin.Forms;
+using Microsoft.AppCenter;
+using Microsoft.AppCenter.Analytics;
+using Microsoft.AppCenter.Crashes;
+using System;
 
 namespace PiholeDashboard
 {
@@ -17,6 +18,15 @@ namespace PiholeDashboard
 
         protected override void OnStart()
         {
+
+            string appcenterID = Environment.GetEnvironmentVariable("appcenterID");
+
+            if (appcenterID != null && appcenterID.Length > 5)
+            {
+                AppCenter.Start($"ios={appcenterID}",
+                    typeof(Analytics), typeof(Crashes));
+            }
+
         }
 
         protected override void OnSleep()
