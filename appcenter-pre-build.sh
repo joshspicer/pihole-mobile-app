@@ -29,7 +29,7 @@ APP_CONSTANT_FILE=$APPCENTER_SOURCE_DIRECTORY/PiholeDashboard/AppConstant.cs
 
 if [ -e "$APP_CONSTANT_FILE" ]
 then
-    echo "Updating ApiUrl to $API_URL in AppConstant.cs"
+    echo "Updating ApiUrl to $appcenterID in AppConstant.cs"
     sed -i '' 's#appcenterID = "[-A-Za-z0-9:_./]*"#appcenterID = "'$appcenterID'"#' $APP_CONSTANT_FILE
 
     echo "File content:"
