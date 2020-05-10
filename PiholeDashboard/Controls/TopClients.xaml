@@ -2,25 +2,28 @@
 <ContentView xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="PiholeDashboard.Controls.TopClients">
     <ContentView.Content>
         <Grid x:Name="_context">
-            <StackLayout  BackgroundColor="GreenYellow" WidthRequest="100" HeightRequest="100">
-                <Label Text="{Binding Clients}" />
-            </StackLayout>
-
-            <ListView x:Name="ItemsListView" VerticalOptions="Center" SeparatorVisibility="None" SelectionMode="None"  ItemsSource="{Binding Clients}">
+            <ListView IsPullToRefreshEnabled="False" x:Name="ItemsListView" VerticalOptions="Center" HasUnevenRows="True" SeparatorVisibility="None" SelectionMode="None"  ItemsSource="{Binding Clients}">
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <ViewCell IsEnabled="False">
                             <ViewCell.View>
-                                <StackLayout Margin="15">
-                                    <Frame CornerRadius="10" 
+                                <StackLayout Padding="15,0,15,10">
+                                    <Frame CornerRadius="10"
                                            HasShadow="False"
-                                           IsClippedToBounds="True"
+                                           Margin="0,0,0,0"
                                            BorderColor="DarkGray"
                                            HorizontalOptions="FillAndExpand">
-                                        <StackLayout HorizontalOptions="FillAndExpand" Orientation="Horizontal">
-                                            <Label x:Name="ip_address" Text="{Binding Key}" />
-                                            <Label x:Name="activity_count" Text="{Binding Value}" />
-                                        </StackLayout>
+                                        <Grid>
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="Auto" />
+                                        </Grid.RowDefinitions>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="*" />
+                                            <ColumnDefinition Width="0.2*" />
+                                        </Grid.ColumnDefinitions>
+                                        <Label x:Name="ip_address" FontAttributes="Bold" Text="{Binding Key}" Grid.Row="1" Grid.Column="0"  />
+                                        <Label x:Name="activity_count" Text="{Binding Value, StringFormat='{0:N0}'}" Grid.Row="1" Grid.Column="1"   />
+                                    </Grid>
                                     </Frame>
                                 </StackLayout>
                             </ViewCell.View>
