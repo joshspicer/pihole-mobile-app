@@ -1,5 +1,6 @@
 # Don't commit bc of AppCenter
-
+secrets.json
+AppConstant.cs
 # globs
 Makefile.in
 *.userprefs

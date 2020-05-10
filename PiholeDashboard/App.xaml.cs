@@ -19,10 +19,9 @@ namespace PiholeDashboard
 
         protected override void OnStart()
         {
+            string appcenterID = AppConstant.appcenterID;
 
-            string appcenterID = Environment.GetEnvironmentVariable("appcenterID");
-
-            if (appcenterID != null && appcenterID.Length > 5)
+            if (appcenterID != null && appcenterID != "")
             {
                 AppCenter.Start($"ios={appcenterID}",
                     typeof(Analytics), typeof(Crashes));
