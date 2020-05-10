@@ -1,7 +1,12 @@
 # pihole-dashboard
 A simple [Xamarin Forms Shell](https://docs.microsoft.com/en-us/xamarin/xamarin-forms/app-fundamentals/shell/) app to manage your local [Pi-hole](https://pi-hole.net/) instance. 
 
-Feel free to [open an issue](https://github.com/joshspicer/pihole-mobile-app/issues) for any ideas/concerns, after checking out the [feature road map](https://github.com/joshspicer/pihole-mobile-app/projects/1).  Pull requests are welcomed!
+The idea of this app is to provide "quick toggles" and display information that would be useful "at a glance". My goal is *not* to reach parity with the (awesome) web app that already exists.  Use cases include:
+
+1. Allow less technically inclined/interested people to disable your home's pi-hole temporarily.
+2. Ensure your pi-hole instance is up and running.
+
+Feel free to [open an issue](https://github.com/joshspicer/pihole-mobile-app/issues) for any ideas/concerns, after checking out the [feature road map](https://github.com/joshspicer/pihole-mobile-app/projects/1).  **Pull requests are welcomed and encouraged!**
 
 <kbd>
   <img width=250 src="Screenshots/1.png">
