@@ -5,6 +5,7 @@ The idea of this app is to provide "quick toggles" and display information that 
 
 1. Allow less technically inclined/interested people to disable your home's pi-hole temporarily.
 2. Ensure your pi-hole instance is up and running.
+3. Check that a given device is routing through pi-hole.
 
 Feel free to [open an issue](https://github.com/joshspicer/pihole-mobile-app/issues) for any ideas/concerns, after checking out the [feature road map](https://github.com/joshspicer/pihole-mobile-app/projects/1).  **Pull requests are welcomed and encouraged!**
 
