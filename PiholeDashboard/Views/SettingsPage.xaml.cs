@@ -2,11 +2,8 @@
 using System.ComponentModel;
 using System.Net.Http;
 using System.Threading.Tasks;
-using System.Windows.Input;
-using Newtonsoft.Json;
 using Xamarin.Essentials;
 using Xamarin.Forms;
-using Xamarin.Forms.Xaml;
 
 namespace PiholeDashboard.Views
 {
@@ -25,10 +22,12 @@ namespace PiholeDashboard.Views
             await Launcher.OpenAsync(url);
         }
 
-        async void Disable10_Clicked(object sender, EventArgs e) => await ModifyHelper("disable","10");
-        async void Disable60_Clicked(object sender, EventArgs e) => await ModifyHelper("disable","60");
-        async void Disable300_Clicked(object sender, EventArgs e) => await ModifyHelper("disable","300");
+        async void Disable10_Clicked(object sender, EventArgs e) => await ModifyHelper("disable", "10");
+        async void Disable60_Clicked(object sender, EventArgs e) => await ModifyHelper("disable", "60");
+        async void Disable300_Clicked(object sender, EventArgs e) => await ModifyHelper("disable", "300");
         async void Enable_Clicked(object sender, EventArgs e) => await ModifyHelper("enable", "");
+        async void Disable_Clicked(object sender, EventArgs e) => await ModifyHelper("disable", "");
+
 
         // Generic disable Pihole Helper.
         async Task ModifyHelper(string operation, string duration)
@@ -55,10 +54,13 @@ namespace PiholeDashboard.Views
                         switch (operation)
                         {
                             case "disable":
-                                await DisplayAlert("Success", $"PiHole disabled for {duration} seconds", "nice!");
+                                if (duration != null && duration != "") 
+                                    await DisplayAlert("Success", $"Pi-Hole disabled for {duration} seconds", "nice!");
+                                else
+                                    await DisplayAlert("Success", $"Pi-Hole disabled.", "nice!");
                                 return;
                             case "enable":
-                                await DisplayAlert("Success", $"PiHole re-enabled.", "nice!");
+                                await DisplayAlert("Success", $"Pi-Hole re-enabled.", "nice!");
                                 return;
                             default:
                                 await DisplayAlert("Error", $"Unspecified Error", "ok :(");
@@ -66,12 +68,11 @@ namespace PiholeDashboard.Views
                         }
                     }
                 }
-                else
-                {
-                    string errStr = "Error disabling Pihole";
-                    await DisplayAlert($"Error ({res.StatusCode})", errStr, "ok :(");
-                    Console.WriteLine($"{errStr}");
-                }
+
+                // If we get here, there's an error (maybe incorrect API key)
+                string errStr = "Error disabling Pihole.  Ensure your complete URI and WEBPASSWORD token are entered correctly.";
+                await DisplayAlert($"Error ({res.StatusCode})", errStr, "ok :(");
+                Console.WriteLine($"Error with uri:{uri} ERR: {errStr}");
             }
             catch (Exception err)
             {

@@ -1,0 +1,37 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentView xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="PiholeDashboard.Controls.TopClients">
+    <ContentView.Content>
+        <Grid x:Name="_context">
+            <StackLayout  BackgroundColor="GreenYellow" WidthRequest="100" HeightRequest="100">
+                <Label Text="{Binding Clients}" />
+            </StackLayout>
+
+            <ListView x:Name="ItemsListView" VerticalOptions="Center" SeparatorVisibility="None" SelectionMode="None"  ItemsSource="{Binding Clients}">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <ViewCell.View>
+                                <StackLayout Margin="15,20,5,0">
+                                    <Grid>
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="Auto" />
+                                        </Grid.RowDefinitions>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="*" />
+                                            <ColumnDefinition Width="0.5*" />
+                                        </Grid.ColumnDefinitions>
+                                        <Label x:Name="ip_address" Text="{Binding Key}" Grid.Row="1" Grid.Column="0"  />
+                                        <Label x:Name="activity_count" Text="{Binding Value}" Grid.Row="1" Grid.Column="1"   />
+                                    </Grid>
+                                </StackLayout>
+                            </ViewCell.View>
+                        </ViewCell>
+
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+
+
+        </Grid>
+    </ContentView.Content>
+</ContentView>

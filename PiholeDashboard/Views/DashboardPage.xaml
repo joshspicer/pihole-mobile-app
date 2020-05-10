@@ -6,11 +6,18 @@
     <ContentPage.Resources>
         <ResourceDictionary>
             <local:APIKeyConcatConverter x:Key="KeyConcat" />
+            <local:Capitalize x:Key="Capitalize" />
+
         </ResourceDictionary>
     </ContentPage.Resources>
     <StackLayout Margin="10" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
         <Label Text="PiHole Dashboard" FontSize="34" Padding="0,0,0,15"/>
-        <Button Text="Refresh!" Margin="0,0,0,30" TextColor="Black" Clicked="RefreshData_Clicked" BackgroundColor="LightBlue"/>
+        <Button Text="Refresh!" Margin="0,0,0,20" TextColor="Black" Clicked="RefreshData_Clicked" BackgroundColor="LightBlue"/>
+        <StackLayout Padding="5,0,0,10" Orientation="Horizontal" HorizontalOptions="Start"  >
+            <controls:StatusIndicator Status="{Binding summary.status}" />
+                <!--<Label FontSize="20" Text="Status:"/>-->
+                <Label FontAttributes="Bold" FontSize="20" Text="{Binding summary.status, Converter={StaticResource Capitalize }}" />
+        </StackLayout>
         <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition Height="*" />
@@ -49,4 +56,6 @@
             <Label Text="{Binding config.ApiKey,Converter={StaticResource KeyConcat }}"   FontSize="12" />
         </StackLayout>
     </StackLayout>
-</ContentPage>   
+</ContentPage>
+
+

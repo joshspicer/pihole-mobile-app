@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-
-public class Relative
+﻿public class Relative
 {
     public string days { get; set; }
     public string hours { get; set; }
@@ -33,8 +31,6 @@ public class Summary
     public int privacy_level { get; set; }
     public string status { get; set; }
     public GravityLastUpdated gravity_last_updated { get; set; }
-    public List<string> top_sources { get; set; }
-    public List<string> top_sources_blocked { get; set; }
 
     public Summary()
     {

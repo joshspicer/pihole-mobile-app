@@ -23,6 +23,11 @@ namespace PiholeDashboard.Views
             BindingContext = this;
         }
 
+        async void OpenHelp_Clicked(object sneder, EventArgs e)
+        {
+            await Navigation.PushModalAsync(new NavigationPage(new HelpModal()));
+        }
+
         async void Save_Clicked(object sender, EventArgs e)
         {
             if (!config.Uri.ToLower().Contains("http"))

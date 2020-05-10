@@ -5,11 +5,16 @@
         <ToolbarItem Text="Save" Clicked="Save_Clicked" />
     </ContentPage.ToolbarItems>
     <ContentPage.Content>
-        <StackLayout Spacing="20" Padding="15">
-            <Label Text="Full URI"  FontSize="Medium" />
-            <Entry Keyboard="Url" Placeholder="http://joshspicer.com:80" IsSpellCheckEnabled="False" IsTextPredictionEnabled="false" Text ="{Binding config.Uri}" FontSize="Small" />
-            <Label Text="WEBPASSWORD (API Key)" FontSize="Medium" />
-            <Entry  Keyboard="Url" IsSpellCheckEnabled="False" Placeholder="WEBPASSWORD from /etc/pihole/setupVars.conf" IsTextPredictionEnabled="false"  Text="{Binding config.ApiKey}" FontSize="Small" />
-        </StackLayout>
+        <Grid x:Name="_context">
+            <StackLayout HorizontalOptions="CenterAndExpand">
+                <StackLayout Spacing="10" Padding="15,25,15,15">
+                    <Label Text="Pi-Hole URI"  FontAttributes="Bold" FontSize="Medium" />
+                    <Entry Keyboard="Url" Margin="0,0,0,10" Placeholder="http://joshspicer.com:80" IsSpellCheckEnabled="False" IsTextPredictionEnabled="false" Text ="{Binding config.Uri}" FontSize="Small" />
+                    <Label Text="WEBPASSWORD" FontAttributes="Bold" FontSize="Medium" />
+                    <Entry  Keyboard="Url" IsSpellCheckEnabled="False" Placeholder="WEBPASSWORD from /etc/pihole/setupVars.conf" IsTextPredictionEnabled="false"  Text="{Binding config.ApiKey}" FontSize="Small" />
+                </StackLayout>
+                <Button x:Name="helpButton" Padding="15" FontSize="16" Text="Toggle Help" Clicked="OpenHelp_Clicked" HorizontalOptions="Start"/>
+            </StackLayout>
+        </Grid> 
     </ContentPage.Content>
 </ContentPage>

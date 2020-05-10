@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"  xmlns:controls="clr-namespace:PiholeDashboard.Controls"  x:Class="PiholeDashboard.Views.ConnectedClients">
+    <ContentPage.Content>
+        <StackLayout Padding="0,10,0,0">
+            <Label HorizontalTextAlignment="Center" Text="Recent Clients" FontSize="25" Padding="0,0,0,5"/>
+            <Label Text="State if disabled bc of no API key"/>
+            <controls:TopClients Clients="{Binding topSources}" />
+            <Button Text="Refresh!" Margin="0,0,0,20" TextColor="Black" Clicked="RefreshData_Clicked" BackgroundColor="LightBlue"/>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

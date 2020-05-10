@@ -1,9 +1,11 @@
 ﻿using System;
 using System.ComponentModel;
 using Xamarin.Forms;
-using Newtonsoft.Json;
+using System.Text.Json;
 using PiholeDashboard.Models;
 using System.Net.Http;
+using System.Collections.Generic;
+using Newtonsoft.Json.Linq;
 
 namespace PiholeDashboard.Views
 {
@@ -32,11 +34,7 @@ namespace PiholeDashboard.Views
         {
             try
             {
-                //var uri = $"{App.Current.Properties["Uri"]}/admin/api.php?summary";
-                var uri = $"{App.Current.Properties["Uri"]}/admin/api.php?summaryRaw&getQuerySources&topClientsBlocked&auth";
-                uri += App.Current.Properties.ContainsKey("ApiKey") ? $"={App.Current.Properties["ApiKey"]}" : "";
-
-                Console.WriteLine($"URI === {uri}");
+                var uri = $"{App.Current.Properties["Uri"]}/admin/api.php?summaryRaw";
 
                 HttpClient _client = new HttpClient();
                 _client.Timeout = TimeSpan.FromSeconds(5);
@@ -45,14 +43,14 @@ namespace PiholeDashboard.Views
                 if (res.IsSuccessStatusCode)
                 {
                     var content = await res.Content.ReadAsStringAsync();
-                    summary = JsonConvert.DeserializeObject<Summary>(content);
+                    summary = JsonSerializer.Deserialize<Summary>(content);
                     // Property Changed!
-                    OnPropertyChanged(nameof(summary));
+                    OnPropertyChanged(nameof(summary));       
                 }
                 else
                 {
                     string errStr = "Error fetching Pihole Summary";
-                    await DisplayAlert($"Error ({res.StatusCode})", errStr, "ok :(");
+                    await DisplayAlert($"Error", errStr, "ok :(");
                     Console.WriteLine($"{errStr}");
                 }
             }
@@ -68,11 +66,10 @@ namespace PiholeDashboard.Views
         {
             base.OnAppearing();
 
-            // Set 
+            // Set Uri
             if (App.Current.Properties.ContainsKey("Uri"))
             {
                 var url = App.Current.Properties["Uri"] as string;
-                Console.WriteLine(url);
                 config.Uri = url;
             }
 
@@ -80,7 +77,6 @@ namespace PiholeDashboard.Views
             if (App.Current.Properties.ContainsKey("ApiKey"))
             {
                 var key = App.Current.Properties["ApiKey"] as string;
-                Console.WriteLine(key);
                 config.ApiKey = key;
             }
 
