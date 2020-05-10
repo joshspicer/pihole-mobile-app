@@ -60,11 +60,22 @@ You can test the API by visiting:
 
 If you see data on the screen, your pi-hole is setup correctly.
 
-&lt;br&gt;&lt;br&gt;
-
-If the page does not load, please check the configuration of your pi-hole and check your firewall settings.
                             </Label.Text>
                         </Label>
+
+                           <Label x:Name="uriHelpDetail2"
+                           FontSize="Header" TextColor="Black"
+                            TextType="Html"
+                           Padding="10,10,0,0">
+                            <Label.Text>
+If the page does not load, please first fix the configuration of your pi-hole and check your firewall settings.
+
+&lt;br&gt;&lt;br&gt;
+
+Note that if you are accessing your pi-hole outside of your local network, you must communicate over HTTPS (An iOS rule).
+
+                                </Label.Text>
+                               </Label>
                     </StackLayout>
                 </Frame>
                 <Frame CornerRadius="10"
@@ -102,7 +113,12 @@ Instead, you'll need to connect to your pi-hole over SSH (or physically), naviga
 
 &lt;br&gt;&lt;br&gt;
 
-and copy the WEBPASSWORD entry.  Enter *just* the key after the &lt;code&gt; WEBPASSWORD= &lt;/code&gt;
+and copy the WEBPASSWORD entry.
+
+&lt;br&gt;&lt;br&gt;
+
+
+Enter *just* the part *after* the &lt;code&gt; WEBPASSWORD= &lt;/code&gt;
                             </Label.Text>
                         </Label>
 
@@ -131,7 +147,7 @@ and copy the WEBPASSWORD entry.  Enter *just* the key after the &lt;code&gt; WEB
                            Padding="10,10,0,0"
                           >
                             <Label.Text>
-This app officially support Pi-Hole v4.4.
+This app has been tested against Pi-Hole v4.4.
 
 &lt;br&gt;&lt;br&gt;
 
