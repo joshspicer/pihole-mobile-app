@@ -46,19 +46,7 @@ into PiContrHOLE.
 
 &lt;br&gt;&lt;br&gt;
 
-Ensure you're entering the correct protocol (HTTP/HTTPS) and (if necessary) ports.
-
-&lt;br&gt;&lt;br&gt;
-
-You can test the API by visiting:
-
-&lt;br&gt;&lt;br&gt;
-
-&lt;code&gt; http://YOUR_PI_IP/admin/api.php?summary &lt;/code&gt;
-
-&lt;br&gt;&lt;br&gt;
-
-If you see data on the screen, your pi-hole is setup correctly.
+Ensure you're entering the correct protocol (HTTP/HTTPS) and (if necessary) ports. If your web interface is hosted over port 80 (the default) you do not need to specify it.
 
                             </Label.Text>
                         </Label>
@@ -68,6 +56,18 @@ If you see data on the screen, your pi-hole is setup correctly.
                             TextType="Html"
                            Padding="10,10,0,0">
                             <Label.Text>
+You can test the API by visiting:
+
+&lt;br&gt;&lt;br&gt;
+
+&lt;code&gt; http://YOUR_PI_IP/admin/api.php?summary &lt;/code&gt;
+
+&lt;br&gt;&lt;br&gt;
+
+If you see data on the screen, your pi-hole is setup correctly!
+
+&lt;br&gt;&lt;br&gt;
+
 If the page does not load, please first fix the configuration of your pi-hole and check your firewall settings.
 
 &lt;br&gt;&lt;br&gt;
@@ -101,22 +101,25 @@ Note that if you are accessing your pi-hole outside of your local network, you m
                            Padding="10,10,0,0"
                            >
                             <Label.Text>
-Due to pi-hole limitations, this app does NOT support the API key generated from the webapp.
+One of the simplest ways to acquire the API Key is to, in the pi-hole webapp open:
 
 &lt;br&gt;&lt;br&gt;
 
-Instead, you'll need to connect to your pi-hole over SSH (or physically), navigate to the:
+&lt;code&gt; Settings > API/Web Interface > Show API Token &lt;/code&gt;
 
 &lt;br&gt;&lt;br&gt;
 
-&lt;code&gt; /etc/pihole/setupVars.conf &lt;/code&gt; file,
+If this doesn't work - there's an alternative! You'll need to connect to your pi-hole over SSH (or physically), browse to the file:
+
+&lt;br&gt;&lt;br&gt;
+
+&lt;code&gt; /etc/pihole/setupVars.conf &lt;/code&gt;
 
 &lt;br&gt;&lt;br&gt;
 
 and copy the WEBPASSWORD entry.
 
 &lt;br&gt;&lt;br&gt;
-
 
 Enter *just* the part *after* the &lt;code&gt; WEBPASSWORD= &lt;/code&gt;
                             </Label.Text>

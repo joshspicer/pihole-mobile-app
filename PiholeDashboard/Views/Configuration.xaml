@@ -10,7 +10,7 @@
                 <StackLayout Spacing="10" Padding="15,25,15,15">
                     <Label Text="Pi-Hole URI"  FontAttributes="Bold" FontSize="Medium" />
                     <Entry BackgroundColor="LightGray" TextColor="Black" Keyboard="Url" Margin="0,0,0,10" Placeholder="http://joshspicer.com:80" IsSpellCheckEnabled="False" IsTextPredictionEnabled="false" Text ="{Binding config.Uri}" FontSize="Small" />
-                    <Label Text="WEBPASSWORD" FontAttributes="Bold" FontSize="Medium" />
+                    <Label Text="WEBPASSWORD API Key" FontAttributes="Bold" FontSize="Medium" />
                     <Entry  BackgroundColor="LightGray" TextColor="Black" Keyboard="Url" IsSpellCheckEnabled="False" Placeholder="WEBPASSWORD from /etc/pihole/setupVars.conf" IsTextPredictionEnabled="false"  Text="{Binding config.ApiKey}" FontSize="Small" />
                 </StackLayout>
                 <Label Padding="15,15,0,0" Text="Having Trouble?"/>
