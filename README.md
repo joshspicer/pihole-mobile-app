@@ -31,6 +31,8 @@ Download, [Visual Studio 2019 (Mac/Windows)](https://visualstudio.microsoft.com/
 
 ## Note
 
-You will need the `WEBPASSWORD` found under `/etc/pihole/setupVars.conf` for anything in "Settings".
+You will need the `WEBPASSWORD` found under `/etc/pihole/setupVars.conf` for anything in "Settings". For more details check [here](/help). 
 
-The API token for this app is NOT the one found in the web GUI, nor is it your login password.
+The API token for this app is NOT the one found in the web GUI, nor is it your login password. The API utilized is outlined [here](https://discourse.pi-hole.net/t/pi-hole-api/1863).
+
+

@@ -19,7 +19,7 @@
                                         </Grid.RowDefinitions>
                                         <Grid.ColumnDefinitions>
                                             <ColumnDefinition Width="*" />
-                                            <ColumnDefinition Width="0.2*" />
+                                            <ColumnDefinition Width="0.3*" />
                                         </Grid.ColumnDefinitions>
                                         <Label x:Name="ip_address" FontAttributes="Bold" Text="{Binding Key}" Grid.Row="1" Grid.Column="0"  />
                                         <Label x:Name="activity_count" Text="{Binding Value, StringFormat='{0:N0}'}" Grid.Row="1" Grid.Column="1"   />

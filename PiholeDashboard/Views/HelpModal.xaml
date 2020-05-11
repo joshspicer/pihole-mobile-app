@@ -147,7 +147,7 @@ Enter *just* the part *after* the &lt;code&gt; WEBPASSWORD= &lt;/code&gt;
                            Padding="10,10,0,0"
                           >
                             <Label.Text>
-This app has been tested against Pi-Hole v4.4.
+This app has been tested against Pi-Hole v4.4 and (briefly) v5.0.
 
 &lt;br&gt;&lt;br&gt;
 
