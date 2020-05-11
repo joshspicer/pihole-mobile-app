@@ -23,9 +23,12 @@ If the page does not load, please first fix the configuration of your pi-hole an
 Note that if you are accessing your pi-hole outside of your local network, you must communicate over HTTPS (An iOS rule).
 
 ## WEBPASSWORD
-Due to pi-hole limitations, this app does NOT support the API key generated from the webapp.
 
-Instead, you'll need to connect to your pi-hole over SSH (or physically), navigate to the:
+One of the simplest ways to acquire the API Key is to, in the pi-hole webapp copy the key from:
+
+`Settings > API/Web Interface > Show API Token` 
+
+If that doesn't work, alternatively (and i've found more reliably),  you can connect to your pi-hole over SSH (or physically), navigate to the:
 
 `/etc/pihole/setupVars.conf` file, and copy the WEBPASSWORD entry.
 
