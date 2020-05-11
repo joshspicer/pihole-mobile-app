@@ -1,7 +1,7 @@
 # pihole-dashboard
 A simple [Xamarin Forms Shell](https://docs.microsoft.com/en-us/xamarin/xamarin-forms/app-fundamentals/shell/) app to manage your local [Pi-hole](https://pi-hole.net/) instance. 
 
-The idea of this app is to provide "quick toggles" and display information that would be useful "at a glance". My goal is *not* to reach parity with the (awesome) web app that already exists.  Use cases include:
+The idea of this app is to provide "quick toggles" and display information that would be useful at a glance. My goal is *not* to reach parity with the (awesome) web app that already exists.  Use cases include:
 
 1. Allow less technically inclined/interested people to disable your home's pi-hole temporarily.
 2. Ensure your pi-hole instance is up and running.
@@ -31,7 +31,7 @@ Download, [Visual Studio 2019 (Mac/Windows)](https://visualstudio.microsoft.com/
 
 ## Note
 
-You will need the `WEBPASSWORD` found under `/etc/pihole/setupVars.conf` for anything in "Settings". For more details check [here](/help). 
+You will need the `WEBPASSWORD` found under `/etc/pihole/setupVars.conf` for anything in "Settings". For more details check [here](./help.md). 
 
 The API token for this app is NOT the one found in the web GUI, nor is it your login password. The API utilized is outlined [here](https://discourse.pi-hole.net/t/pi-hole-api/1863).
 
