@@ -1,4 +1,7 @@
 # pihole-dashboard
+
+[![Build status](https://build.appcenter.ms/v0.1/apps/35dc5804-64c0-441f-adee-04ccfb1cdd2e/branches/master/badge)](https://appcenter.ms)
+
 A simple [Xamarin Forms Shell](https://docs.microsoft.com/en-us/xamarin/xamarin-forms/app-fundamentals/shell/) app to manage your local [Pi-hole](https://pi-hole.net/) instance. 
 
 The idea of this app is to provide "quick toggles" and display information that would be useful at a glance. My goal is *not* to reach parity with the (awesome) web app that already exists.  Use cases include:
