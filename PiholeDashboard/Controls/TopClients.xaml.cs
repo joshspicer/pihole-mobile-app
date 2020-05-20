@@ -21,10 +21,7 @@ namespace PiholeDashboard.Controls
                 default(Dictionary<string, int>),
                 propertyChanged: OnClientsChanged);
 
-        private static void OnClientsChanged(BindableObject bindable, object oldValue, object newValue)
-        {
-            Console.WriteLine("BINDABLE CHANGED!!");
-        }
+        private static void OnClientsChanged(BindableObject bindable, object oldValue, object newValue) { }
 
         public Dictionary<string,int> Clients
         {

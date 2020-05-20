@@ -16,5 +16,8 @@ namespace PiholeDashboard.Views
         {
             await Navigation.PopModalAsync();
         }
+
+        async void Config_Clicked(object sender, EventArgs e) => await Navigation.PushModalAsync(new NavigationPage(new NewItemPage()));
+
     }
 }

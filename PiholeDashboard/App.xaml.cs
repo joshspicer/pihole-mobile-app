@@ -26,7 +26,6 @@ namespace PiholeDashboard
                 AppCenter.Start($"ios={appcenterID}",
                     typeof(Analytics), typeof(Crashes));
             }
-
         }
 
         protected override void OnSleep()

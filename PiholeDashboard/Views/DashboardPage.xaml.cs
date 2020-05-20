@@ -15,6 +15,7 @@ namespace PiholeDashboard.Views
     {
         public PiHoleConfig config { get; } = new PiHoleConfig();
         public Summary summary { get; private set; } = new Summary();
+        public string lastUpdated { get; set; } = "N/A";
 
         public DashboardPage()
         {
@@ -23,6 +24,7 @@ namespace PiholeDashboard.Views
 
             OnPropertyChanged(nameof(summary));
             OnPropertyChanged(nameof(config));
+            OnPropertyChanged(nameof(lastUpdated));
         }
 
         async Task ErrorAlert(string customMsg)
@@ -34,12 +36,10 @@ namespace PiholeDashboard.Views
             }
         }
 
-        async void AddItem_Clicked(object sender, EventArgs e)
-        {
-            await Navigation.PushModalAsync(new NavigationPage(new NewItemPage()));
-        }
+        async void AddItem_Clicked(object sender, EventArgs e) => await Navigation.PushModalAsync(new NavigationPage(new NewItemPage()));
+        async void RefreshData_Clicked(object sender, EventArgs e) => await DoRefresh();
 
-        async void RefreshData_Clicked(object sender, EventArgs e)
+        async Task DoRefresh(bool showError=true)
         {
             try
             {
@@ -54,24 +54,33 @@ namespace PiholeDashboard.Views
                     var content = await res.Content.ReadAsStringAsync();
                     summary = JsonSerializer.Deserialize<Summary>(content);
                     // Property Changed!
-                    OnPropertyChanged(nameof(summary));       
+                    lastUpdated = DateTime.Now.ToString("hh:mm:ss tt");
+
+                    OnPropertyChanged(nameof(summary));
+                    OnPropertyChanged(nameof(lastUpdated));
                 }
                 else
                 {
-                    string errStr = "Error fetching Pihole Summary (err=3)";
-                    await ErrorAlert(errStr);
-                    Console.WriteLine($"{errStr}");
+                    if (showError)
+                    {
+                        string errStr = "Error fetching Pihole Summary (err=3)";
+                        await ErrorAlert(errStr);
+                        Console.WriteLine($"{errStr}");
+                    }
                 }
             }
             catch (Exception err)
             {
-                string errStr = "Could not connect to PiHole service. Ensure your URI is correct. (err=4)";
-                await ErrorAlert(errStr);
-                Console.WriteLine($"{errStr}: {err}");
+                if (showError)
+                {
+                    string errStr = "Could not connect to PiHole service. Ensure your URI is set correctly. (err=4)";
+                    await ErrorAlert(errStr);
+                    Console.WriteLine($"{errStr}: {err}");
+                }
             }
         }
 
-        protected override void OnAppearing()
+        async protected override void OnAppearing()
         {
             base.OnAppearing();
 
@@ -91,6 +100,12 @@ namespace PiholeDashboard.Views
 
             // Refresh
             OnPropertyChanged(nameof(config));
+
+            Console.WriteLine("DASHBOARD APPEARING!");
+            if (App.Current.Properties.ContainsKey("Uri"))
+            {
+                await DoRefresh(showError: false);
+            }
         }
     }
 }
