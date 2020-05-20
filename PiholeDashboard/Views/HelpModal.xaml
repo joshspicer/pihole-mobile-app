@@ -4,8 +4,10 @@
         <ToolbarItem Text="Close" Clicked="Close_Clicked" />
     </ContentPage.ToolbarItems>
     <ContentPage.Content>
+
         <ScrollView>
             <StackLayout x:Name="helpView" >
+                <Button Clicked="Config_Clicked" Text="Set Pi-Hole Credentials" />
                 <Frame CornerRadius="10"
                        HasShadow="False"
                        x:Name="helpView1"
@@ -46,24 +48,35 @@ into PiContrHOLE.
 
 &lt;br&gt;&lt;br&gt;
 
-Ensure you're entering the correct protocol (HTTP/HTTPS) and (if necessary) ports. If your web interface is hosted over port 80 (the default) you do not need to specify it.
+Ensure you're entering the correct protocol (HTTP/HTTPS) and (if necessary) ports.
 
                             </Label.Text>
                         </Label>
 
-                           <Label x:Name="uriHelpDetail2"
+                        <Label x:Name="uriHelpDetail2"
                            FontSize="Header" TextColor="Black"
                             TextType="Html"
                            Padding="10,10,0,0">
                             <Label.Text>
+If your web interface is hosted over port 80 (the default) you do not need to specify it.
+
+&lt;br&gt;&lt;br&gt;
+
 You can test the API by visiting:
 
 &lt;br&gt;&lt;br&gt;
 
 &lt;code&gt; http://YOUR_PI_IP/admin/api.php?summary &lt;/code&gt;
 
-&lt;br&gt;&lt;br&gt;
 
+                            </Label.Text>
+                        </Label>
+
+                        <Label x:Name="uriHelpDetail3"
+                           FontSize="Header" TextColor="Black"
+                            TextType="Html"
+                           Padding="10,10,0,0">
+                            <Label.Text>
 If you see data on the screen, your pi-hole is setup correctly!
 
 &lt;br&gt;&lt;br&gt;
@@ -74,8 +87,8 @@ If the page does not load, please first fix the configuration of your pi-hole an
 
 Note that if you are accessing your pi-hole outside of your local network, you must communicate over HTTPS (An iOS rule).
 
-                                </Label.Text>
-                               </Label>
+                            </Label.Text>
+                        </Label>
                     </StackLayout>
                 </Frame>
                 <Frame CornerRadius="10"
@@ -158,7 +171,7 @@ Visit &lt;code&gt;github.com/joshspicer/pihole-mobile-app &lt;/code&gt;for addit
 
 
                             </Label.Text>
-                            </Label>
+                        </Label>
                     </StackLayout>
                 </Frame>
             </StackLayout>

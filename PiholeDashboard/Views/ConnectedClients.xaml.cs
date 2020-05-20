@@ -20,6 +20,17 @@ namespace PiholeDashboard.Views
             BindingContext = this;
         }
 
+        async protected override void OnAppearing()
+        {
+
+            Console.WriteLine("Connected Client APPEARING");
+
+            if (App.Current.Properties.ContainsKey("Uri") && App.Current.Properties.ContainsKey("ApiKey"))
+            {
+                await DoRefresh(showError: false);
+            }
+        }
+
         async Task ErrorAlert(string customMsg)
         {
             var wantsHelp = await DisplayAlert("Error", customMsg, "Open Help", "OK");
@@ -29,7 +40,9 @@ namespace PiholeDashboard.Views
             }
         }
 
-        async void RefreshData_Clicked(object sender, EventArgs e)
+        async void RefreshData_Clicked(object sender, EventArgs e) => await DoRefresh();
+
+        async Task DoRefresh(bool showError=true)
         {
             try
             {
@@ -54,17 +67,23 @@ namespace PiholeDashboard.Views
                 }
                 else
                 {
-                    string errStr = "Error fetching Pihole Summary (err=5)";
-                    await ErrorAlert(errStr);
-                    Console.WriteLine($"{errStr}");
+                    if (showError)
+                    {
+                        string errStr = "Error fetching Pihole Summary (err=5)";
+                        await ErrorAlert(errStr);
+                        Console.WriteLine($"{errStr}");
+                    }
                 }
             }
             catch (Exception err)
             {
-                string errStr = "Could not fetch connected devices. Ensure your URI/WEBPASSWORD are complete and correct. (err=6)";
-                await ErrorAlert(errStr);
-                Console.WriteLine($"{errStr}: {err}");
-                
+                if (showError)
+                {
+                    string errStr = "Could not fetch connected devices. Ensure your URI/WEBPASSWORD are complete and correct. (err=6)";
+                    await ErrorAlert(errStr);
+                    Console.WriteLine($"{errStr}: {err}");
+                }
+
             }
         }
     }

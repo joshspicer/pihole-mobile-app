@@ -7,6 +7,7 @@ using Xamarin.Forms.Xaml;
 using PiholeDashboard.Models;
 using System.Collections;
 using System.Threading.Tasks;
+using ZXing.Net.Mobile.Forms;
 
 namespace PiholeDashboard.Views
 {
@@ -18,10 +19,15 @@ namespace PiholeDashboard.Views
         public NewItemPage()
         {
             InitializeComponent();
-
             config = new PiHoleConfig();
-
             BindingContext = this;
+
+            // Restore values
+            if (App.Current.Properties.ContainsKey("Uri"))
+                Uri.Text = App.Current.Properties["Uri"].ToString();
+            if (App.Current.Properties.ContainsKey("ApiKey"))
+                ApiKey.Text = App.Current.Properties["ApiKey"].ToString();
+
         }
 
         async Task ErrorAlert(string customMsg)
@@ -31,6 +37,28 @@ namespace PiholeDashboard.Views
             {
                 await Navigation.PushModalAsync(new NavigationPage(new HelpModal()));
             }
+        }
+
+        async void QR_Clicked(object sender, EventArgs e)
+        {
+            var scanPage = new ZXingScannerPage();
+
+            scanPage.OnScanResult += (result) =>
+            {
+                // Stop scanning
+                scanPage.IsScanning = false;
+
+                // Pop the page and show the result
+                Device.BeginInvokeOnMainThread(async () =>
+                {
+                    await Navigation.PopAsync();
+                    config.ApiKey = result.Text;
+                    ApiKey.Text = config.ApiKey;
+                });
+            };
+
+            // Navigate to our scanner page
+            await Navigation.PushAsync(scanPage);
         }
 
         async void OpenHelp_Clicked(object sneder, EventArgs e)
