@@ -73,7 +73,7 @@ namespace PiholeDashboard.Views
             {
                 if (showError)
                 {
-                    string errStr = "Could not connect to PiHole service. Ensure your URI is set by pressing the top-right button. (err=4)";
+                    string errStr = "Could not connect to PiHole service. Ensure your URI is set correctly. (err=4)";
                     await ErrorAlert(errStr);
                     Console.WriteLine($"{errStr}: {err}");
                 }
