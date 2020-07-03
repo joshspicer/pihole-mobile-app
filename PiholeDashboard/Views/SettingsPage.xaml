@@ -25,6 +25,12 @@
             </StackLayout>
         </StackLayout>
         <StackLayout Grid.Row="1">
+
+         <StackLayout Padding="5,0,0,0" Orientation="Horizontal" HorizontalOptions="Center">
+            <RadioButton TextColor="Black" Text="Primary" GroupName="mode" IsChecked="True" />
+            <RadioButton TextColor="Black" Text="Backup" GroupName="mode" CheckedChanged="RadioButton_CheckedChanged" />
+        </StackLayout>
+
              <Button Margin="0,15,0,0"  Text="Enable Pi-Hole" Clicked="Enable_Clicked" BackgroundColor="Green" TextColor="White" />
              <Button Margin="0,10,0,20"  Text="Disable Pi-Hole" Clicked="Disable_Clicked" BackgroundColor="Red" TextColor="White" />
 

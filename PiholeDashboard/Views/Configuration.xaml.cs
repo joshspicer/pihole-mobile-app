@@ -56,8 +56,12 @@ namespace PiholeDashboard.Views
                 Device.BeginInvokeOnMainThread(async () =>
                 {
                     await Navigation.PopAsync();
-                    config.PrimaryApiKey = result.Text;
-                    ApiKeyLabel.Text = config.PrimaryApiKey;
+                    if (isBackupSelected)
+                        config.PrimaryApiKey = result.Text;
+                    else
+                        config.BackupApiKey = result.Text;
+
+                    ApiKeyLabel.Text = result.Text;
                 });
             };
 

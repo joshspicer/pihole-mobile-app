@@ -2,6 +2,7 @@
 using System.ComponentModel;
 using System.Net.Http;
 using System.Threading.Tasks;
+using PiholeDashboard.Models;
 using Xamarin.Essentials;
 using Xamarin.Forms;
 
@@ -10,10 +11,24 @@ namespace PiholeDashboard.Views
     [DesignTimeVisible(false)]
     public partial class SettingsPage : ContentPage
     {
+        bool isBackupSelected = false;
+        public PiHoleConfig config { get; set; }
+
         public SettingsPage()
         {
             InitializeComponent();
             BindingContext = this;
+        }
+
+        protected override void OnAppearing()
+        {
+            Console.WriteLine("Settings APPEARING");
+
+            // Restore values
+            if (App.Current.Properties.ContainsKey("config"))
+                config = (PiHoleConfig)App.Current.Properties["config"];
+            else
+                config = new PiHoleConfig();
         }
 
         async void Github_Clicked(object sender, EventArgs e)
@@ -26,9 +41,7 @@ namespace PiholeDashboard.Views
         {
             var wantsHelp = await DisplayAlert("Error", customMsg, "Open Help", "OK");
             if (wantsHelp)
-            {
                 await Navigation.PushModalAsync(new NavigationPage(new HelpModal()));
-            }
         }
 
         async Task SuccessAlert(string customMsg)
@@ -36,7 +49,7 @@ namespace PiholeDashboard.Views
             await DisplayAlert("Success", customMsg, "Nice!");
         }
 
-        async void Help_Clicked(object sneder, EventArgs e)
+        async void Help_Clicked(object sender, EventArgs e)
         {
             await Navigation.PushModalAsync(new NavigationPage(new HelpModal()));
         }
@@ -53,8 +66,8 @@ namespace PiholeDashboard.Views
         {
             try
             {
-                var dest = App.Current.Properties["Uri"];
-                var auth = App.Current.Properties["ApiKey"];
+                var dest = isBackupSelected ? config.BackupUri : config.PrimaryUri;
+                var auth = isBackupSelected ? config.BackupApiKey : config.PrimaryApiKey;
                 var maybeDuration = duration != "" ? $"={duration}" : "";
                 var uri = $"{dest}/admin/api.php?{operation}{maybeDuration}&auth={auth}";
 
@@ -70,16 +83,18 @@ namespace PiholeDashboard.Views
                     // If return contains "status", we know we were successful.
                     if (content.Contains("status"))
                     {
+                        var mode = isBackupSelected ? "Backup" : "Primary";
+
                         switch (operation)
                         {
                             case "disable":
                                 if (duration != null && duration != "")
-                                    await SuccessAlert($"Pi-Hole disabled for {duration} seconds");
+                                    await SuccessAlert($"{mode} pi-hole disabled for {duration} seconds");
                                 else
-                                    await SuccessAlert($"Pi-Hole disabled.");
+                                    await SuccessAlert($"{mode} pi-hole disabled.");
                                 return;
                             case "enable":
-                                await SuccessAlert($"Pi-Hole re-enabled.");
+                                await SuccessAlert($"{mode} pi-hole re-enabled.");
                                 return;
                             default:
                                 await ErrorAlert("Unspecified Error (err=0)");
@@ -100,5 +115,7 @@ namespace PiholeDashboard.Views
                 Console.WriteLine($"{errStr}: {err}");
             }
         }
+
+        void RadioButton_CheckedChanged(System.Object sender, Xamarin.Forms.CheckedChangedEventArgs e) => isBackupSelected = e.Value;
     }
 }

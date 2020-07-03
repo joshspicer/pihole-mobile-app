@@ -108,11 +108,12 @@ namespace PiholeDashboard.Views
                 await DoRefresh(showError: false);
         }
 
-        void RadioButton_CheckedChanged(object sender, CheckedChangedEventArgs e)
+        async void RadioButton_CheckedChanged(object sender, CheckedChangedEventArgs e)
         {
             // Set class var to indicate if we are configuring primary or backup pihole.
             isBackupSelected = e.Value;
             DisplayRightCachedValue();
+            await DoRefresh(showError: false);
         }
 
         void DisplayRightCachedValue()
@@ -121,12 +122,14 @@ namespace PiholeDashboard.Views
             if (isBackupSelected)
             {
                 UriLabel.Text = config.BackupUri;
-                ApiKeyLabel.Text = config.BackupApiKey;
+                int len = config.BackupApiKey.Length;
+                ApiKeyLabel.Text = $"{config.BackupApiKey.Substring(0, Math.Min(len / 2, 10))}XXXXX";
             }
             else
             {
                 UriLabel.Text = config.PrimaryUri;
-                ApiKeyLabel.Text = config.PrimaryApiKey;
+                int len = config.BackupApiKey.Length;
+                ApiKeyLabel.Text = $"{config.PrimaryApiKey.Substring(0, Math.Min(len / 2, 10))}XXXXX";
             }
         }
     }
