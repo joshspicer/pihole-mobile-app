@@ -25,6 +25,11 @@ namespace PiholeDashboard.Views
             OnPropertyChanged(nameof(summary));
             OnPropertyChanged(nameof(config));
             OnPropertyChanged(nameof(lastUpdated));
+
+            // Refresh Button
+            var refresh = new TapGestureRecognizer();
+            refresh.Tapped += async (s, e) => await DoRefresh();
+            RefreshLabel.GestureRecognizers.Add(refresh);
         }
 
         async Task ErrorAlert(string customMsg)
@@ -37,7 +42,7 @@ namespace PiholeDashboard.Views
         }
 
         async void AddItem_Clicked(object sender, EventArgs e) => await Navigation.PushModalAsync(new NavigationPage(new NewItemPage()));
-        async void RefreshData_Clicked(object sender, EventArgs e) => await DoRefresh();
+        //async void RefreshData_Clicked(object sender, EventArgs e) => await DoRefresh();
 
         async Task DoRefresh(bool showError=true)
         {

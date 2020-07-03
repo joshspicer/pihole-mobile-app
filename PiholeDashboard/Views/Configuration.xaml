@@ -1,22 +1,37 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
-<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:d="http://xamarin.com/schemas/2014/forms/design" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" mc:Ignorable="d" x:Class="PiholeDashboard.Views.NewItemPage" Title="Set Credential">
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:d="http://xamarin.com/schemas/2014/forms/design" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:xaml="http://xamarin.com/schemas/2014/forms" mc:Ignorable="d" x:Class="PiholeDashboard.Views.NewItemPage" Title="Set Credential">
     <ContentPage.ToolbarItems>
         <ToolbarItem Text="Cancel" Clicked="Cancel_Clicked" />
         <ToolbarItem Text="Save" Clicked="Save_Clicked" />
     </ContentPage.ToolbarItems>
     <ContentPage.Content>
         <Grid x:Name="_context">
+
             <StackLayout HorizontalOptions="CenterAndExpand">
                 <StackLayout Spacing="10" Padding="15,25,15,15">
+
+                    <!-- Toggle Between Primary and Backup Pi-Hole -->
+                    <StackLayout Orientation="Horizontal">
+                        <RadioButton Text="Primary" GroupName="mode" />
+                        <RadioButton Text="Backup" GroupName="mode" />
+                    </StackLayout>
+
                     <Label Text="Pi-Hole URI"  FontAttributes="Bold" FontSize="Medium" />
                     <Entry x:Name="Uri" BackgroundColor="LightGray" TextColor="Black" Keyboard="Url" Margin="0,0,0,10" Placeholder="http://joshspicer.com:80" IsSpellCheckEnabled="False" IsTextPredictionEnabled="false" Text ="{Binding config.Uri}" FontSize="Small" />
                     <Label Text="WEBPASSWORD API Key" FontAttributes="Bold" FontSize="Medium" />
                     <Entry x:Name="ApiKey" BackgroundColor="LightGray" TextColor="Black" Keyboard="Url" IsSpellCheckEnabled="False" Placeholder="WEBPASSWORD from /etc/pihole/setupVars.conf" IsTextPredictionEnabled="false"  Text="{Binding config.ApiKey}" FontSize="Small" />
                     <Button Clicked="QR_Clicked" Text="(or) Scan QR Code" />
                 </StackLayout>
-                <Label Padding="15,15,0,0"  FontAttributes="Bold" Text="Having Trouble?"/>
-                <Button x:Name="helpButton" Padding="15,0,0,15" FontSize="16" Text="Toggle Help" Clicked="OpenHelp_Clicked" HorizontalOptions="Start"/>
+
+
+                <StackLayout Padding="15,0,0,60" >
+                    <Label FontAttributes="Bold" Margin="0"  Padding="0,0,0,0" Text="Having Trouble?"/>
+                    <Button x:Name="helpButton" FontSize="16" Text="Toggle Help" Margin="0" Clicked="OpenHelp_Clicked" HorizontalOptions="Start"/>
+                </StackLayout>
+
             </StackLayout>
+
+
         </Grid>
     </ContentPage.Content>
 </ContentPage>

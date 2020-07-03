@@ -27,7 +27,6 @@ namespace PiholeDashboard.Views
                 Uri.Text = App.Current.Properties["Uri"].ToString();
             if (App.Current.Properties.ContainsKey("ApiKey"))
                 ApiKey.Text = App.Current.Properties["ApiKey"].ToString();
-
         }
 
         async Task ErrorAlert(string customMsg)
