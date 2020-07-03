@@ -17,13 +17,19 @@
             <controls:StatusIndicator Status="{Binding summary.status}" />
                 <!--<Label FontSize="20" Text="Status:"/>-->
                 <Label FontAttributes="Bold" FontSize="20" Text="{Binding summary.status, Converter={StaticResource Capitalize }}" />
-                    <Label x:Name="RefreshLabel" Text="&#xf2ea;" Padding="4,3,0,0" FontSize="18" FontFamily="FontAwesome" />
+                    <Label x:Name="RefreshLabel" Text="&#xf2ea;" Padding="4,5,0,0" FontSize="14" FontFamily="FontAwesome" />
 
         </StackLayout>
         <StackLayout  Padding="5,0,0,10" Orientation="Horizontal" HorizontalOptions="Start">
                 <Label FontAttributes="Bold" FontSize="12" Text="Last Updated: " />
                 <Label FontSize="12" Text="{Binding lastUpdated}" />
         </StackLayout>
+
+        <StackLayout Padding="5,0,0,0" Orientation="Horizontal">
+            <RadioButton TextColor="Black" Text="Primary" GroupName="mode" IsChecked="True" />
+            <RadioButton TextColor="Black" Text="Backup" GroupName="mode" CheckedChanged="RadioButton_CheckedChanged" />
+        </StackLayout>
+
         <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition Height="*" />
@@ -56,10 +62,10 @@
                     Grid.Row="1" Grid.Column="1"/>
         </Grid>
         <StackLayout Padding="0,10,0,0">
-            <Label x:Name="address_label" FontAttributes="Bold" Text="Address" LineBreakMode="NoWrap" FontSize="16" />
-            <Label Text="{Binding config.Uri}" d:Text="Item descripton" LineBreakMode="NoWrap"  FontSize="12" />
-            <Label x:Name="key_label" FontAttributes="Bold" Text="API Key" LineBreakMode="NoWrap" FontSize="16" />
-            <Label Text="{Binding config.ApiKey,Converter={StaticResource KeyConcat }}"   FontSize="12" />
+            <Label x:Name="address_label_heading" FontAttributes="Bold" Text="Address" LineBreakMode="NoWrap" FontSize="16" />
+            <Label x:Name="UriLabel" Text="{Binding UriBinding}" d:Text="Item descripton" LineBreakMode="NoWrap"  FontSize="12" />
+            <Label x:Name="key_label_heading" FontAttributes="Bold" Text="API Key" LineBreakMode="NoWrap" FontSize="16" />
+            <Label x:Name="ApiKeyLabel" Text="{Binding ApiKeyBinding,Converter={StaticResource KeyConcat }}"   FontSize="12" />
         </StackLayout>
     </StackLayout>
 </ContentPage>

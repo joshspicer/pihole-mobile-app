@@ -13,9 +13,12 @@ namespace PiholeDashboard.Views
     [DesignTimeVisible(false)]
     public partial class DashboardPage : ContentPage
     {
-        public PiHoleConfig config { get; } = new PiHoleConfig();
+        public PiHoleConfig config { get; set; }
         public Summary summary { get; private set; } = new Summary();
         public string lastUpdated { get; set; } = "N/A";
+        public string UriBinding { get; set; } = "";
+        public string ApiKeyBinding { get; set; } = "";
+        bool isBackupSelected = false;
 
         public DashboardPage()
         {
@@ -42,13 +45,13 @@ namespace PiholeDashboard.Views
         }
 
         async void AddItem_Clicked(object sender, EventArgs e) => await Navigation.PushModalAsync(new NavigationPage(new NewItemPage()));
-        //async void RefreshData_Clicked(object sender, EventArgs e) => await DoRefresh();
 
         async Task DoRefresh(bool showError=true)
         {
             try
             {
-                var uri = $"{App.Current.Properties["Uri"]}/admin/api.php?summaryRaw";
+                var baseUri = isBackupSelected ? config.BackupUri : config.PrimaryUri;
+                var uri = $"{baseUri}/admin/api.php?summaryRaw";
 
                 HttpClient _client = new HttpClient();
                 _client.Timeout = TimeSpan.FromSeconds(5);
@@ -88,28 +91,42 @@ namespace PiholeDashboard.Views
         async protected override void OnAppearing()
         {
             base.OnAppearing();
+            Console.WriteLine("DASHBOARD APPEARING!");
 
-            // Set Uri
-            if (App.Current.Properties.ContainsKey("Uri"))
-            {
-                var url = App.Current.Properties["Uri"] as string;
-                config.Uri = url;
-            }
+            // Restore values
+            if (App.Current.Properties.ContainsKey("config"))
+                config = (PiHoleConfig)App.Current.Properties["config"];
+            else
+                config = new PiHoleConfig();
 
-            // Set ApiKey
-            if (App.Current.Properties.ContainsKey("ApiKey"))
-            {
-                var key = App.Current.Properties["ApiKey"] as string;
-                config.ApiKey = key;
-            }
+            DisplayRightCachedValue();
 
             // Refresh
             OnPropertyChanged(nameof(config));
 
-            Console.WriteLine("DASHBOARD APPEARING!");
-            if (App.Current.Properties.ContainsKey("Uri"))
-            {
+            if (config != null && config.PrimaryUri != "")
                 await DoRefresh(showError: false);
+        }
+
+        void RadioButton_CheckedChanged(object sender, CheckedChangedEventArgs e)
+        {
+            // Set class var to indicate if we are configuring primary or backup pihole.
+            isBackupSelected = e.Value;
+            DisplayRightCachedValue();
+        }
+
+        void DisplayRightCachedValue()
+        {
+            // Display the right cached value
+            if (isBackupSelected)
+            {
+                UriLabel.Text = config.BackupUri;
+                ApiKeyLabel.Text = config.BackupApiKey;
+            }
+            else
+            {
+                UriLabel.Text = config.PrimaryUri;
+                ApiKeyLabel.Text = config.PrimaryApiKey;
             }
         }
     }

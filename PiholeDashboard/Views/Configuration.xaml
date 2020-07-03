@@ -12,26 +12,24 @@
 
                     <!-- Toggle Between Primary and Backup Pi-Hole -->
                     <StackLayout Orientation="Horizontal">
-                        <RadioButton Text="Primary" GroupName="mode" />
-                        <RadioButton Text="Backup" GroupName="mode" />
+                        <RadioButton Text="Primary" GroupName="mode" IsChecked="True" />
+                        <RadioButton Text="Backup" GroupName="mode" CheckedChanged="RadioButton_CheckedChanged" />
                     </StackLayout>
 
                     <Label Text="Pi-Hole URI"  FontAttributes="Bold" FontSize="Medium" />
-                    <Entry x:Name="Uri" BackgroundColor="LightGray" TextColor="Black" Keyboard="Url" Margin="0,0,0,10" Placeholder="http://joshspicer.com:80" IsSpellCheckEnabled="False" IsTextPredictionEnabled="false" Text ="{Binding config.Uri}" FontSize="Small" />
+                    <Entry x:Name="UriLabel" BackgroundColor="LightGray" TextColor="Black" Keyboard="Url" Margin="0,0,0,10" Placeholder="http://joshspicer.com:80" IsSpellCheckEnabled="False" IsTextPredictionEnabled="false" Text ="{Binding UriBinding}" FontSize="Small" />
                     <Label Text="WEBPASSWORD API Key" FontAttributes="Bold" FontSize="Medium" />
-                    <Entry x:Name="ApiKey" BackgroundColor="LightGray" TextColor="Black" Keyboard="Url" IsSpellCheckEnabled="False" Placeholder="WEBPASSWORD from /etc/pihole/setupVars.conf" IsTextPredictionEnabled="false"  Text="{Binding config.ApiKey}" FontSize="Small" />
+                    <Entry x:Name="ApiKeyLabel" BackgroundColor="LightGray" TextColor="Black" Keyboard="Url" IsSpellCheckEnabled="False" Placeholder="WEBPASSWORD from /etc/pihole/setupVars.conf" IsTextPredictionEnabled="false"  Text="{Binding ApiKeyBinding}" FontSize="Small" />
                     <Button Clicked="QR_Clicked" Text="(or) Scan QR Code" />
                 </StackLayout>
 
-
+                <!-- Help Menu -->
                 <StackLayout Padding="15,0,0,60" >
                     <Label FontAttributes="Bold" Margin="0"  Padding="0,0,0,0" Text="Having Trouble?"/>
                     <Button x:Name="helpButton" FontSize="16" Text="Toggle Help" Margin="0" Clicked="OpenHelp_Clicked" HorizontalOptions="Start"/>
                 </StackLayout>
 
             </StackLayout>
-
-
         </Grid>
     </ContentPage.Content>
 </ContentPage>

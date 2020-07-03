@@ -16,26 +16,31 @@ namespace PiholeDashboard.Views
     {
         public PiHoleConfig config { get; set; }
 
+        public string UriBinding { get; set; }
+        public string ApiKeyBinding { get; set; }
+
+        bool isBackupSelected = false;
+
         public NewItemPage()
         {
             InitializeComponent();
-            config = new PiHoleConfig();
             BindingContext = this;
 
             // Restore values
-            if (App.Current.Properties.ContainsKey("Uri"))
-                Uri.Text = App.Current.Properties["Uri"].ToString();
-            if (App.Current.Properties.ContainsKey("ApiKey"))
-                ApiKey.Text = App.Current.Properties["ApiKey"].ToString();
+            if (App.Current.Properties.ContainsKey("config"))
+                config = (PiHoleConfig)App.Current.Properties["config"];
+            else
+                config = new PiHoleConfig();
+
+            UriLabel.Text = config.PrimaryUri;
+            ApiKeyLabel.Text = config.PrimaryApiKey;
         }
 
         async Task ErrorAlert(string customMsg)
         {
             var wantsHelp = await DisplayAlert("Error", customMsg, "Open Help", "OK");
             if (wantsHelp)
-            {
                 await Navigation.PushModalAsync(new NavigationPage(new HelpModal()));
-            }
         }
 
         async void QR_Clicked(object sender, EventArgs e)
@@ -51,8 +56,8 @@ namespace PiholeDashboard.Views
                 Device.BeginInvokeOnMainThread(async () =>
                 {
                     await Navigation.PopAsync();
-                    config.ApiKey = result.Text;
-                    ApiKey.Text = config.ApiKey;
+                    config.PrimaryApiKey = result.Text;
+                    ApiKeyLabel.Text = config.PrimaryApiKey;
                 });
             };
 
@@ -67,30 +72,59 @@ namespace PiholeDashboard.Views
 
         async void Save_Clicked(object sender, EventArgs e)
         {
-            if (!config.Uri.ToLower().Contains("http"))
+            if (!UriBinding.ToLower().Contains("http"))
             {
                 var txt = "Please specify a protocol (HTTP/HTTPS) in your URI!";
                 await ErrorAlert(txt);
                 return;
             }
 
-            var keys = new List<string>() { "ApiKey", "Uri" };
-            foreach (var k in keys)
-            {
-                // Save 
-                if (App.Current.Properties.ContainsKey(k))
-                    App.Current.Properties[k] = k == "ApiKey" ? config.ApiKey : config.Uri;
-                else
-                    App.Current.Properties.Add(k, k == "ApiKey" ? config.ApiKey : config.Uri);
-            }
+            WriteValues();
+
+            // Save 
+            if (App.Current.Properties.ContainsKey("config"))
+                App.Current.Properties["config"] = config;
+            else
+                App.Current.Properties.Add("config", config);
 
             // Pop this model.
             await Navigation.PopModalAsync();
         }
 
-        async void Cancel_Clicked(object sender, EventArgs e)
+        void WriteValues() {
+            if (isBackupSelected)
+            {
+                config.BackupUri = UriBinding;
+                config.BackupApiKey = ApiKeyBinding;
+            }
+            else
+            {
+                config.PrimaryUri = UriBinding;
+                config.PrimaryApiKey = ApiKeyBinding;
+            }
+        }
+
+        async void Cancel_Clicked(object sender, EventArgs e) => await Navigation.PopModalAsync();
+
+        void RadioButton_CheckedChanged(object sender, CheckedChangedEventArgs e)
         {
-            await Navigation.PopModalAsync();
+            // Write whatever is written where user is dismissing
+            WriteValues();
+
+            // Set class var to indicate if we are configuring primary or backup pihole.
+            isBackupSelected = e.Value;
+
+            // Display the right cached value
+            if (isBackupSelected)
+            {
+                UriLabel.Text = config.BackupUri;
+                ApiKeyLabel.Text = config.BackupApiKey;
+            } else
+            {
+                UriLabel.Text = config.PrimaryUri;
+                ApiKeyLabel.Text = config.PrimaryApiKey;
+            }
+
         }
     }
 }
