@@ -2,7 +2,6 @@
 using Microsoft.AppCenter;
 using Microsoft.AppCenter.Analytics;
 using Microsoft.AppCenter.Crashes;
-using System;
 
 namespace PiholeDashboard
 {
@@ -19,13 +18,10 @@ namespace PiholeDashboard
 
         protected override void OnStart()
         {
+            // For release versions, option to run AppCenter prebuild script to inject secrets.
             string appcenterID = AppConstant.appcenterID;
-
             if (appcenterID != null && appcenterID != "")
-            {
-                AppCenter.Start($"ios={appcenterID}",
-                    typeof(Analytics), typeof(Crashes));
-            }
+                AppCenter.Start($"ios={appcenterID}", typeof(Analytics), typeof(Crashes));
         }
 
         protected override void OnSleep()

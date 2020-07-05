@@ -4,8 +4,6 @@ using Xamarin.Forms;
 using System.Text.Json;
 using PiholeDashboard.Models;
 using System.Net.Http;
-using System.Collections.Generic;
-using Newtonsoft.Json.Linq;
 using System.Threading.Tasks;
 
 namespace PiholeDashboard.Views
@@ -18,7 +16,7 @@ namespace PiholeDashboard.Views
         public string lastUpdated { get; set; } = "N/A";
         public string UriBinding { get; set; } = "";
         public string ApiKeyBinding { get; set; } = "";
-        bool isBackupSelected = false;
+        bool isBackupSelected = false; 
 
         public DashboardPage()
         {
@@ -45,6 +43,11 @@ namespace PiholeDashboard.Views
         }
 
         async void AddItem_Clicked(object sender, EventArgs e) => await Navigation.PushModalAsync(new NavigationPage(new NewItemPage()));
+
+        async void LeftButton_Clicked(object sender, EventArgs e) => await Shell.Current.GoToAsync("///connected");
+        async void CenterButton_Clicked(object sender, EventArgs e) => await Shell.Current.GoToAsync("///browse");
+        async void RightButton_Clicked(object sender, EventArgs e) => await Shell.Current.GoToAsync("///settings");
+
 
         async Task DoRefresh(bool showError=true)
         {

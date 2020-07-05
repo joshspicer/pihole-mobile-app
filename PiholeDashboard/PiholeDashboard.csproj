@@ -21,9 +21,7 @@
     <Folder Include="Resources\" />
   </ItemGroup>
   <ItemGroup>
-    <None Remove="Resources\fa.ttf" />
-  </ItemGroup>
-  <ItemGroup>
     <EmbeddedResource Include="Resources\fa.ttf" />
+    <EmbeddedResource Include="Resources\joseregular.ttf" />
   </ItemGroup>
 </Project>

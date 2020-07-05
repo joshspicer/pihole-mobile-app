@@ -1,11 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel;
 using Xamarin.Forms;
-using Xamarin.Forms.Xaml;
-
 using PiholeDashboard.Models;
-using System.Collections;
 using System.Threading.Tasks;
 using ZXing.Net.Mobile.Forms;
 

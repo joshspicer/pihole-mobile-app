@@ -1,71 +1,96 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:local="clr-namespace:PiholeDashboard" xmlns:controls="clr-namespace:PiholeDashboard.Controls"  xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:d="http://xamarin.com/schemas/2014/forms/design" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" mc:Ignorable="d" x:Class="PiholeDashboard.Views.DashboardPage" Title="{Binding Title}" x:Name="BrowseItemsPage">
-    <ContentPage.ToolbarItems>
-        <ToolbarItem Text="Set Credentials" Clicked="AddItem_Clicked" />
-    </ContentPage.ToolbarItems>
-    <ContentPage.Resources>
+<ContentPage
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:local="clr-namespace:PiholeDashboard"
+    xmlns:controls="clr-namespace:PiholeDashboard.Controls"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    BackgroundColor="{StaticResource lemon}"
+    x:Class="PiholeDashboard.Views.DashboardPage"
+    xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core" 
+    ios:Page.UseSafeArea="true" 
+    Title="{Binding Title}" 
+    x:Name="BrowseItemsPage">
+
+    <ContentPage.Resources>  
         <ResourceDictionary>
             <local:APIKeyConcatConverter x:Key="KeyConcat" />
             <local:Capitalize x:Key="Capitalize" />
-
         </ResourceDictionary>
     </ContentPage.Resources>
-    <StackLayout Margin="10" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
-        <Label Text="PiHole Dashboard" FontSize="34" Padding="0,0,0,15"/>
-        <StackLayout Padding="5,0,0,2" Orientation="Horizontal" HorizontalOptions="Start"  >
-            <controls:StatusIndicator Status="{Binding summary.status}" />
-                <Label FontAttributes="Bold" FontSize="20" Text="{Binding summary.status, Converter={StaticResource Capitalize }}" />
-                 <Label x:Name="RefreshLabel" Text="&#xf2ea;" Padding="4,5,0,0" FontSize="14" FontFamily="FontAwesome" />
 
-        </StackLayout>
-        <StackLayout  Padding="5,0,0,10" Orientation="Horizontal" HorizontalOptions="Start">
-                <Label FontAttributes="Bold" FontSize="12" Text="Last Updated: " />
-                <Label FontSize="12" Text="{Binding lastUpdated}" />
-        </StackLayout>
+    <AbsoluteLayout VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
+        <Button AbsoluteLayout.LayoutBounds=".95,0,AutoSize,AutoSize" AbsoluteLayout.LayoutFlags="PositionProportional" Margin="0,0,0,0" FontFamily="FontAwesome" BackgroundColor="#FFFFFF" HeightRequest="36" WidthRequest="36" 
+                TextColor="{StaticResource yellow}" Text="&#xf085;"  Clicked="AddItem_Clicked" HorizontalOptions="Center" VerticalOptions="Center" FontSize="16" CornerRadius="18" />
 
-        <StackLayout Padding="5,0,0,0" Orientation="Horizontal">
-            <RadioButton TextColor="Black" Text="Primary" GroupName="mode" IsChecked="True" />
-            <RadioButton TextColor="Black" Text="Backup" GroupName="mode" CheckedChanged="RadioButton_CheckedChanged" />
-        </StackLayout>
+        <StackLayout Margin="10" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
 
-        <Grid>
-            <Grid.RowDefinitions>
-                <RowDefinition Height="*" />
-                <RowDefinition Height="*" />
-            </Grid.RowDefinitions>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*" />
-                <ColumnDefinition Width="*" />
-            </Grid.ColumnDefinitions>
+            <StackLayout Padding="5,0,0,2" Orientation="Horizontal" HorizontalOptions="Start"  >
+                <controls:StatusIndicator Status="{Binding summary.status}" />
+                <Label FontAttributes="Bold" FontSize="30" Text="{Binding summary.status, Converter={StaticResource Capitalize }}" />
+                <Label x:Name="RefreshLabel" Text="&#xf2ea;" Padding="4,5,0,0" FontSize="14" FontFamily="FontAwesome" />
 
-            <controls:SummaryComponent
+            </StackLayout>
+            <StackLayout  Padding="5,0,0,10" Orientation="Horizontal" HorizontalOptions="Start">
+                <Label FontAttributes="Bold" FontSize="15" Text="Last Updated: " />
+                <Label FontSize="15" Text="{Binding lastUpdated}" />
+            </StackLayout>
+
+            <StackLayout Padding="5,0,0,0" Orientation="Horizontal">
+                <RadioButton TextColor="Black" Text="Primary" GroupName="mode" IsChecked="True" />
+                <RadioButton TextColor="Black" Text="Backup" GroupName="mode" CheckedChanged="RadioButton_CheckedChanged" />
+            </StackLayout>
+
+            <!--Info blocks-->
+            <Grid>
+                <controls:SummaryComponent
                     MyVal="{Binding summary.dns_queries_all_types, StringFormat='{0:N0}'}"
                     Heading="Total Queries"
-                    BgColor="Green"
-                    Grid.Row="0" Grid.Column="0"/>
-            <controls:SummaryComponent
+                    BgColor="{StaticResource blue}"
+                    Grid.Row="0" Grid.Column="0"/> 
+                <controls:SummaryComponent
                     MyVal="{Binding summary.ads_blocked_today, StringFormat='{0:N0}'}"
                     Heading="Ads Blocked Today"
-                    BgColor="Blue"
+                    BgColor="{StaticResource red}"
                     Grid.Row="0" Grid.Column="1"/>
-            <controls:SummaryComponent
+                <controls:SummaryComponent
                     MyVal="{Binding summary.ads_percentage_today, StringFormat='{0:N2}%'}"
                     Heading="Percentage Blocked"
-                    BgColor="DarkOrange"
+                    BgColor="{StaticResource orange}"
                     Grid.Row="1" Grid.Column="0"/>
-            <controls:SummaryComponent
+                <controls:SummaryComponent
                     MyVal="{Binding summary.unique_domains, StringFormat='{0:N0}'}"
                     Heading="Unique Domains"
-                    BgColor="Red"
+                    BgColor="{StaticResource green}"
                     Grid.Row="1" Grid.Column="1"/>
-        </Grid>
-        <StackLayout Padding="0,10,0,0">
-            <Label x:Name="address_label_heading" FontAttributes="Bold" Text="Address" LineBreakMode="NoWrap" FontSize="16" />
-            <Label x:Name="UriLabel" Text="{Binding UriBinding}" d:Text="Item descripton" LineBreakMode="NoWrap"  FontSize="12" />
-            <Label x:Name="key_label_heading" FontAttributes="Bold" Text="API Key" LineBreakMode="NoWrap" FontSize="16" />
-            <Label x:Name="ApiKeyLabel" Text="{Binding ApiKeyBinding,Converter={StaticResource KeyConcat }}"   FontSize="12" />
+            </Grid>
+            <StackLayout Padding="0,10,0,0">
+                <Label x:Name="address_label_heading" FontAttributes="Bold" Text="Address" LineBreakMode="NoWrap" FontSize="16" />
+                <Label x:Name="UriLabel" Text="{Binding UriBinding}" d:Text="Item descripton" LineBreakMode="NoWrap"  FontSize="12" />
+                <Label x:Name="key_label_heading" FontAttributes="Bold" Text="API Key" LineBreakMode="NoWrap" FontSize="16" />
+                <Label x:Name="ApiKeyLabel" Text="{Binding ApiKeyBinding,Converter={StaticResource KeyConcat }}"   FontSize="12" />
+            </StackLayout>
+
+
+            <AbsoluteLayout HorizontalOptions="CenterAndExpand" VerticalOptions="EndAndExpand">
+                <Grid>
+                    <Button Grid.Row="3" Margin="30,0,0,0" FontFamily="FontAwesome" BackgroundColor="#FFFFFF" HeightRequest="52" WidthRequest="52"
+                            TextColor="{StaticResource yellow}" Text="&#xf422;"  Clicked="LeftButton_Clicked"
+                            HorizontalOptions="Center" VerticalOptions="Center" FontSize="24" Grid.Column="0" CornerRadius="24" />
+
+                    <Button Grid.Row="3" FontFamily="FontAwesome" BackgroundColor="#FFFFFF" HeightRequest="68" WidthRequest="68"
+                            TextColor="{StaticResource yellow}" Text="&#xf015;" Clicked="CenterButton_Clicked"
+                            HorizontalOptions="Center" VerticalOptions="Center" FontSize="32" Grid.Column="1" CornerRadius="32" />
+
+                    <Button Grid.Row="3" Margin="0,0,30,0" FontFamily="FontAwesome" BackgroundColor="#FFFFFF" HeightRequest="52" WidthRequest="52"
+                            TextColor="{StaticResource yellow}" Text="&#xf0ad;" Clicked="RightButton_Clicked"
+                            HorizontalOptions="Center" VerticalOptions="Center" FontSize="24" Grid.Column="2" CornerRadius="24" />
+                </Grid>
+            </AbsoluteLayout>
         </StackLayout>
-    </StackLayout>
+    </AbsoluteLayout>
 </ContentPage>
 
 
