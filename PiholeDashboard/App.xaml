@@ -20,7 +20,12 @@
 
             <Style ApplyToDerivedTypes="True" TargetType="Label">
                 <Setter Property="FontFamily" Value="jose"/>
+                <Setter Property="TextColor" Value="#2A2A2A" />
             </Style>
+
+            <Style ApplyToDerivedTypes="True" TargetType="ContentPage">
+                <Setter Property="BackgroundColor" Value="{StaticResource lemon}"/>
+             </Style>
 
         </ResourceDictionary>
     </Application.Resources>

@@ -15,7 +15,6 @@ namespace PiholeDashboard.Views
         public Summary summary { get; private set; } = new Summary();
         public string lastUpdated { get; set; } = "N/A";
         public string UriBinding { get; set; } = "";
-        public string ApiKeyBinding { get; set; } = "";
         bool isBackupSelected = false; 
 
         public DashboardPage()
@@ -126,13 +125,11 @@ namespace PiholeDashboard.Views
             {
                 UriLabel.Text = config.BackupUri;
                 int len = config.BackupApiKey.Length;
-                ApiKeyLabel.Text = $"{config.BackupApiKey.Substring(0, Math.Min(len / 2, 10))}XXXXX";
             }
             else
             {
                 UriLabel.Text = config.PrimaryUri;
                 int len = config.BackupApiKey.Length;
-                ApiKeyLabel.Text = $"{config.PrimaryApiKey.Substring(0, Math.Min(len / 2, 10))}XXXXX";
             }
         }
     }

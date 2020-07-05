@@ -40,17 +40,4 @@
         <FlyoutItem Title="Settings" Icon="tab_about.png">
             <ShellContent Route="settings" ContentTemplate="{DataTemplate local:SettingsPage}" />
         </FlyoutItem>
-
-        <!--<TabBar>
-        <Tab Title="Browse" Icon="tab_feed.png">
-            <ShellContent Route="browse" ContentTemplate="{DataTemplate local:DashboardPage}" />
-        </Tab>
-        <Tab Title="Connected Clients" Icon="tab_feed.png">
-            <ShellContent Route="connected" ContentTemplate="{DataTemplate local:ConnectedClients}" />
-        </Tab>
-        <Tab Title="Settings" Icon="tab_about.png">
-            <ShellContent Route="settings" ContentTemplate="{DataTemplate local:SettingsPage}" />
-        </Tab>
-    </TabBar>-->
-
 </Shell>
