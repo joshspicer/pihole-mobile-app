@@ -7,11 +7,11 @@
     xmlns:d="http://xamarin.com/schemas/2014/forms/design"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
-    BackgroundColor="{StaticResource lemon}"
     x:Class="PiholeDashboard.Views.DashboardPage"
     xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core" 
     ios:Page.UseSafeArea="true" 
-    Title="{Binding Title}" 
+    Title="{Binding Title}"
+    BackgroundColor="{StaticResource lightBackground}" 
     x:Name="BrowseItemsPage">
 
     <ContentPage.Resources>
@@ -21,27 +21,26 @@
         </ResourceDictionary>
     </ContentPage.Resources>
 
-    <AbsoluteLayout VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
-        <Button AbsoluteLayout.LayoutBounds=".95,0,AutoSize,AutoSize" AbsoluteLayout.LayoutFlags="PositionProportional" Margin="0,0,0,0" FontFamily="FontAwesome" BackgroundColor="#FFFFFF" HeightRequest="36" WidthRequest="36" 
-                TextColor="{StaticResource yellow}" Text="&#xf085;"  Clicked="AddItem_Clicked" HorizontalOptions="Center" VerticalOptions="Center" FontSize="16" CornerRadius="18" />
+    <AbsoluteLayout VerticalOptions="FillAndExpand">
+        <Button AbsoluteLayout.LayoutBounds=".95,0,AutoSize,AutoSize" AbsoluteLayout.LayoutFlags="PositionProportional" Margin="0,0,0,0" FontFamily="FontAwesome" BackgroundColor="{StaticResource lemon}" HeightRequest="36" WidthRequest="36" 
+                TextColor="{StaticResource red}" Text="&#xf085;"  Clicked="AddItem_Clicked" HorizontalOptions="Center" VerticalOptions="Center" FontSize="16" CornerRadius="18" />
 
-        <StackLayout Margin="10" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
+        <StackLayout Margin="10" VerticalOptions="FillAndExpand">
 
             <StackLayout Padding="5,0,0,2" Orientation="Horizontal" HorizontalOptions="Start"  >
                 <controls:StatusIndicator Status="{Binding summary.status}" />
                 <Label FontAttributes="Bold" FontSize="30" Text="{Binding summary.status, Converter={StaticResource Capitalize }}" />
                 <Label x:Name="RefreshLabel" Text="&#xf2ea;" Padding="4,5,0,0" FontSize="14" FontFamily="FontAwesome" />
+            </StackLayout>
 
+            <StackLayout>
+                <Label  Padding="5,0,0,10" x:Name="UriLabel" Text="{Binding UriBinding}" LineBreakMode="NoWrap"  FontSize="15" />
             </StackLayout>
             <StackLayout  Padding="5,0,0,10" Orientation="Horizontal" HorizontalOptions="Start">
                 <Label FontAttributes="Bold" FontSize="15" Text="Last Updated: " />
                 <Label FontSize="15" Text="{Binding lastUpdated}" />
             </StackLayout>
-            <StackLayout>
-                <Label x:Name="address_label_heading" FontAttributes="Bold" Text="Address" LineBreakMode="NoWrap" FontSize="16" />
-                <Label x:Name="UriLabel" Text="{Binding UriBinding}" d:Text="Item descripton" LineBreakMode="NoWrap"  FontSize="12" />
-            </StackLayout>
-
+    
             <StackLayout Padding="5,0,0,0" Orientation="Horizontal">
                 <RadioButton TextColor="Black" Text="Primary" GroupName="mode" IsChecked="True" />
                 <RadioButton TextColor="Black" Text="Backup" GroupName="mode" CheckedChanged="RadioButton_CheckedChanged" />
@@ -50,13 +49,13 @@
             <!--Info blocks-->
             <StackLayout>
                 <controls:SummaryComponent
-                    MyVal="{Binding summary.dns_queries_all_types, StringFormat='{0:N0}'}"
+                    MyVal="{Binding summary.dns_queries_all_types, StringFormat='{}{0:N0}'}"
                     Heading="Total Queries"
                     BgColor="{StaticResource blue}"
                     Grid.Row="3" />
                 <Grid>
                     <controls:SummaryComponent
-                        MyVal="{Binding summary.dns_queries_all_types, StringFormat='{0:N0}'}"
+                        MyVal="{Binding summary.dns_queries_all_types, StringFormat='{}{0:N0}'}"
                         Heading="Total Queries"
                         BgColor="{StaticResource red}"
                         CustomHeight="200"
@@ -64,48 +63,47 @@
 
                     <StackLayout Grid.Column="1">
                         <controls:SummaryComponent
-                        MyVal="{Binding summary.ads_percentage_today, StringFormat='{0:N2}%'}"
-                        Heading="Percentage Blocked"
-                        BgColor="{StaticResource orange}"
-                        Grid.Row="0" Grid.Column="1"/>
+                            MyVal="{Binding summary.ads_percentage_today, StringFormat='{}{0:N2}%'}"
+                            Heading="Percentage Blocked"
+                            BgColor="{StaticResource orange}"
+                            Grid.Row="0" Grid.Column="1"/>
                         <controls:SummaryComponent
-                        MyVal="{Binding summary.unique_domains, StringFormat='{0:N0}'}"
-                        Heading="Unique Domains"
-                        BgColor="{StaticResource green}"
-                        Grid.Row="1" Grid.Column="1"/>
+                            MyVal="{Binding summary.unique_domains, StringFormat='{}{0:N0}'}"
+                            Heading="Unique Domains"
+                            BgColor="{StaticResource green}"
+                            Grid.Row="1" Grid.Column="1"/>
                     </StackLayout>
-                </Grid>
+                </Grid> 
                 <StackLayout>
                     <Grid>
                         <controls:SummaryComponent
-                        MyVal="{Binding summary.dns_queries_all_types, StringFormat='{0:N0}'}"
-                        Heading="Total Queries"
-                        BgColor="{StaticResource green}"
-                        Grid.Row="0" Grid.Column="0"/>
+                            MyVal="{Binding summary.dns_queries_all_types, StringFormat='{}{0:N0}'}"
+                            Heading="Total Queries"
+                            BgColor="{StaticResource green}"
+                            Grid.Row="0" Grid.Column="0"/>
                         <controls:SummaryComponent
-                        MyVal="{Binding summary.ads_blocked_today, StringFormat='{0:N0}'}"
-                        Heading="Ads Blocked Today"
-                        BgColor="{StaticResource red}"
-                        Grid.Row="0" Grid.Column="1"/>
+                            MyVal="{Binding summary.ads_blocked_today, StringFormat='{}{0:N0}'}"
+                            Heading="Ads Blocked Today"
+                            BgColor="{StaticResource red}"
+                            Grid.Row="0" Grid.Column="1"/>
                     </Grid>
                 </StackLayout>
-            </StackLayout> <!--End Info Blocks-->
+            </StackLayout>
+            <!--End Info Blocks-->
 
-            <AbsoluteLayout HorizontalOptions="CenterAndExpand" VerticalOptions="EndAndExpand">
-                <Grid>
-                    <Button Grid.Row="3" Margin="30,0,0,0" FontFamily="FontAwesome" BackgroundColor="#FFFFFF" HeightRequest="52" WidthRequest="52"
-                            TextColor="{StaticResource yellow}" Text="&#xf422;"  Clicked="LeftButton_Clicked"
-                            HorizontalOptions="Center" VerticalOptions="Center" FontSize="24" Grid.Column="0" CornerRadius="24" />
+            <Grid>
+                <Button x:Name="leftBtn" Grid.Row="2" Margin="50,0,0,0" FontFamily="FontAwesome" BackgroundColor="{StaticResource lemon}" HeightRequest="52" WidthRequest="52"
+                        TextColor="{StaticResource red}" Text="&#xf422;"  Clicked="LeftButton_Clicked"
+                        HorizontalOptions="Center" VerticalOptions="Center" FontSize="24" Grid.Column="0" CornerRadius="24" />
 
-                    <Button Grid.Row="3" FontFamily="FontAwesome" BackgroundColor="#FFFFFF" HeightRequest="68" WidthRequest="68"
-                            TextColor="{StaticResource yellow}" Text="&#xf015;" Clicked="CenterButton_Clicked"
-                            HorizontalOptions="Center" VerticalOptions="Center" FontSize="32" Grid.Column="1" CornerRadius="32" />
+                <Button x:Name="centerBtn" Grid.Row="2" FontFamily="FontAwesome" BackgroundColor="{StaticResource lemon}" HeightRequest="72" WidthRequest="72"
+                        TextColor="{StaticResource red}" Text="&#xf015;" Clicked="CenterButton_Clicked"  BorderWidth="2" BorderColor="{StaticResource red}"
+                        HorizontalOptions="Center" VerticalOptions="Center" FontSize="32" Grid.Column="1" CornerRadius="36" />
 
-                    <Button Grid.Row="3" Margin="0,0,30,0" FontFamily="FontAwesome" BackgroundColor="#FFFFFF" HeightRequest="52" WidthRequest="52"
-                            TextColor="{StaticResource yellow}" Text="&#xf0ad;" Clicked="RightButton_Clicked"
-                            HorizontalOptions="Center" VerticalOptions="Center" FontSize="24" Grid.Column="2" CornerRadius="24" />
-                </Grid>
-            </AbsoluteLayout>
+                <Button x:Name="rightBtn" Grid.Row="2" Margin="0,0,50,0" FontFamily="FontAwesome" BackgroundColor="{StaticResource lemon}" HeightRequest="52" WidthRequest="52"
+                        TextColor="{StaticResource red}" Text="&#xf0ad;" Clicked="RightButton_Clicked"
+                        HorizontalOptions="Center" VerticalOptions="Center" FontSize="24" Grid.Column="2" CornerRadius="24" />
+            </Grid>
         </StackLayout>
     </AbsoluteLayout>
 </ContentPage>

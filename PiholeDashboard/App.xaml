@@ -17,6 +17,7 @@
             <Color x:Key="green">#94A128</Color>
             <Color x:Key="yellow">#FCBF49</Color>
             <Color x:Key="lemon">#EAE2B7</Color>
+            <Color x:Key="lightBackground">#FCFCFC</Color>
 
             <Style ApplyToDerivedTypes="True" TargetType="Label">
                 <Setter Property="FontFamily" Value="jose"/>
@@ -24,8 +25,8 @@
             </Style>
 
             <Style ApplyToDerivedTypes="True" TargetType="ContentPage">
-                <Setter Property="BackgroundColor" Value="{StaticResource lemon}"/>
-             </Style>
+                <Setter Property="BackgroundColor" Value="{StaticResource lightBackground}"/>
+            </Style>  
 
         </ResourceDictionary>
     </Application.Resources>
