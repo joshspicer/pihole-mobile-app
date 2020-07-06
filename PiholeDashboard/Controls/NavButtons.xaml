@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentView xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="PiholeDashboard.Controls.NavButtons">
+    <ContentView.Content>
+        <Grid>
+            <Button x:Name="leftBtn" Grid.Row="2" Margin="50,0,0,0" FontFamily="FontAwesome" BackgroundColor="{StaticResource lemon}" HeightRequest="52" WidthRequest="52"
+                        TextColor="{StaticResource red}" Text="&#xf422;"  Clicked="LeftButton_Clicked"
+                        HorizontalOptions="Center" VerticalOptions="Center" FontSize="24" Grid.Column="0" CornerRadius="24" />
+
+            <Button x:Name="centerBtn" Grid.Row="2" FontFamily="FontAwesome" BackgroundColor="{StaticResource lemon}" HeightRequest="72" WidthRequest="72"
+                        TextColor="{StaticResource red}" Text="&#xf015;" Clicked="CenterButton_Clicked"  BorderWidth="2" BorderColor="{StaticResource red}"
+                        HorizontalOptions="Center" VerticalOptions="Center" FontSize="32" Grid.Column="1" CornerRadius="36" />
+
+            <Button x:Name="rightBtn" Grid.Row="2" Margin="0,0,50,0" FontFamily="FontAwesome" BackgroundColor="{StaticResource lemon}" HeightRequest="52" WidthRequest="52"
+                        TextColor="{StaticResource red}" Text="&#xf0ad;" Clicked="RightButton_Clicked"
+                        HorizontalOptions="Center" VerticalOptions="Center" FontSize="24" Grid.Column="2" CornerRadius="24" />
+        </Grid>
+    </ContentView.Content>
+</ContentView>

@@ -36,7 +36,7 @@ namespace PiholeDashboard.Views
         {
             var wantsHelp = await DisplayAlert("Error", customMsg, "Open Help", "OK");
             if (wantsHelp)
-                await Navigation.PushModalAsync(new NavigationPage(new HelpModal()));
+                await Shell.Current.GoToAsync("///help");
         }
 
         async void QR_Clicked(object sender, EventArgs e)
@@ -67,7 +67,7 @@ namespace PiholeDashboard.Views
 
         async void OpenHelp_Clicked(object sneder, EventArgs e)
         {
-            await Navigation.PushModalAsync(new NavigationPage(new HelpModal()));
+            await Shell.Current.GoToAsync("///help");
         }
 
         async void Save_Clicked(object sender, EventArgs e)
@@ -88,10 +88,11 @@ namespace PiholeDashboard.Views
                 App.Current.Properties.Add("config", config);
 
             // Pop this model.
-            await Navigation.PopModalAsync();
+            await Shell.Current.GoToAsync("///browse");
         }
 
-        void WriteValues() {
+        void WriteValues()
+        {
             if (isBackupSelected)
             {
                 config.BackupUri = UriBinding;
@@ -104,7 +105,7 @@ namespace PiholeDashboard.Views
             }
         }
 
-        async void Cancel_Clicked(object sender, EventArgs e) => await Navigation.PopModalAsync();
+        async void Cancel_Clicked(object sender, EventArgs e) => await Shell.Current.GoToAsync("///browse");
 
         void RadioButton_CheckedChanged(object sender, CheckedChangedEventArgs e)
         {
@@ -119,12 +120,12 @@ namespace PiholeDashboard.Views
             {
                 UriLabel.Text = config.BackupUri;
                 ApiKeyLabel.Text = config.BackupApiKey;
-            } else
+            }
+            else
             {
                 UriLabel.Text = config.PrimaryUri;
                 ApiKeyLabel.Text = config.PrimaryApiKey;
             }
-
         }
     }
 }

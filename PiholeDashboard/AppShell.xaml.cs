@@ -1,11 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-
-using Xamarin.Forms;
+﻿using Xamarin.Forms;
 
 namespace PiholeDashboard
 {
-    public partial class AppShell : Xamarin.Forms.Shell
+    public partial class AppShell : Shell
     {
         public AppShell()
         {

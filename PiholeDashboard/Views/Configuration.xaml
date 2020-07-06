@@ -1,5 +1,17 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
-<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:d="http://xamarin.com/schemas/2014/forms/design" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:xaml="http://xamarin.com/schemas/2014/forms" mc:Ignorable="d" x:Class="PiholeDashboard.Views.NewItemPage" Title="Set Credential">
+<ContentPage
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:xaml="http://xamarin.com/schemas/2014/forms"
+    mc:Ignorable="d"
+    xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core" 
+    ios:Page.UseSafeArea="true"
+    BackgroundColor="{StaticResource lightBackground}" 
+    x:Class="PiholeDashboard.Views.NewItemPage"
+    Title="Set Credential">
+
     <ContentPage.ToolbarItems>
         <ToolbarItem Text="Cancel" Clicked="Cancel_Clicked" />
         <ToolbarItem Text="Save" Clicked="Save_Clicked" />
@@ -8,7 +20,18 @@
         <Grid x:Name="_context">
 
             <StackLayout HorizontalOptions="CenterAndExpand">
+          
                 <StackLayout Spacing="10" Padding="15,25,15,15">
+
+                    <StackLayout HorizontalOptions="EndAndExpand" Spacing="10" Orientation="Horizontal">
+                        <Button x:Name="leftBtn" Grid.Row="2" Margin="50,0,0,0" FontFamily="FontAwesome" BackgroundColor="{StaticResource lemon}" HeightRequest="52" WidthRequest="52"
+                            TextColor="{StaticResource blue}" Text="&#xf55a;"  Clicked="Cancel_Clicked"
+                            HorizontalOptions="Center" VerticalOptions="Center" FontSize="24" Grid.Column="0" CornerRadius="24" />
+
+                        <Button x:Name="centerBtn" Grid.Row="2" FontFamily="FontAwesome" BackgroundColor="{StaticResource lemon}" HeightRequest="52" WidthRequest="52"
+                            TextColor="{StaticResource blue}" Text="&#xf0c7;" Clicked="Save_Clicked" 
+                            HorizontalOptions="Center" VerticalOptions="Center" FontSize="32" Grid.Column="1" CornerRadius="24" />
+                    </StackLayout>
 
                     <!-- Toggle Between Primary and Backup Pi-Hole -->
                     <StackLayout Orientation="Horizontal">

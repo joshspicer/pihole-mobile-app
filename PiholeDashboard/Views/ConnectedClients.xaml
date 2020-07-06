@@ -9,7 +9,7 @@
     x:Class="PiholeDashboard.Views.ConnectedClients">
     <ContentPage.ToolbarItems>
         <ToolbarItem Text="Reload" Clicked="RefreshData_Clicked">
-            </ToolbarItem>
+        </ToolbarItem>
     </ContentPage.ToolbarItems>
 
     <ContentPage.Content>
@@ -17,10 +17,10 @@
             <Label HorizontalTextAlignment="Center" Text="Active Clients" FontSize="32" Padding="0,0,0,5"/>
             <Label HorizontalTextAlignment="Center" FontAttributes="Bold" Text="Past 24 Hours" FontSize="12" Padding="0,0,0,5"/>
 
-        <StackLayout Padding="5,0,0,0" Orientation="Horizontal" HorizontalOptions="Center">
-            <RadioButton TextColor="Black" Text="Primary" GroupName="mode" IsChecked="True" />
-            <RadioButton TextColor="Black" Text="Backup" GroupName="mode" CheckedChanged="RadioButton_CheckedChanged" />
-        </StackLayout>
+            <StackLayout Padding="5,0,0,0" Orientation="Horizontal" HorizontalOptions="Center">
+                <RadioButton TextColor="Black" Text="Primary" GroupName="mode" IsChecked="True" />
+                <RadioButton TextColor="Black" Text="Backup" GroupName="mode" CheckedChanged="RadioButton_CheckedChanged" />
+            </StackLayout>
 
             <StackLayout Padding="22">
                 <Grid>
@@ -36,6 +36,10 @@
                 </Grid>
             </StackLayout>
             <controls:TopClients Clients="{Binding topSources}" />
+
+            <controls:NavButtons />
+
         </StackLayout>
+
     </ContentPage.Content>
 </ContentPage>

@@ -41,12 +41,7 @@ namespace PiholeDashboard.Views
             }
         }
 
-        async void AddItem_Clicked(object sender, EventArgs e) => await Navigation.PushModalAsync(new NavigationPage(new NewItemPage()));
-
-        async void LeftButton_Clicked(object sender, EventArgs e) => await Shell.Current.GoToAsync("///connected");
-        async void CenterButton_Clicked(object sender, EventArgs e) => await Shell.Current.GoToAsync("///browse");
-        async void RightButton_Clicked(object sender, EventArgs e) => await Shell.Current.GoToAsync("///settings");
-
+        async void AddItem_Clicked(object sender, EventArgs e) => await Shell.Current.GoToAsync("///configuration");
 
         async Task DoRefresh(bool showError=true)
         {

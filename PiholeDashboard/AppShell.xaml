@@ -11,9 +11,9 @@
        x:Class="PiholeDashboard.AppShell">
     <!-- 
         Styles and Resources 
-    --> 
+    -->
     <Shell.Resources>
-        <ResourceDictionary> 
+        <ResourceDictionary>
             <Style ApplyToDerivedTypes="True" x:Key="BaseStyle" TargetType="Element">
                 <!--<Setter Property="Shell.BackgroundColor" Value="{StaticResource }" />-->
                 <Setter Property="Shell.ForegroundColor" Value="White" />
@@ -29,15 +29,24 @@
         </ResourceDictionary>
     </Shell.Resources>
     <!-- Your Pages -->
-        <FlyoutItem Title="Browse" Icon="tab_feed.png">
-            <ShellContent Route="browse" ContentTemplate="{DataTemplate local:DashboardPage}"/>
-        </FlyoutItem>
+    <FlyoutItem Title="Browse" Icon="tab_feed.png">
+        <ShellContent Route="browse" ContentTemplate="{DataTemplate local:DashboardPage}"/>
+    </FlyoutItem>
 
-        <FlyoutItem Title="Connected Clients" Icon="tab_feed.png">
-            <ShellContent Route="connected" ContentTemplate="{DataTemplate local:ConnectedClients}" />
-        </FlyoutItem>
+    <FlyoutItem Title="Connected Clients" Icon="tab_feed.png">
+        <ShellContent Route="connected" ContentTemplate="{DataTemplate local:ConnectedClients}" />
+    </FlyoutItem>
 
-        <FlyoutItem Title="Settings" Icon="tab_about.png">
-            <ShellContent Route="settings" ContentTemplate="{DataTemplate local:SettingsPage}" />
-        </FlyoutItem>
+    <FlyoutItem Title="Settings" Icon="tab_about.png">
+        <ShellContent Route="settings" ContentTemplate="{DataTemplate local:SettingsPage}" />
+    </FlyoutItem>
+
+    <FlyoutItem Title="Configuration">
+        <ShellContent Route="configuration" ContentTemplate="{DataTemplate local:NewItemPage}" />
+    </FlyoutItem>
+
+    <FlyoutItem Title="Help">
+        <ShellContent Route="help" ContentTemplate="{DataTemplate local:HelpModal}" />
+    </FlyoutItem>
+
 </Shell>
