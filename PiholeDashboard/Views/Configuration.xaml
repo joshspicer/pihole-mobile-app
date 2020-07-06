@@ -52,6 +52,13 @@
                     <Button x:Name="helpButton" FontSize="16" Text="Toggle Help" Margin="0" Clicked="OpenHelp_Clicked" HorizontalOptions="Start"/>
                 </StackLayout>
 
+                <!-- Credits -->
+                <StackLayout VerticalOptions="EndAndExpand" HorizontalOptions="Center">
+                    <Label FontAttributes="Bold" Margin="0"   HorizontalTextAlignment="Center" FontSize="12" Padding="0,0,0,0" Text="(c) Josh Spicer"/>
+                    <Label x:Name="github" FontAttributes="Bold" Margin="0"   HorizontalTextAlignment="Center" FontSize="12" Padding="0,0,0,0" Text="Open Source on GitHub"/>
+
+                </StackLayout>
+
             </StackLayout>
         </Grid>
     </ContentPage.Content>

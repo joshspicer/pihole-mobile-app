@@ -11,11 +11,6 @@
     BackgroundColor="{StaticResource lightBackground}" 
     x:Class="PiholeDashboard.Views.SettingsPage"
     Title="{Binding Title}">
-    <ContentPage.ToolbarItems>
-        <ToolbarItem Text="Github" Clicked="Github_Clicked" />
-        <ToolbarItem Text="Help" Clicked="Help_Clicked" />
-
-    </ContentPage.ToolbarItems>
     <ContentPage.Resources>
         <ResourceDictionary>
             <Color x:Key="Primary">#2196F3</Color>

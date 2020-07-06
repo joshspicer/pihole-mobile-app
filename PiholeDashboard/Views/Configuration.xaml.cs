@@ -4,13 +4,14 @@ using Xamarin.Forms;
 using PiholeDashboard.Models;
 using System.Threading.Tasks;
 using ZXing.Net.Mobile.Forms;
-
+using Xamarin.Essentials;
+using PiholeDashboard.Utils;
 namespace PiholeDashboard.Views
 {
     [DesignTimeVisible(false)]
     public partial class NewItemPage : ContentPage
     {
-        public PiHoleConfig config { get; set; }
+        public PiHoleConfig config;
 
         public string UriBinding { get; set; }
         public string ApiKeyBinding { get; set; }
@@ -23,13 +24,22 @@ namespace PiholeDashboard.Views
             BindingContext = this;
 
             // Restore values
-            if (App.Current.Properties.ContainsKey("config"))
-                config = (PiHoleConfig)App.Current.Properties["config"];
-            else
+            if (!PersistenceSerializer.TryFetchConfig(out config))
                 config = new PiHoleConfig();
 
             UriLabel.Text = config.PrimaryUri;
             ApiKeyLabel.Text = config.PrimaryApiKey;
+
+            // Refresh Button
+            var refresh = new TapGestureRecognizer();
+            refresh.Tapped += async (s, e) => await Github_Clicked();
+            github.GestureRecognizers.Add(refresh);
+        }
+
+        async Task Github_Clicked()
+        {
+            var url = "https://joshspicer.com/pihole";
+            await Launcher.OpenAsync(url);
         }
 
         async Task ErrorAlert(string customMsg)
@@ -79,19 +89,16 @@ namespace PiholeDashboard.Views
                 return;
             }
 
-            WriteValues();
+            DisplayValues();
 
-            // Save 
-            if (App.Current.Properties.ContainsKey("config"))
-                App.Current.Properties["config"] = config;
-            else
-                App.Current.Properties.Add("config", config);
+            // Save
+            PersistenceSerializer.SerializeAndSaveConfig(config);
 
             // Pop this model.
             await Shell.Current.GoToAsync("///browse");
         }
 
-        void WriteValues()
+        void DisplayValues()
         {
             if (isBackupSelected)
             {
@@ -110,7 +117,7 @@ namespace PiholeDashboard.Views
         void RadioButton_CheckedChanged(object sender, CheckedChangedEventArgs e)
         {
             // Write whatever is written where user is dismissing
-            WriteValues();
+            DisplayValues();
 
             // Set class var to indicate if we are configuring primary or backup pihole.
             isBackupSelected = e.Value;

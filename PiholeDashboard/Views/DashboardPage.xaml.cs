@@ -5,13 +5,14 @@ using System.Text.Json;
 using PiholeDashboard.Models;
 using System.Net.Http;
 using System.Threading.Tasks;
+using PiholeDashboard.Utils;
 
 namespace PiholeDashboard.Views
 {
     [DesignTimeVisible(false)]
     public partial class DashboardPage : ContentPage
     {
-        public PiHoleConfig config { get; set; }
+        public PiHoleConfig config;
         public Summary summary { get; private set; } = new Summary();
         public string lastUpdated { get; set; } = "N/A";
         public string UriBinding { get; set; } = "";
@@ -23,7 +24,6 @@ namespace PiholeDashboard.Views
             BindingContext = this;
 
             OnPropertyChanged(nameof(summary));
-            OnPropertyChanged(nameof(config));
             OnPropertyChanged(nameof(lastUpdated));
 
             // Refresh Button
@@ -91,9 +91,7 @@ namespace PiholeDashboard.Views
             Console.WriteLine("DASHBOARD APPEARING!");
 
             // Restore values
-            if (App.Current.Properties.ContainsKey("config"))
-                config = (PiHoleConfig)App.Current.Properties["config"];
-            else
+            if (!PersistenceSerializer.TryFetchConfig(out config))
                 config = new PiHoleConfig();
 
             DisplayRightCachedValue();

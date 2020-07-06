@@ -21,10 +21,7 @@
         </ResourceDictionary>
     </ContentPage.Resources>
 
-    <AbsoluteLayout VerticalOptions="FillAndExpand">
-        <Button AbsoluteLayout.LayoutBounds=".95,0,AutoSize,AutoSize" AbsoluteLayout.LayoutFlags="PositionProportional" Margin="0,0,0,0" FontFamily="FontAwesome" BackgroundColor="{StaticResource lemon}" HeightRequest="36" WidthRequest="36" 
-                TextColor="{StaticResource red}" Text="&#xf085;"  Clicked="AddItem_Clicked" HorizontalOptions="Center" VerticalOptions="Center" FontSize="16" CornerRadius="18" />
-
+    <Grid VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
         <StackLayout Margin="10" VerticalOptions="FillAndExpand">
 
             <StackLayout Padding="5,0,0,2" Orientation="Horizontal" HorizontalOptions="Start"  >
@@ -40,7 +37,7 @@
                 <Label FontAttributes="Bold" FontSize="15" Text="Last Updated: " />
                 <Label FontSize="15" Text="{Binding lastUpdated}" />
             </StackLayout>
-    
+
             <StackLayout Padding="5,0,0,0" Orientation="Horizontal">
                 <RadioButton TextColor="Black" Text="Primary" GroupName="mode" IsChecked="True" />
                 <RadioButton TextColor="Black" Text="Backup" GroupName="mode" CheckedChanged="RadioButton_CheckedChanged" />
@@ -73,7 +70,7 @@
                             BgColor="{StaticResource green}"
                             Grid.Row="1" Grid.Column="1"/>
                     </StackLayout>
-                </Grid> 
+                </Grid>
                 <StackLayout>
                     <Grid>
                         <controls:SummaryComponent
@@ -89,12 +86,20 @@
                     </Grid>
                 </StackLayout>
             </StackLayout>
-            <!--End Info Blocks-->
+            <!--End Info Blocks--> 
 
-            <controls:NavButtons />
+            <!-- Navigation -->
+            <controls:NavButtons Grid.Row="2"/>
 
         </StackLayout>
-    </AbsoluteLayout>
+
+        <!--Config Button-->
+        <AbsoluteLayout>
+            <Button AbsoluteLayout.LayoutBounds=".95,0,AutoSize,AutoSize" AbsoluteLayout.LayoutFlags="PositionProportional" Margin="0,0,0,0" FontFamily="FontAwesome" BackgroundColor="{StaticResource lemon}" HeightRequest="36" WidthRequest="36" 
+                TextColor="{StaticResource red}" Text="&#xf085;"  Clicked="AddItem_Clicked" HorizontalOptions="Center" VerticalOptions="Center" FontSize="16" CornerRadius="18" />
+        </AbsoluteLayout>
+
+    </Grid>
 </ContentPage>
 
 

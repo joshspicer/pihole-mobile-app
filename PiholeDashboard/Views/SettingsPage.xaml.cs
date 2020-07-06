@@ -31,12 +31,6 @@ namespace PiholeDashboard.Views
                 config = new PiHoleConfig();
         }
 
-        async void Github_Clicked(object sender, EventArgs e)
-        {
-            var url = "https://joshspicer.com/pihole";
-            await Launcher.OpenAsync(url);
-        }
-
         async Task ErrorAlert(string customMsg)
         {
             var wantsHelp = await DisplayAlert("Error", customMsg, "Open Help", "OK");
