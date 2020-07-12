@@ -3,6 +3,7 @@ using System.ComponentModel;
 using System.Net.Http;
 using System.Threading.Tasks;
 using PiholeDashboard.Models;
+using PiholeDashboard.Utils;
 using Xamarin.Essentials;
 using Xamarin.Forms;
 
@@ -12,7 +13,7 @@ namespace PiholeDashboard.Views
     public partial class SettingsPage : ContentPage
     {
         bool isBackupSelected = false;
-        public PiHoleConfig config { get; set; }
+        public PiHoleConfig config;
 
         public SettingsPage()
         {
@@ -25,9 +26,7 @@ namespace PiholeDashboard.Views
             Console.WriteLine("Settings APPEARING");
 
             // Restore values
-            if (App.Current.Properties.ContainsKey("config"))
-                config = (PiHoleConfig)App.Current.Properties["config"];
-            else
+            if (!PersistenceSerializer.TryFetchConfig(out config))
                 config = new PiHoleConfig();
         }
 

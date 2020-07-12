@@ -29,6 +29,10 @@ namespace PiholeDashboard.Utils
             {
                 var json = (string)App.Current.Properties["config"];
                 config = JsonSerializer.Deserialize<PiHoleConfig>(json);
+
+                if (config == null)
+                    return false;
+
                 return true;
             }
 

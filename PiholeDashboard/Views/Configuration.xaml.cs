@@ -82,12 +82,14 @@ namespace PiholeDashboard.Views
 
         async void Save_Clicked(object sender, EventArgs e)
         {
-            if (!UriBinding.ToLower().Contains("http"))
+            // Validate
+            if (UriBinding != "" && !UriBinding.ToLower().Contains("http"))
             {
                 var txt = "Please specify a protocol (HTTP/HTTPS) in your URI!";
                 await ErrorAlert(txt);
                 return;
             }
+
 
             DisplayValues();
 

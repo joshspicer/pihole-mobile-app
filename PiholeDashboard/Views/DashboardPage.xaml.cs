@@ -90,7 +90,7 @@ namespace PiholeDashboard.Views
             base.OnAppearing();
             Console.WriteLine("DASHBOARD APPEARING!");
 
-            // Restore values
+            // Restore values. Ensures config != null
             if (!PersistenceSerializer.TryFetchConfig(out config))
                 config = new PiHoleConfig();
 
@@ -98,6 +98,12 @@ namespace PiholeDashboard.Views
 
             // Refresh
             OnPropertyChanged(nameof(config));
+
+            // Hide Radio Buttons if there is no backup server set
+            if (config.BackupUri == "")
+                radioButtons.IsVisible = false;
+            else
+                radioButtons.IsVisible = true;
 
             if (config != null && config.PrimaryUri != "")
                 await DoRefresh(showError: false);

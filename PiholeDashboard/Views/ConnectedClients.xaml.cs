@@ -4,6 +4,7 @@ using System.Net.Http;
 using System.Threading.Tasks;
 using Newtonsoft.Json.Linq;
 using PiholeDashboard.Models;
+using PiholeDashboard.Utils;
 using Xamarin.Forms;
 
 namespace PiholeDashboard.Views
@@ -14,7 +15,7 @@ namespace PiholeDashboard.Views
         // Maps <IP address, # of requests>
         // Pi-hole returns only clients active in past 24 hrs.
         public Dictionary<string, int> topSources { get; set; }
-        public PiHoleConfig config { get; set; }
+        public PiHoleConfig config;
 
         bool isBackupSelected = false;
 
@@ -29,24 +30,27 @@ namespace PiholeDashboard.Views
         {
             Console.WriteLine("Connected Client APPEARING");
 
-            // Restore values
-            if (App.Current.Properties.ContainsKey("config"))
-                config = (PiHoleConfig)App.Current.Properties["config"];
-            else
+            // Restore values.  Ensures config != null.
+            if (!PersistenceSerializer.TryFetchConfig(out config))
                 config = new PiHoleConfig();
 
+            // Hide Radio Buttons if there is no backup server set
+            if (config.BackupUri == "")
+                radioButtons.IsVisible = false;
+            else
+                radioButtons.IsVisible = true;
 
-            if (config != null && ((isBackupSelected && config.BackupApiKey != "") || config.PrimaryApiKey != ""))
+            // Auto Refresh if we have a primary URL
+            if (config.PrimaryUri != "")
                 await DoRefresh(showError: false);
+
         }
 
         async Task ErrorAlert(string customMsg)
         {
             var wantsHelp = await DisplayAlert("Error", customMsg, "Open Help", "OK");
             if (wantsHelp)
-            {
                 await Navigation.PushModalAsync(new NavigationPage(new HelpModal()));
-            }
         }
 
         async void RefreshData_Clicked(object sender, EventArgs e) => await DoRefresh();

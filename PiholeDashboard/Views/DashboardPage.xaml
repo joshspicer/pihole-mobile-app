@@ -21,8 +21,15 @@
         </ResourceDictionary>
     </ContentPage.Resources>
 
-    <Grid VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
+    <Grid VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand"> 
         <StackLayout Margin="10" VerticalOptions="FillAndExpand">
+
+            
+        <!--Config Button-->
+        <AbsoluteLayout>
+            <Button AbsoluteLayout.LayoutBounds=".95,0,Autosize,Autosize" AbsoluteLayout.LayoutFlags="PositionProportional" Margin="0,0,0,0" FontFamily="FontAwesome" BackgroundColor="{StaticResource lemon}" HeightRequest="36" WidthRequest="36" 
+                TextColor="{StaticResource red}" Text="&#xf085;"  Clicked="AddItem_Clicked" HorizontalOptions="Center" VerticalOptions="Center" FontSize="16" CornerRadius="18" />
+        </AbsoluteLayout>
 
             <StackLayout Padding="5,0,0,2" Orientation="Horizontal" HorizontalOptions="Start"  >
                 <controls:StatusIndicator Status="{Binding summary.status}" />
@@ -38,7 +45,7 @@
                 <Label FontSize="15" Text="{Binding lastUpdated}" />
             </StackLayout>
 
-            <StackLayout Padding="5,0,0,0" Orientation="Horizontal">
+            <StackLayout x:Name="radioButtons" Padding="5,0,0,0" Orientation="Horizontal">
                 <RadioButton TextColor="Black" Text="Primary" GroupName="mode" IsChecked="True" />
                 <RadioButton TextColor="Black" Text="Backup" GroupName="mode" CheckedChanged="RadioButton_CheckedChanged" />
             </StackLayout>
@@ -93,11 +100,6 @@
 
         </StackLayout>
 
-        <!--Config Button-->
-        <AbsoluteLayout>
-            <Button AbsoluteLayout.LayoutBounds=".95,0,AutoSize,AutoSize" AbsoluteLayout.LayoutFlags="PositionProportional" Margin="0,0,0,0" FontFamily="FontAwesome" BackgroundColor="{StaticResource lemon}" HeightRequest="36" WidthRequest="36" 
-                TextColor="{StaticResource red}" Text="&#xf085;"  Clicked="AddItem_Clicked" HorizontalOptions="Center" VerticalOptions="Center" FontSize="16" CornerRadius="18" />
-        </AbsoluteLayout>
 
     </Grid>
 </ContentPage>
