@@ -44,7 +44,7 @@ The API utilized is outlined [here](https://discourse.pi-hole.net/t/pi-hole-api/
 
 ## Development
 
-Please feel free to push feature/bug PRs!  I'll merge it into `dev` branch, which automatically builds and releases a TestFlight build via AppCenter.  _If you'd like to join the experimental Testflight channel, [contact me](http://joshspicer.com/contact)!
+Please feel free to push feature/bug PRs!  I'll merge it into `dev` branch, which automatically builds and releases a TestFlight build via AppCenter.  _If you'd like to join the experimental Testflight channel, [contact me](http://joshspicer.com/contact)!_
 
 Once we agree everything is working on iOS, i'll merge to master, and a new App Store version will be released.  
 
