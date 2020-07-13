@@ -32,13 +32,22 @@ This app is available on the iOS app store under the name [Pi ContrHOLE](https:/
 
 Download, [Visual Studio 2019 (Mac/Windows)](https://visualstudio.microsoft.com/), open the `.sln` file, and build for the appropriate device (ios/android).
 
-## Note
+### Note
 
-You will need the `WEBPASSWORD` found under `/etc/pihole/setupVars.conf` for anything in that required authorization. For more details check [here](./help.md). 
+You will need an API key for anything in that requires authorization. For more details check [here](./help.md). 
 
-As of v5.0 of pi-hole i've found the web UI's generated API key to be equal to WEBPASSWORD. You can find that key here: `Settings > API/Web Interface > Show API Token`
+The Pi-Hole web UI's generated API key can be found here:  `Settings > API/Web Interface > Show API Token`.  The app also lets you scan the QR code that pi-hole generates.
+
+One final place you can find the key is as the `WEBPASSWORD` found under `/etc/pihole/setupVars.conf` 
 
 The API utilized is outlined [here](https://discourse.pi-hole.net/t/pi-hole-api/1863).
+
+## Development
+
+Please feel free to push feature/bug PRs!  I'll merge it into `dev` branch, which automatically builds and releases a TestFlight build via AppCenter.  _If you'd like to join the experimental Testflight channel, [contact me](http://joshspicer.com/contact)!
+
+Once we agree everything is working on iOS, i'll merge to master, and a new App Store version will be released.  
+
 
 ## License
 <a rel="license" href="http://creativecommons.org/licenses/by/3.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by/3.0/88x31.png" /></a><br />This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by/3.0/">Creative Commons Attribution 3.0 Unported License</a>.
