@@ -90,7 +90,6 @@ namespace PiholeDashboard.Views
                 return;
             }
 
-
             DisplayValues();
 
             // Save

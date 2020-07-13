@@ -34,7 +34,12 @@
             <StackLayout Padding="5,0,0,2" Orientation="Horizontal" HorizontalOptions="Start"  >
                 <controls:StatusIndicator Status="{Binding summary.status}" />
                 <Label FontAttributes="Bold" FontSize="30" Text="{Binding summary.status, Converter={StaticResource Capitalize }}" />
-                <Label x:Name="RefreshLabel" Text="&#xf2ea;" Padding="4,5,0,0" FontSize="14" FontFamily="FontAwesome" />
+
+                <StackLayout x:Name="refreshStack">
+                    <Label  x:Name="refreshStack_label" Text="&#xf2ea;" Padding="7,2,0,0" FontSize="20" FontFamily="FontAwesome" />
+                    <ActivityIndicator x:Name="refreshStack_activity" Margin="0,5,0,0" WidthRequest="30" IsVisible="False" Color="Black" IsRunning="true" />
+                </StackLayout>
+
             </StackLayout>
 
             <StackLayout>
@@ -59,8 +64,8 @@
                     Grid.Row="3" />
                 <Grid>
                     <controls:SummaryComponent
-                        MyVal="{Binding summary.dns_queries_all_types, StringFormat='{}{0:N0}'}"
-                        Heading="Total Queries"
+                        MyVal="{Binding summary.domains_being_blocked, StringFormat='{}{0:N0}'}"
+                        Heading="Domains Being Blocked"
                         BgColor="{StaticResource red}"
                         CustomHeight="200"
                         Grid.Column="0" />
@@ -81,8 +86,8 @@
                 <StackLayout>
                     <Grid>
                         <controls:SummaryComponent
-                            MyVal="{Binding summary.dns_queries_all_types, StringFormat='{}{0:N0}'}"
-                            Heading="Total Queries"
+                            MyVal="{Binding summary.queries_cached, StringFormat='{}{0:N0}'}"
+                            Heading="Queries Cached"
                             BgColor="{StaticResource green}"
                             Grid.Row="0" Grid.Column="0"/>
                         <controls:SummaryComponent
@@ -92,11 +97,13 @@
                             Grid.Row="0" Grid.Column="1"/>
                     </Grid>
                 </StackLayout>
+
+                <!-- Navigation -->
+                <controls:NavButtons/>
+
             </StackLayout>
             <!--End Info Blocks--> 
 
-            <!-- Navigation -->
-            <controls:NavButtons Grid.Row="2"/>
 
         </StackLayout>
 

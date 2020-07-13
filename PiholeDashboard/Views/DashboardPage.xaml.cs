@@ -29,7 +29,7 @@ namespace PiholeDashboard.Views
             // Refresh Button
             var refresh = new TapGestureRecognizer();
             refresh.Tapped += async (s, e) => await DoRefresh();
-            RefreshLabel.GestureRecognizers.Add(refresh);
+            refreshStack_label.GestureRecognizers.Add(refresh);
         }
 
         async Task ErrorAlert(string customMsg)
@@ -43,8 +43,17 @@ namespace PiholeDashboard.Views
 
         async void AddItem_Clicked(object sender, EventArgs e) => await Shell.Current.GoToAsync("///configuration");
 
+
+        void ShowVisualActivity(bool isLoading)
+        {
+            refreshStack_activity.IsVisible = isLoading;
+            refreshStack_label.IsVisible = !isLoading;
+        }
+
         async Task DoRefresh(bool showError=true)
         {
+            ShowVisualActivity(true);
+
             try
             {
                 var baseUri = isBackupSelected ? config.BackupUri : config.PrimaryUri;
@@ -59,7 +68,7 @@ namespace PiholeDashboard.Views
                     var content = await res.Content.ReadAsStringAsync();
                     summary = JsonSerializer.Deserialize<Summary>(content);
                     // Property Changed!
-                    lastUpdated = DateTime.Now.ToString("hh:mm:ss tt");
+                    lastUpdated = DateTime.Now.ToString("HH:mm:ss");
 
                     OnPropertyChanged(nameof(summary));
                     OnPropertyChanged(nameof(lastUpdated));
@@ -83,6 +92,9 @@ namespace PiholeDashboard.Views
                     Console.WriteLine($"{errStr}: {err}");
                 }
             }
+
+            ShowVisualActivity(false);
+
         }
 
         async protected override void OnAppearing()
@@ -105,7 +117,7 @@ namespace PiholeDashboard.Views
             else
                 radioButtons.IsVisible = true;
 
-            if (config != null && config.PrimaryUri != "")
+            if ((isBackupSelected && config.BackupUri != "") || config.BackupUri != "")
                 await DoRefresh(showError: false);
         }
 

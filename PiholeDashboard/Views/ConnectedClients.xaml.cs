@@ -41,9 +41,8 @@ namespace PiholeDashboard.Views
                 radioButtons.IsVisible = true;
 
             // Auto Refresh if we have a primary URL
-            if (config.PrimaryUri != "")
+            if ((isBackupSelected && config.BackupApiKey != "") || config.PrimaryApiKey != "")
                 await DoRefresh(showError: false);
-
         }
 
         async Task ErrorAlert(string customMsg)

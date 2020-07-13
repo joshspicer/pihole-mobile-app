@@ -25,9 +25,15 @@ namespace PiholeDashboard.Views
         {
             Console.WriteLine("Settings APPEARING");
 
-            // Restore values
+            // Restore values. Ensures non null.
             if (!PersistenceSerializer.TryFetchConfig(out config))
                 config = new PiHoleConfig();
+
+            // Hide Radio Buttons if there is no backup server set
+            if (config.BackupUri == "")
+                radioButtons.IsVisible = false;
+            else
+                radioButtons.IsVisible = true;
         }
 
         async Task ErrorAlert(string customMsg)

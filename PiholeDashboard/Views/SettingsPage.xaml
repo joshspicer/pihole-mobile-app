@@ -25,7 +25,7 @@
         </Grid.RowDefinitions>
         <StackLayout Grid.Row="1">
 
-            <StackLayout Padding="5,0,0,0" Orientation="Horizontal" HorizontalOptions="Center">
+            <StackLayout x:Name="radioButtons" Padding="5,0,0,0" Orientation="Horizontal" HorizontalOptions="Center">
                 <RadioButton TextColor="Black" Text="Primary" GroupName="mode" IsChecked="True" />
                 <RadioButton TextColor="Black" Text="Backup" GroupName="mode" CheckedChanged="RadioButton_CheckedChanged" />
             </StackLayout>

@@ -37,7 +37,7 @@
             </StackLayout>
             <controls:TopClients Clients="{Binding topSources}" />
 
-            <controls:NavButtons />
+            <controls:NavButtons  />
 
         </StackLayout>
 
