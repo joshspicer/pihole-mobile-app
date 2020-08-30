@@ -117,7 +117,7 @@ namespace PiholeDashboard.Views
             else
                 radioButtons.IsVisible = true;
 
-            if ((isBackupSelected && config.BackupUri != "") || config.BackupUri != "")
+            if ((isBackupSelected && config.BackupUri != "") || config.PrimaryUri != "")
                 await DoRefresh(showError: false);
         }
 

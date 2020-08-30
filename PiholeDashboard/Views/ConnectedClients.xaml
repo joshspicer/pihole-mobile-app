@@ -5,7 +5,6 @@
     xmlns:controls="clr-namespace:PiholeDashboard.Controls"
     xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core" 
     ios:Page.UseSafeArea="true"
-    BackgroundColor="{StaticResource lightBackground}" 
     x:Class="PiholeDashboard.Views.ConnectedClients">
     <ContentPage.ToolbarItems>
         <ToolbarItem Text="Reload" Clicked="RefreshData_Clicked">
@@ -22,22 +21,9 @@
                 <RadioButton TextColor="Black" Text="Backup" GroupName="mode" CheckedChanged="RadioButton_CheckedChanged" />
             </StackLayout>
 
-            <StackLayout Padding="22">
-                <Grid>
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="Auto" />
-                    </Grid.RowDefinitions>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="*" />
-                        <ColumnDefinition Width="0*" />
-                    </Grid.ColumnDefinitions>
-                    <Label FontAttributes="Bold" AnchorX="1" HorizontalOptions="Start" HorizontalTextAlignment="Start" Text="Host IP Address" FontSize="15"/>
-                    <Label FontAttributes="Bold" HorizontalOptions="End" HorizontalTextAlignment="End" Text="# of Requests" FontSize="15"/>
-                </Grid>
+            <StackLayout Padding="0,10,0,0">
+                <controls:TopClients Clients="{Binding topSources}" />
             </StackLayout>
-            <controls:TopClients Clients="{Binding topSources}" />
-
-            <controls:NavButtons  />
 
         </StackLayout>
 

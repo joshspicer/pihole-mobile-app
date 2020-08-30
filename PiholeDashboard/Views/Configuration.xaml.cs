@@ -38,7 +38,7 @@ namespace PiholeDashboard.Views
 
         async Task Github_Clicked()
         {
-            var url = "https://joshspicer.com/pihole";
+            var url = "https://github.com/joshspicer/pihole-mobile-app";
             await Launcher.OpenAsync(url);
         }
 
@@ -76,9 +76,7 @@ namespace PiholeDashboard.Views
         }
 
         async void OpenHelp_Clicked(object sneder, EventArgs e)
-        {
-            await Shell.Current.GoToAsync("///help");
-        }
+                        => await Navigation.PushModalAsync(new NavigationPage(new HelpModal()));
 
         async void Save_Clicked(object sender, EventArgs e)
         {

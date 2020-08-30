@@ -8,7 +8,6 @@
     mc:Ignorable="d"
     xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core" 
     ios:Page.UseSafeArea="true"
-    BackgroundColor="{StaticResource lightBackground}" 
     x:Class="PiholeDashboard.Views.SettingsPage"
     Title="{Binding Title}">
     <ContentPage.Resources>
@@ -18,31 +17,17 @@
             <Color x:Key="LightTextColor">#999999</Color>
         </ResourceDictionary>
     </ContentPage.Resources>
-    <Grid VerticalOptions="FillAndExpand">
-        <Grid.RowDefinitions>
-            <RowDefinition Height="0" />
-                 <RowDefinition Height="100" />
-        </Grid.RowDefinitions>
-        <StackLayout Grid.Row="1">
+        <StackLayout>
 
             <StackLayout x:Name="radioButtons" Padding="5,0,0,0" Orientation="Horizontal" HorizontalOptions="Center">
                 <RadioButton TextColor="Black" Text="Primary" GroupName="mode" IsChecked="True" />
                 <RadioButton TextColor="Black" Text="Backup" GroupName="mode" CheckedChanged="RadioButton_CheckedChanged" />
             </StackLayout>
 
-            <Button Margin="0,15,0,0"  Text="Enable Pi-Hole" Clicked="Enable_Clicked" BackgroundColor="Green" TextColor="White" />
-            <Button Margin="0,10,0,20"  Text="Disable Pi-Hole" Clicked="Disable_Clicked" BackgroundColor="Red" TextColor="White" />
-
-            <Button Margin="0,10,0,0" Text="Disable for 10 Seconds" Clicked="Disable10_Clicked" BackgroundColor="{StaticResource Primary}" TextColor="White" />
-            <Button Margin="0,10,0,0" Text="Disable for 60 Seconds" Clicked="Disable60_Clicked" BackgroundColor="{StaticResource Primary}" TextColor="White" />
-            <Button Margin="0,10,0,0" Text="Disable for 5 Minutes"  Clicked="Disable300_Clicked" BackgroundColor="{StaticResource Primary}" TextColor="White" />
+            <Button Margin="0,15,0,0"  Text="Enable Pi-Hole" Clicked="Enable_Clicked" BackgroundColor="{StaticResource green}" />
+            <Button Margin="0,10,0,20"  Text="Disable Pi-Hole" Clicked="Disable_Clicked" BackgroundColor="{d:StaticResource red}"  />
+            <Button Margin="0,10,0,0" Text="Disable for 10 Seconds" Clicked="Disable10_Clicked" BackgroundColor="{StaticResource blue}" />
+            <Button Margin="0,10,0,0" Text="Disable for 60 Seconds" Clicked="Disable60_Clicked" BackgroundColor="{StaticResource blue}"  />
+            <Button Margin="0,10,0,0" Text="Disable for 5 Minutes"  Clicked="Disable300_Clicked" BackgroundColor="{StaticResource blue}" />
         </StackLayout>
-
-        <StackLayout Grid.Row="2" VerticalOptions="EndAndExpand">
-        <controls:NavButtons />
-            </StackLayout>
-
-    </Grid>
-
-
 </ContentPage>

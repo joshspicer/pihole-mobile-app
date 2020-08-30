@@ -7,7 +7,6 @@
 
         <ScrollView>
             <StackLayout x:Name="helpView" >
-                <Button Clicked="Config_Clicked" Text="Set Pi-Hole Credentials" />
                 <Frame CornerRadius="10"
                        HasShadow="False"
                        x:Name="helpView1"
@@ -15,16 +14,14 @@
                        Margin="15,10,15,0"
                        BorderColor="DarkGray"
                        IsClippedToBounds="True"
-                       BackgroundColor="{Binding BgColor}"
                        >
                     <StackLayout>
                         <Label x:Name="uriHelpHeader"
                            FontSize="Header" FontAttributes="Bold"
-                           TextColor="Black"
                            Padding="10,10,0,0"
                            Text="Pi-Hole Uri" />
                         <Label x:Name="uriHelpDetail"
-                           FontSize="Header" TextColor="Black"
+                           FontSize="Header"
                             TextType="Html"
                            Padding="10,10,0,0">
                             <Label.Text>
@@ -54,7 +51,7 @@ Ensure you're entering the correct protocol (HTTP/HTTPS) and (if necessary) port
                         </Label>
 
                         <Label x:Name="uriHelpDetail2"
-                           FontSize="Header" TextColor="Black"
+                           FontSize="Header"
                             TextType="Html"
                            Padding="10,10,0,0">
                             <Label.Text>
@@ -73,7 +70,7 @@ You can test the API by visiting:
                         </Label>
 
                         <Label x:Name="uriHelpDetail3"
-                           FontSize="Header" TextColor="Black"
+                           FontSize="Header"
                             TextType="Html"
                            Padding="10,10,0,0">
                             <Label.Text>
@@ -98,18 +95,15 @@ Note that if you are accessing your pi-hole outside of your local network, you m
                        Margin="15,10,15,0"
                        BorderColor="DarkGray"
                        IsClippedToBounds="True"
-                       BackgroundColor="{Binding BgColor}"
                        >
                     <StackLayout>
                         <Label x:Name="apiHelpHeader"
                            FontSize="Header"
                            FontAttributes="Bold"
-                           TextColor="Black"
                            Padding="10,10,0,0"
                            Text="WEBPASSWORD (API Key)" />
                         <Label x:Name="apiHelpDetail"
                            FontSize="Header"
-                           TextColor="Black"
                            TextType="Html"
                            Padding="10,10,0,0"
                            >
@@ -147,18 +141,15 @@ Enter *just* the part *after* the &lt;code&gt; WEBPASSWORD= &lt;/code&gt;
                        Margin="15,20,15,0"
                        BorderColor="DarkGray"
                        IsClippedToBounds="True"
-                       BackgroundColor="{Binding BgColor}"
                        >
                     <StackLayout>
                         <Label x:Name="moreInfoHelpHeader"
                            FontSize="Header"
                            FontAttributes="Bold"
-                           TextColor="Black"
                            Padding="10,10,0,0"
                            Text="Raise an Issue" />
                         <Label x:Name="moreInfoHelpDetail"
                            FontSize="Header"
-                           TextColor="Black"
                            TextType="Html"
                            Padding="10,10,0,0"
                           >

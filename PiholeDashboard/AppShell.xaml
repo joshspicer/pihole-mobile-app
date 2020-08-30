@@ -12,41 +12,62 @@
     <!-- 
         Styles and Resources 
     -->
+
     <Shell.Resources>
         <ResourceDictionary>
             <Style ApplyToDerivedTypes="True" x:Key="BaseStyle" TargetType="Element">
-                <!--<Setter Property="Shell.BackgroundColor" Value="{StaticResource }" />-->
-                <Setter Property="Shell.ForegroundColor" Value="White" />
+                <!--<Setter Property="Shell.BackgroundColor" Value="{DynamicResource DynamicBackgroundColor}" />-->
+                <Setter Property="Shell.ForegroundColor" Value="{StaticResource blue}" />
                 <Setter Property="Shell.TitleColor" Value="White" />
                 <Setter Property="Shell.DisabledColor" Value="#B4FFFFFF" />
                 <Setter Property="Shell.UnselectedColor" Value="#95FFFFFF" />
                 <!--<Setter Property="Shell.TabBarBackgroundColor" Value="{StaticResource greenBG}" />-->
-                <Setter Property="Shell.TabBarForegroundColor" Value="White" />
-                <Setter Property="Shell.TabBarUnselectedColor" Value="#95FFFFFF" />
-                <Setter Property="Shell.TabBarTitleColor" Value="White" />
+                <Setter Property="Shell.TabBarForegroundColor" Value="Black" />
+                <Setter Property="Shell.TabBarUnselectedColor" Value="Gray" />
+                <Setter Property="Shell.TabBarTitleColor"
+                                    Value="{AppThemeBinding
+                                                Dark={StaticResource lightBlue},
+                                                Light={StaticResource blue}}" />
             </Style>
             <Style TargetType="TabBar" BasedOn="{StaticResource BaseStyle}" />
+
+            <Style TargetType="ContentPage" ApplyToDerivedTypes="True">
+                <Setter Property="BackgroundColor" 
+                    Value="{AppThemeBinding
+                        Dark={StaticResource darkColor},
+                        Light={StaticResource white}}"/>
+            </Style>
+
+
+
+
         </ResourceDictionary>
     </Shell.Resources>
     <!-- Your Pages -->
-    <FlyoutItem Title="Browse" Icon="tab_feed.png">
-        <ShellContent Route="browse" ContentTemplate="{DataTemplate local:DashboardPage}"/>
-    </FlyoutItem>
+    <TabBar >
+        <Tab Title="Status">
+            <Tab.Icon>
+                <FontImageSource FontFamily="FontAwesome" Glyph="&#xf015;" Size="Small" />
+            </Tab.Icon>
+            <ShellContent Route="browse" ContentTemplate="{DataTemplate local:DashboardPage}"/>
+        </Tab>
 
-    <FlyoutItem Title="Connected Clients" Icon="tab_feed.png">
-        <ShellContent Route="connected" ContentTemplate="{DataTemplate local:ConnectedClients}" />
-    </FlyoutItem>
+        <Tab Title="Connected">
+            <Tab.Icon>
+                <FontImageSource FontFamily="FontAwesome" Glyph="&#xf5fc;" Size="Small" />
+            </Tab.Icon>
+            <ShellContent Route="connected" ContentTemplate="{DataTemplate local:ConnectedClients}" />
+        </Tab>
 
-    <FlyoutItem Title="Settings" Icon="tab_about.png">
-        <ShellContent Route="settings" ContentTemplate="{DataTemplate local:SettingsPage}" />
-    </FlyoutItem>
+        <Tab Title="Toggles" >
+            <Tab.Icon>
+                <FontImageSource FontFamily="FontAwesome" Glyph="&#xf011;" Size="Small" />
+            </Tab.Icon>
+            <ShellContent Route="settings" ContentTemplate="{DataTemplate local:SettingsPage}" />
+        </Tab>
+    </TabBar>
 
-    <FlyoutItem Title="Configuration">
-        <ShellContent Route="configuration" ContentTemplate="{DataTemplate local:NewItemPage}" />
-    </FlyoutItem>
-
-    <FlyoutItem Title="Help">
-        <ShellContent Route="help" ContentTemplate="{DataTemplate local:HelpModal}" />
-    </FlyoutItem>
+    <ShellContent Route="configuration" ContentTemplate="{DataTemplate local:NewItemPage}" />
+    <ShellContent Route="help" ContentTemplate="{DataTemplate local:HelpModal}" />
 
 </Shell>
