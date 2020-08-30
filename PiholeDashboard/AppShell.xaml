@@ -1,36 +1,73 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<Shell xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:d="http://xamarin.com/schemas/2014/forms/design" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" mc:Ignorable="d" xmlns:local="clr-namespace:PiholeDashboard.Views" Title="PiholeDashboard" x:Class="PiholeDashboard.AppShell">
+<Shell xmlns="http://xamarin.com/schemas/2014/forms"
+       xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+       xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+       mc:Ignorable="d"
+       xmlns:local="clr-namespace:PiholeDashboard.Views"
+       Title="PiholeDashboard"
+       FlyoutBehavior="Disabled" 
+  
+       x:Class="PiholeDashboard.AppShell">
     <!-- 
         Styles and Resources 
     -->
+
     <Shell.Resources>
         <ResourceDictionary>
-            <Color x:Key="NavigationPrimary">#2196F3</Color>
-            <Style x:Key="BaseStyle" TargetType="Element">
-                <Setter Property="Shell.BackgroundColor" Value="{StaticResource NavigationPrimary}" />
-                <Setter Property="Shell.ForegroundColor" Value="White" />
+            <Style ApplyToDerivedTypes="True" x:Key="BaseStyle" TargetType="Element">
+                <!--<Setter Property="Shell.BackgroundColor" Value="{DynamicResource DynamicBackgroundColor}" />-->
+                <Setter Property="Shell.ForegroundColor" Value="{StaticResource blue}" />
                 <Setter Property="Shell.TitleColor" Value="White" />
                 <Setter Property="Shell.DisabledColor" Value="#B4FFFFFF" />
                 <Setter Property="Shell.UnselectedColor" Value="#95FFFFFF" />
-                <Setter Property="Shell.TabBarBackgroundColor" Value="{StaticResource NavigationPrimary}" />
-                <Setter Property="Shell.TabBarForegroundColor" Value="White" />
-                <Setter Property="Shell.TabBarUnselectedColor" Value="#95FFFFFF" />
-                <Setter Property="Shell.TabBarTitleColor" Value="White" />
+                <!--<Setter Property="Shell.TabBarBackgroundColor" Value="{StaticResource greenBG}" />-->
+                <Setter Property="Shell.TabBarForegroundColor" Value="Black" />
+                <Setter Property="Shell.TabBarUnselectedColor" Value="Gray" />
+                <Setter Property="Shell.TabBarTitleColor"
+                                    Value="{AppThemeBinding
+                                                Dark={StaticResource lightBlue},
+                                                Light={StaticResource blue}}" />
             </Style>
             <Style TargetType="TabBar" BasedOn="{StaticResource BaseStyle}" />
+
+            <Style TargetType="ContentPage" ApplyToDerivedTypes="True">
+                <Setter Property="BackgroundColor" 
+                    Value="{AppThemeBinding
+                        Dark={StaticResource darkColor},
+                        Light={StaticResource white}}"/>
+            </Style>
+
+
+
+
         </ResourceDictionary>
     </Shell.Resources>
     <!-- Your Pages -->
-    <TabBar>
-        <Tab Title="Browse" Icon="tab_feed.png">
-            <ShellContent ContentTemplate="{DataTemplate local:DashboardPage}" />
+    <TabBar >
+        <Tab Title="Status">
+            <Tab.Icon>
+                <FontImageSource FontFamily="FontAwesome" Glyph="&#xf015;" Size="Small" />
+            </Tab.Icon>
+            <ShellContent Route="browse" ContentTemplate="{DataTemplate local:DashboardPage}"/>
         </Tab>
-        <Tab Title="Connected Clients" Icon="tab_feed.png">
-            <ShellContent ContentTemplate="{DataTemplate local:ConnectedClients}" />
+
+        <Tab Title="Connected">
+            <Tab.Icon>
+                <FontImageSource FontFamily="FontAwesome" Glyph="&#xf5fc;" Size="Small" />
+            </Tab.Icon>
+            <ShellContent Route="connected" ContentTemplate="{DataTemplate local:ConnectedClients}" />
         </Tab>
-        <Tab Title="Settings" Icon="tab_about.png">
-            <ShellContent ContentTemplate="{DataTemplate local:SettingsPage}" />
+
+        <Tab Title="Toggles" >
+            <Tab.Icon>
+                <FontImageSource FontFamily="FontAwesome" Glyph="&#xf011;" Size="Small" />
+            </Tab.Icon>
+            <ShellContent Route="settings" ContentTemplate="{DataTemplate local:SettingsPage}" />
         </Tab>
     </TabBar>
+
+    <ShellContent Route="configuration" ContentTemplate="{DataTemplate local:NewItemPage}" />
+    <ShellContent Route="help" ContentTemplate="{DataTemplate local:HelpModal}" />
 
 </Shell>

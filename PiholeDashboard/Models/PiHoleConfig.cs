@@ -1,16 +1,19 @@
-﻿using System;
-
-namespace PiholeDashboard.Models
+﻿namespace PiholeDashboard.Models
 {
     public class PiHoleConfig
     {
-        public string Uri { get; set; }
-        public string ApiKey { get; set; }
+        public string PrimaryUri { get; set; }
+        public string PrimaryApiKey { get; set; }
+
+        public string BackupUri { get; set; }
+        public string BackupApiKey { get; set; }
 
         public PiHoleConfig()
         {
-            Uri = "";
-            ApiKey = "";
+            PrimaryUri = "";
+            PrimaryApiKey = "";
+            BackupUri = "";
+            BackupApiKey = "";
         }
     }
 }

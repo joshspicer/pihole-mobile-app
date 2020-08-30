@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Net.Http;
 using System.Threading.Tasks;
 using Newtonsoft.Json.Linq;
+using PiholeDashboard.Models;
+using PiholeDashboard.Utils;
 using Xamarin.Forms;
 
 namespace PiholeDashboard.Views
@@ -13,6 +15,10 @@ namespace PiholeDashboard.Views
         // Maps <IP address, # of requests>
         // Pi-hole returns only clients active in past 24 hrs.
         public Dictionary<string, int> topSources { get; set; }
+        public PiHoleConfig config;
+
+        bool isBackupSelected = false;
+
 
         public ConnectedClients()
         {
@@ -22,31 +28,39 @@ namespace PiholeDashboard.Views
 
         async protected override void OnAppearing()
         {
-
             Console.WriteLine("Connected Client APPEARING");
 
-            if (App.Current.Properties.ContainsKey("Uri") && App.Current.Properties.ContainsKey("ApiKey"))
-            {
+            // Restore values.  Ensures config != null.
+            if (!PersistenceSerializer.TryFetchConfig(out config))
+                config = new PiHoleConfig();
+
+            // Hide Radio Buttons if there is no backup server set
+            if (config.BackupUri == "")
+                radioButtons.IsVisible = false;
+            else
+                radioButtons.IsVisible = true;
+
+            // Auto Refresh if we have a primary URL
+            if ((isBackupSelected && config.BackupApiKey != "") || config.PrimaryApiKey != "")
                 await DoRefresh(showError: false);
-            }
         }
 
         async Task ErrorAlert(string customMsg)
         {
             var wantsHelp = await DisplayAlert("Error", customMsg, "Open Help", "OK");
             if (wantsHelp)
-            {
                 await Navigation.PushModalAsync(new NavigationPage(new HelpModal()));
-            }
         }
 
         async void RefreshData_Clicked(object sender, EventArgs e) => await DoRefresh();
 
-        async Task DoRefresh(bool showError=true)
+        async Task DoRefresh(bool showError = true)
         {
             try
             {
-                var uri = $"{App.Current.Properties["Uri"]}/admin/api.php?getQuerySources&auth={App.Current.Properties["ApiKey"]}";
+                var baseUri = isBackupSelected ? config.BackupUri : config.PrimaryUri;
+                var modeApiKey = isBackupSelected ? config.BackupApiKey : config.PrimaryApiKey;
+                var uri = $"{baseUri}/admin/api.php?getQuerySources&auth={modeApiKey}";
 
                 HttpClient _client = new HttpClient();
                 _client.Timeout = TimeSpan.FromSeconds(5);
@@ -85,6 +99,12 @@ namespace PiholeDashboard.Views
                 }
 
             }
+        }
+
+        async void RadioButton_CheckedChanged(object sender, CheckedChangedEventArgs e)
+        {
+            isBackupSelected = e.Value;
+            await DoRefresh(showError: false);
         }
     }
 }

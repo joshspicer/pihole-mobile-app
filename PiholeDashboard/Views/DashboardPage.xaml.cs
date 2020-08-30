@@ -4,27 +4,37 @@ using Xamarin.Forms;
 using System.Text.Json;
 using PiholeDashboard.Models;
 using System.Net.Http;
-using System.Collections.Generic;
-using Newtonsoft.Json.Linq;
 using System.Threading.Tasks;
+using PiholeDashboard.Utils;
+using PiholeDashboard.Functions;
 
 namespace PiholeDashboard.Views
 {
     [DesignTimeVisible(false)]
     public partial class DashboardPage : ContentPage
     {
-        public PiHoleConfig config { get; } = new PiHoleConfig();
+        public PiHoleConfig config;
         public Summary summary { get; private set; } = new Summary();
         public string lastUpdated { get; set; } = "N/A";
+        public string UriBinding { get; set; } = "";
+        bool isBackupSelected = false; 
 
         public DashboardPage()
         {
             InitializeComponent();
             BindingContext = this;
 
+            MessagingCenter.Subscribe<Application>(App.Current, "RefreshDashboard",
+                                                           async (app) => await DoRefresh(showError: false));
+
             OnPropertyChanged(nameof(summary));
-            OnPropertyChanged(nameof(config));
             OnPropertyChanged(nameof(lastUpdated));
+
+            // Refresh Button
+            var refresh = new TapGestureRecognizer();
+            refresh.Tapped += async (s, e) => await DoRefresh();
+            refreshStack_label.GestureRecognizers.Add(refresh);
+
         }
 
         async Task ErrorAlert(string customMsg)
@@ -36,14 +46,23 @@ namespace PiholeDashboard.Views
             }
         }
 
-        async void AddItem_Clicked(object sender, EventArgs e) => await Navigation.PushModalAsync(new NavigationPage(new NewItemPage()));
-        async void RefreshData_Clicked(object sender, EventArgs e) => await DoRefresh();
+        async void AddItem_Clicked(object sender, EventArgs e) => await Shell.Current.GoToAsync("///configuration");
+
+
+        void ShowVisualActivity(bool isLoading)
+        {
+            refreshStack_activity.IsVisible = isLoading;
+            refreshStack_label.IsVisible = !isLoading;
+        }
 
         async Task DoRefresh(bool showError=true)
         {
+            ShowVisualActivity(true);
+
             try
             {
-                var uri = $"{App.Current.Properties["Uri"]}/admin/api.php?summaryRaw";
+                var baseUri = isBackupSelected ? config.BackupUri : config.PrimaryUri;
+                var uri = $"{baseUri}/admin/api.php?summaryRaw";
 
                 HttpClient _client = new HttpClient();
                 _client.Timeout = TimeSpan.FromSeconds(5);
@@ -54,7 +73,7 @@ namespace PiholeDashboard.Views
                     var content = await res.Content.ReadAsStringAsync();
                     summary = JsonSerializer.Deserialize<Summary>(content);
                     // Property Changed!
-                    lastUpdated = DateTime.Now.ToString("hh:mm:ss tt");
+                    lastUpdated = DateTime.Now.ToString("HH:mm:ss");
 
                     OnPropertyChanged(nameof(summary));
                     OnPropertyChanged(nameof(lastUpdated));
@@ -78,33 +97,55 @@ namespace PiholeDashboard.Views
                     Console.WriteLine($"{errStr}: {err}");
                 }
             }
+
+            ShowVisualActivity(false);
+
         }
 
         async protected override void OnAppearing()
         {
             base.OnAppearing();
+            Console.WriteLine("DASHBOARD APPEARING!");
 
-            // Set Uri
-            if (App.Current.Properties.ContainsKey("Uri"))
-            {
-                var url = App.Current.Properties["Uri"] as string;
-                config.Uri = url;
-            }
+            // Restore values. Ensures config != null
+            if (!PersistenceSerializer.TryFetchConfig(out config))
+                config = new PiHoleConfig();
 
-            // Set ApiKey
-            if (App.Current.Properties.ContainsKey("ApiKey"))
-            {
-                var key = App.Current.Properties["ApiKey"] as string;
-                config.ApiKey = key;
-            }
+            DisplayRightCachedValue();
 
             // Refresh
             OnPropertyChanged(nameof(config));
 
-            Console.WriteLine("DASHBOARD APPEARING!");
-            if (App.Current.Properties.ContainsKey("Uri"))
-            {
+            // Hide Radio Buttons if there is no backup server set
+            if (config.BackupUri == "")
+                radioButtons.IsVisible = false;
+            else
+                radioButtons.IsVisible = true;
+
+            if ((isBackupSelected && config.BackupUri != "") || config.PrimaryUri != "")
                 await DoRefresh(showError: false);
+        }
+
+        async void RadioButton_CheckedChanged(object sender, CheckedChangedEventArgs e)
+        {
+            // Set class var to indicate if we are configuring primary or backup pihole.
+            isBackupSelected = e.Value;
+            DisplayRightCachedValue();
+            await DoRefresh(showError: false);
+        }
+
+        void DisplayRightCachedValue()
+        {
+            // Display the right cached value
+            if (isBackupSelected)
+            {
+                UriLabel.Text = config.BackupUri;
+                int len = config.BackupApiKey.Length;
+            }
+            else
+            {
+                UriLabel.Text = config.PrimaryUri;
+                int len = config.BackupApiKey.Length;
             }
         }
     }

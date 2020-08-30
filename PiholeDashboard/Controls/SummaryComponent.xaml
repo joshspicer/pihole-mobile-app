@@ -2,16 +2,18 @@
 <ContentView xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="PiholeDashboard.Controls.SummaryComponent">
     <ContentView.Content>
         <Grid x:Name="_context">
-            <Frame CornerRadius="10" 
-                HasShadow="True"
+            <Frame
+                x:Name="frame"
+                CornerRadius="10" 
+                HasShadow="False"
                 IsClippedToBounds="True"
                 BackgroundColor="{Binding BgColor}"
                 WidthRequest="100"
-                HeightRequest="100"
+                HeightRequest="{Binding CustomHeight}"
                 Padding="0">
                 <StackLayout>
-                    <Label x:Name="labelHeader" FontSize="15" TextColor="LightGray" Padding="10,5,0,0"  Text="{Binding Heading}"  />
-                    <Label x:Name="labelValue" FontSize="35" TextColor="LightGray" Padding="10,10,0,0"  Text="{Binding MyVal}" />
+                    <Label x:Name="labelHeader" TextColor="{StaticResource lightColor}" FontSize="15" Padding="10,5,0,0"  Text="{Binding Heading}"  />
+                    <Label x:Name="labelValue"  TextColor="{StaticResource lightColor}" FontSize="35"  Padding="10,10,0,0"  Text="{Binding MyVal}" />
                 </StackLayout>
             </Frame>
         </Grid>

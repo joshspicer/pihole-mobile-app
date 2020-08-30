@@ -1,65 +1,110 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:local="clr-namespace:PiholeDashboard" xmlns:controls="clr-namespace:PiholeDashboard.Controls"  xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:d="http://xamarin.com/schemas/2014/forms/design" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" mc:Ignorable="d" x:Class="PiholeDashboard.Views.DashboardPage" Title="{Binding Title}" x:Name="BrowseItemsPage">
-    <ContentPage.ToolbarItems>
-        <ToolbarItem Text="Set Credentials" Clicked="AddItem_Clicked" />
-    </ContentPage.ToolbarItems>
+<ContentPage
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:local="clr-namespace:PiholeDashboard"
+    xmlns:controls="clr-namespace:PiholeDashboard.Controls"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    x:Class="PiholeDashboard.Views.DashboardPage"
+    xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core" 
+    ios:Page.UseSafeArea="true" 
+    Title="{Binding Title}"
+    x:Name="BrowseItemsPage">
+
     <ContentPage.Resources>
         <ResourceDictionary>
             <local:APIKeyConcatConverter x:Key="KeyConcat" />
             <local:Capitalize x:Key="Capitalize" />
-
         </ResourceDictionary>
     </ContentPage.Resources>
-    <StackLayout Margin="10" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
-        <Label Text="PiHole Dashboard" FontSize="34" Padding="0,0,0,15"/>
-        <Button Text="Refresh!" Margin="0,0,0,20" TextColor="Black" Clicked="RefreshData_Clicked" BackgroundColor="LightBlue"/>
-        <StackLayout Padding="5,0,0,2" Orientation="Horizontal" HorizontalOptions="Start"  >
-            <controls:StatusIndicator Status="{Binding summary.status}" />
-                <!--<Label FontSize="20" Text="Status:"/>-->
-                <Label FontAttributes="Bold" FontSize="20" Text="{Binding summary.status, Converter={StaticResource Capitalize }}" />
-        </StackLayout>
-        <StackLayout  Padding="5,0,0,10" Orientation="Horizontal" HorizontalOptions="Start">
-                <Label FontAttributes="Bold" FontSize="12" Text="Last Updated: " />
-                <Label FontSize="12" Text="{Binding lastUpdated}" />
-        </StackLayout>
-        <Grid>
-            <Grid.RowDefinitions>
-                <RowDefinition Height="*" />
-                <RowDefinition Height="*" />
-            </Grid.RowDefinitions>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*" />
-                <ColumnDefinition Width="*" />
-            </Grid.ColumnDefinitions>
 
-            <controls:SummaryComponent
-                    MyVal="{Binding summary.dns_queries_all_types, StringFormat='{0:N0}'}"
+    <Grid VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand"> 
+        <StackLayout Margin="10" VerticalOptions="FillAndExpand">
+
+            
+        <!--Config Button-->
+        <AbsoluteLayout>
+            <Button AbsoluteLayout.LayoutBounds=".95,0,Autosize,Autosize" AbsoluteLayout.LayoutFlags="PositionProportional" Margin="0,0,0,0" FontFamily="FontAwesome" BackgroundColor="{StaticResource lemon}" HeightRequest="36" WidthRequest="36" 
+                TextColor="{StaticResource red}" Text="&#xf085;"  Clicked="AddItem_Clicked" HorizontalOptions="Center" VerticalOptions="Center" FontSize="16" CornerRadius="18" />
+        </AbsoluteLayout>
+
+            <StackLayout Padding="5,0,0,2" Orientation="Horizontal" HorizontalOptions="Start"  >
+                <controls:StatusIndicator Status="{Binding summary.status}" />
+                <Label FontAttributes="Bold" FontSize="30" Text="{Binding summary.status, Converter={StaticResource Capitalize }}" />
+
+                <StackLayout x:Name="refreshStack">
+                    <Label  x:Name="refreshStack_label" Text="&#xf2ea;" Padding="7,2,0,0" FontSize="20" FontFamily="FontAwesome" />
+                    <ActivityIndicator x:Name="refreshStack_activity" Margin="0,5,0,0" WidthRequest="30" IsVisible="False" Color="Black" IsRunning="true" />
+                </StackLayout>
+
+            </StackLayout>
+
+            <StackLayout>
+                <Label  Padding="5,0,0,10" x:Name="UriLabel" Text="{Binding UriBinding}" LineBreakMode="NoWrap"  FontSize="15" />
+            </StackLayout>
+            <StackLayout  Padding="5,0,0,10" Orientation="Horizontal" HorizontalOptions="Start">
+                <Label FontAttributes="Bold" FontSize="15" Text="Last Updated: " />
+                <Label FontSize="15" Text="{Binding lastUpdated}" />
+            </StackLayout>
+
+            <StackLayout x:Name="radioButtons" Padding="5,0,0,0" Orientation="Horizontal">
+                <RadioButton Text="Primary" GroupName="mode" IsChecked="True" />
+                <RadioButton Text="Backup" GroupName="mode" CheckedChanged="RadioButton_CheckedChanged" />
+            </StackLayout>
+
+            <!--Info blocks-->
+            <StackLayout>
+                <controls:SummaryComponent
+                    MyVal="{Binding summary.dns_queries_all_types, StringFormat='{}{0:N0}'}"
                     Heading="Total Queries"
-                    BgColor="Green"
-                    Grid.Row="0" Grid.Column="0"/>
-            <controls:SummaryComponent
-                    MyVal="{Binding summary.ads_blocked_today, StringFormat='{0:N0}'}"
-                    Heading="Ads Blocked Today"
-                    BgColor="Blue"
-                    Grid.Row="0" Grid.Column="1"/>
-            <controls:SummaryComponent
-                    MyVal="{Binding summary.ads_percentage_today, StringFormat='{0:N2}%'}"
-                    Heading="Percentage Blocked"
-                    BgColor="DarkOrange"
-                    Grid.Row="1" Grid.Column="0"/>
-            <controls:SummaryComponent
-                    MyVal="{Binding summary.unique_domains, StringFormat='{0:N0}'}"
-                    Heading="Unique Domains"
-                    BgColor="Red"
-                    Grid.Row="1" Grid.Column="1"/>
-        </Grid>
-        <StackLayout Padding="0,10,0,0">
-            <Label x:Name="address_label" FontAttributes="Bold" Text="Address" LineBreakMode="NoWrap" FontSize="16" />
-            <Label Text="{Binding config.Uri}" d:Text="Item descripton" LineBreakMode="NoWrap"  FontSize="12" />
-            <Label x:Name="key_label" FontAttributes="Bold" Text="API Key" LineBreakMode="NoWrap" FontSize="16" />
-            <Label Text="{Binding config.ApiKey,Converter={StaticResource KeyConcat }}"   FontSize="12" />
+                    BgColor="{StaticResource blue}"
+                    Grid.Row="3" />
+                <Grid>
+                    <controls:SummaryComponent
+                        MyVal="{Binding summary.domains_being_blocked, StringFormat='{}{0:N0}'}"
+                        Heading="Domains Being Blocked"
+                        BgColor="{StaticResource red}"
+                        CustomHeight="200"
+                        Grid.Column="0" />
+
+                    <StackLayout Grid.Column="1">
+                        <controls:SummaryComponent
+                            MyVal="{Binding summary.ads_percentage_today, StringFormat='{}{0:N2}%'}"
+                            Heading="Percentage Blocked"
+                            BgColor="{StaticResource orange}"
+                            Grid.Row="0" Grid.Column="1"/>
+                        <controls:SummaryComponent
+                            MyVal="{Binding summary.unique_domains, StringFormat='{}{0:N0}'}"
+                            Heading="Unique Domains"
+                            BgColor="{StaticResource green}"
+                            Grid.Row="1" Grid.Column="1"/>
+                    </StackLayout>
+                </Grid>
+                <StackLayout>
+                    <Grid>
+                        <controls:SummaryComponent
+                            MyVal="{Binding summary.queries_cached, StringFormat='{}{0:N0}'}"
+                            Heading="Queries Cached"
+                            BgColor="{StaticResource green}"
+                            Grid.Row="0" Grid.Column="0"/>
+                        <controls:SummaryComponent
+                            MyVal="{Binding summary.ads_blocked_today, StringFormat='{}{0:N0}'}"
+                            Heading="Ads Blocked Today"
+                            BgColor="{StaticResource red}"
+                            Grid.Row="0" Grid.Column="1"/>
+                    </Grid>
+                </StackLayout>
+
+            </StackLayout>
+            <!--End Info Blocks--> 
+
+
         </StackLayout>
-    </StackLayout>
+
+
+    </Grid>
 </ContentPage>
 
 

@@ -1,36 +1,30 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
-<ContentView xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="PiholeDashboard.Controls.TopClients">
+<ContentView
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    x:Class="PiholeDashboard.Controls.TopClients"
+    xmlns:local="clr-namespace:PiholeDashboard"
+   >
+        
+    <ContentView.Resources>
+        <ResourceDictionary>
+            <local:ActiveClientNameConverter x:Key="ActiveClientNameConverter" />
+        </ResourceDictionary>
+    </ContentView.Resources>
+
     <ContentView.Content>
         <Grid x:Name="_context">
-            <ListView BackgroundColor="White" IsPullToRefreshEnabled="False" x:Name="ItemsListView" VerticalOptions="Center" HasUnevenRows="True" SeparatorVisibility="None" SelectionMode="None"  ItemsSource="{Binding Clients}">
-                <ListView.ItemTemplate>
-                    <DataTemplate>
-                        <ViewCell IsEnabled="False">
-                            <ViewCell.View>
-                                <StackLayout Padding="15,0,15,10">
-                                    <Frame CornerRadius="10"
-                                           HasShadow="False"
-                                           Margin="0,0,0,0"
-                                           BorderColor="DarkGray"
-                                           HorizontalOptions="FillAndExpand">
-                                        <Grid>
-                                        <Grid.RowDefinitions>
-                                            <RowDefinition Height="Auto" />
-                                        </Grid.RowDefinitions>
-                                        <Grid.ColumnDefinitions>
-                                            <ColumnDefinition Width="*" />
-                                            <ColumnDefinition Width="0.3*" />
-                                        </Grid.ColumnDefinitions>
-                                        <Label x:Name="ip_address" FontAttributes="Bold" Text="{Binding Key}" Grid.Row="1" Grid.Column="0"  />
-                                        <Label x:Name="activity_count" Text="{Binding Value, StringFormat='{0:N0}'}" Grid.Row="1" Grid.Column="1"   />
-                                    </Grid>
-                                    </Frame>
-                                </StackLayout>
-                            </ViewCell.View>
-                        </ViewCell>
-
-                    </DataTemplate>
-                </ListView.ItemTemplate>
+            <ListView IsPullToRefreshEnabled="False" x:Name="ItemsListView" VerticalOptions="Center" HasUnevenRows="True" SeparatorVisibility="Default" SelectionMode="None"  ItemsSource="{Binding Clients}">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell>
+                        <StackLayout Padding="5,5,0,5">
+                             <Label FontFamily="jose" FontSize="20" Text="{Binding Key, Converter={StaticResource ActiveClientNameConverter}}" />
+                             <Label FontFamily="jose" FontSize="15" Text="{Binding Value, StringFormat='{0} Requests'}" />
+                         </StackLayout>
+                     </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
             </ListView>
         </Grid>
     </ContentView.Content>

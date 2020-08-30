@@ -43,13 +43,13 @@ namespace PiholeDashboard.Controls
                     switch (strStatus.ToLower())
                     {
                         case "enabled":
-                            return Color.Green;
+                            return (Xamarin.Forms.Color)App.Current.Resources["green"];
                         case "disabled":
                         default:
-                            return Color.Red;
+                            return (Xamarin.Forms.Color)App.Current.Resources["red"];
                     }
                 }
-                return Color.DarkOrange;
+                return (Xamarin.Forms.Color)App.Current.Resources["orange"];
             }
 
             set

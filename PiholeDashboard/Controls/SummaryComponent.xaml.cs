@@ -40,6 +40,17 @@ namespace PiholeDashboard.Controls
             set { SetValue(MyValProperty, value); }
         }
 
+        //  Height
+        public static readonly BindableProperty CustomHeightProperty =
+            BindableProperty.Create(nameof(CustomHeight), typeof(int),
+                typeof(SummaryComponent), 100,BindingMode.TwoWay, null, null);
+
+        public int CustomHeight
+        {
+            get { return (int)GetValue(CustomHeightProperty); }
+            set { SetValue(CustomHeightProperty, value); }
+        }
+
 
         // COLOR
         public static readonly BindableProperty ColorProperty =

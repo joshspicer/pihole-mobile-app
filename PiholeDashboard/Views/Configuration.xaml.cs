@@ -1,42 +1,52 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel;
 using Xamarin.Forms;
-using Xamarin.Forms.Xaml;
-
 using PiholeDashboard.Models;
-using System.Collections;
 using System.Threading.Tasks;
 using ZXing.Net.Mobile.Forms;
-
+using Xamarin.Essentials;
+using PiholeDashboard.Utils;
 namespace PiholeDashboard.Views
 {
     [DesignTimeVisible(false)]
     public partial class NewItemPage : ContentPage
     {
-        public PiHoleConfig config { get; set; }
+        public PiHoleConfig config;
+
+        public string UriBinding { get; set; }
+        public string ApiKeyBinding { get; set; }
+
+        bool isBackupSelected = false;
 
         public NewItemPage()
         {
             InitializeComponent();
-            config = new PiHoleConfig();
             BindingContext = this;
 
             // Restore values
-            if (App.Current.Properties.ContainsKey("Uri"))
-                Uri.Text = App.Current.Properties["Uri"].ToString();
-            if (App.Current.Properties.ContainsKey("ApiKey"))
-                ApiKey.Text = App.Current.Properties["ApiKey"].ToString();
+            if (!PersistenceSerializer.TryFetchConfig(out config))
+                config = new PiHoleConfig();
 
+            UriLabel.Text = config.PrimaryUri;
+            ApiKeyLabel.Text = config.PrimaryApiKey;
+
+            // Refresh Button
+            var refresh = new TapGestureRecognizer();
+            refresh.Tapped += async (s, e) => await Github_Clicked();
+            github.GestureRecognizers.Add(refresh);
+        }
+
+        async Task Github_Clicked()
+        {
+            var url = "https://github.com/joshspicer/pihole-mobile-app";
+            await Launcher.OpenAsync(url);
         }
 
         async Task ErrorAlert(string customMsg)
         {
             var wantsHelp = await DisplayAlert("Error", customMsg, "Open Help", "OK");
             if (wantsHelp)
-            {
-                await Navigation.PushModalAsync(new NavigationPage(new HelpModal()));
-            }
+                await Shell.Current.GoToAsync("///help");
         }
 
         async void QR_Clicked(object sender, EventArgs e)
@@ -52,8 +62,12 @@ namespace PiholeDashboard.Views
                 Device.BeginInvokeOnMainThread(async () =>
                 {
                     await Navigation.PopAsync();
-                    config.ApiKey = result.Text;
-                    ApiKey.Text = config.ApiKey;
+                    if (isBackupSelected)
+                        config.PrimaryApiKey = result.Text;
+                    else
+                        config.BackupApiKey = result.Text;
+
+                    ApiKeyLabel.Text = result.Text;
                 });
             };
 
@@ -62,36 +76,62 @@ namespace PiholeDashboard.Views
         }
 
         async void OpenHelp_Clicked(object sneder, EventArgs e)
-        {
-            await Navigation.PushModalAsync(new NavigationPage(new HelpModal()));
-        }
+                        => await Navigation.PushModalAsync(new NavigationPage(new HelpModal()));
 
         async void Save_Clicked(object sender, EventArgs e)
         {
-            if (!config.Uri.ToLower().Contains("http"))
+            // Validate
+            if (UriBinding != "" && !UriBinding.ToLower().Contains("http"))
             {
                 var txt = "Please specify a protocol (HTTP/HTTPS) in your URI!";
                 await ErrorAlert(txt);
                 return;
             }
 
-            var keys = new List<string>() { "ApiKey", "Uri" };
-            foreach (var k in keys)
-            {
-                // Save 
-                if (App.Current.Properties.ContainsKey(k))
-                    App.Current.Properties[k] = k == "ApiKey" ? config.ApiKey : config.Uri;
-                else
-                    App.Current.Properties.Add(k, k == "ApiKey" ? config.ApiKey : config.Uri);
-            }
+            DisplayValues();
+
+            // Save
+            PersistenceSerializer.SerializeAndSaveConfig(config);
 
             // Pop this model.
-            await Navigation.PopModalAsync();
+            await Shell.Current.GoToAsync("///browse");
         }
 
-        async void Cancel_Clicked(object sender, EventArgs e)
+        void DisplayValues()
         {
-            await Navigation.PopModalAsync();
+            if (isBackupSelected)
+            {
+                config.BackupUri = UriBinding;
+                config.BackupApiKey = ApiKeyBinding;
+            }
+            else
+            {
+                config.PrimaryUri = UriBinding;
+                config.PrimaryApiKey = ApiKeyBinding;
+            }
+        }
+
+        async void Cancel_Clicked(object sender, EventArgs e) => await Shell.Current.GoToAsync("///browse");
+
+        void RadioButton_CheckedChanged(object sender, CheckedChangedEventArgs e)
+        {
+            // Write whatever is written where user is dismissing
+            DisplayValues();
+
+            // Set class var to indicate if we are configuring primary or backup pihole.
+            isBackupSelected = e.Value;
+
+            // Display the right cached value
+            if (isBackupSelected)
+            {
+                UriLabel.Text = config.BackupUri;
+                ApiKeyLabel.Text = config.BackupApiKey;
+            }
+            else
+            {
+                UriLabel.Text = config.PrimaryUri;
+                ApiKeyLabel.Text = config.PrimaryApiKey;
+            }
         }
     }
 }

@@ -1,21 +1,63 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
-<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:d="http://xamarin.com/schemas/2014/forms/design" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" mc:Ignorable="d" x:Class="PiholeDashboard.Views.NewItemPage" Title="Set Credential">
+<ContentPage
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:xaml="http://xamarin.com/schemas/2014/forms"
+    mc:Ignorable="d"
+    xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core" 
+    ios:Page.UseSafeArea="true"
+    x:Class="PiholeDashboard.Views.NewItemPage"
+    Title="Set Credential">
+
     <ContentPage.ToolbarItems>
         <ToolbarItem Text="Cancel" Clicked="Cancel_Clicked" />
         <ToolbarItem Text="Save" Clicked="Save_Clicked" />
     </ContentPage.ToolbarItems>
     <ContentPage.Content>
         <Grid x:Name="_context">
+
             <StackLayout HorizontalOptions="CenterAndExpand">
+          
                 <StackLayout Spacing="10" Padding="15,25,15,15">
+
+                    <StackLayout HorizontalOptions="EndAndExpand" Spacing="10" Orientation="Horizontal">
+                        <Button x:Name="leftBtn" Grid.Row="2" Margin="50,0,0,0" FontFamily="FontAwesome" BackgroundColor="{StaticResource lemon}" HeightRequest="52" WidthRequest="52"
+                            TextColor="{StaticResource blue}" Text="&#xf55a;"  Clicked="Cancel_Clicked"
+                            HorizontalOptions="Center" VerticalOptions="Center" FontSize="24" Grid.Column="0" CornerRadius="24" />
+
+                        <Button x:Name="centerBtn" Grid.Row="2" FontFamily="FontAwesome" BackgroundColor="{StaticResource lemon}" HeightRequest="52" WidthRequest="52"
+                            TextColor="{StaticResource blue}" Text="&#xf0c7;" Clicked="Save_Clicked" 
+                            HorizontalOptions="Center" VerticalOptions="Center" FontSize="32" Grid.Column="1" CornerRadius="24" />
+                    </StackLayout>
+
+                    <!-- Toggle Between Primary and Backup Pi-Hole -->
+                    <StackLayout Orientation="Horizontal">
+                        <RadioButton Text="Primary" GroupName="mode" IsChecked="True" />
+                        <RadioButton Text="Backup" GroupName="mode" CheckedChanged="RadioButton_CheckedChanged" />
+                    </StackLayout>
+
                     <Label Text="Pi-Hole URI"  FontAttributes="Bold" FontSize="Medium" />
-                    <Entry x:Name="Uri" BackgroundColor="LightGray" TextColor="Black" Keyboard="Url" Margin="0,0,0,10" Placeholder="http://joshspicer.com:80" IsSpellCheckEnabled="False" IsTextPredictionEnabled="false" Text ="{Binding config.Uri}" FontSize="Small" />
+                    <Entry x:Name="UriLabel" BackgroundColor="LightGray" TextColor="Black" Keyboard="Url" Margin="0,0,0,10" Placeholder="http://joshspicer.com:80" IsSpellCheckEnabled="False" IsTextPredictionEnabled="false" Text ="{Binding UriBinding}" FontSize="Small" />
                     <Label Text="WEBPASSWORD API Key" FontAttributes="Bold" FontSize="Medium" />
-                    <Entry x:Name="ApiKey" BackgroundColor="LightGray" TextColor="Black" Keyboard="Url" IsSpellCheckEnabled="False" Placeholder="WEBPASSWORD from /etc/pihole/setupVars.conf" IsTextPredictionEnabled="false"  Text="{Binding config.ApiKey}" FontSize="Small" />
+                    <Entry x:Name="ApiKeyLabel" BackgroundColor="LightGray" TextColor="Black" Keyboard="Url" IsSpellCheckEnabled="False" Placeholder="WEBPASSWORD from /etc/pihole/setupVars.conf" IsTextPredictionEnabled="false"  Text="{Binding ApiKeyBinding}" FontSize="Small" />
                     <Button Clicked="QR_Clicked" Text="(or) Scan QR Code" />
                 </StackLayout>
-                <Label Padding="15,15,0,0"  FontAttributes="Bold" Text="Having Trouble?"/>
-                <Button x:Name="helpButton" Padding="15,0,0,15" FontSize="16" Text="Toggle Help" Clicked="OpenHelp_Clicked" HorizontalOptions="Start"/>
+
+                <!-- Help Menu -->
+                <StackLayout Padding="15,0,0,60" >
+                    <Label FontAttributes="Bold" Margin="0"  Padding="0,0,0,0" Text="Having Trouble?"/>
+                    <Button x:Name="helpButton" FontSize="16" Text="Toggle Help" Margin="0" Clicked="OpenHelp_Clicked" HorizontalOptions="Start"/>
+                </StackLayout>
+
+                <!-- Credits -->
+                <StackLayout VerticalOptions="EndAndExpand" HorizontalOptions="Center">
+                    <Label FontAttributes="Bold" Margin="0"   HorizontalTextAlignment="Center" FontSize="12" Padding="0,0,0,0" Text="(c) Josh Spicer"/>
+                    <Label x:Name="github" FontAttributes="Bold" Margin="0"   HorizontalTextAlignment="Center" FontSize="12" Padding="0,0,0,0" Text="Open Source on GitHub"/>
+
+                </StackLayout>
+
             </StackLayout>
         </Grid>
     </ContentPage.Content>
