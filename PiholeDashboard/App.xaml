@@ -52,6 +52,12 @@
                 <Setter Property="TextColor" Value="White"/>
             </Style>
 
+            <Style TargetType="RadioButton">
+                <Setter Property="TextColor"
+                        Value="{AppThemeBinding
+                        Dark={StaticResource lightColor},
+                        Light={StaticResource darkColor}}"/>
+            </Style>
 
         </ResourceDictionary>
     </Application.Resources>

@@ -20,6 +20,7 @@
   <ItemGroup>
     <Folder Include="Resources\" />
     <Folder Include="Utils\" />
+    <Folder Include="Functions\" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Resources\fa.ttf" />

@@ -6,6 +6,7 @@ using PiholeDashboard.Models;
 using System.Net.Http;
 using System.Threading.Tasks;
 using PiholeDashboard.Utils;
+using PiholeDashboard.Functions;
 
 namespace PiholeDashboard.Views
 {
@@ -23,6 +24,9 @@ namespace PiholeDashboard.Views
             InitializeComponent();
             BindingContext = this;
 
+            MessagingCenter.Subscribe<Application>(App.Current, "RefreshDashboard",
+                                                           async (app) => await DoRefresh(showError: false));
+
             OnPropertyChanged(nameof(summary));
             OnPropertyChanged(nameof(lastUpdated));
 
@@ -30,6 +34,7 @@ namespace PiholeDashboard.Views
             var refresh = new TapGestureRecognizer();
             refresh.Tapped += async (s, e) => await DoRefresh();
             refreshStack_label.GestureRecognizers.Add(refresh);
+
         }
 
         async Task ErrorAlert(string customMsg)

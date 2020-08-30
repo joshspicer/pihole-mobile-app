@@ -50,8 +50,8 @@
             </StackLayout>
 
             <StackLayout x:Name="radioButtons" Padding="5,0,0,0" Orientation="Horizontal">
-                <RadioButton TextColor="Black" Text="Primary" GroupName="mode" IsChecked="True" />
-                <RadioButton TextColor="Black" Text="Backup" GroupName="mode" CheckedChanged="RadioButton_CheckedChanged" />
+                <RadioButton Text="Primary" GroupName="mode" IsChecked="True" />
+                <RadioButton Text="Backup" GroupName="mode" CheckedChanged="RadioButton_CheckedChanged" />
             </StackLayout>
 
             <!--Info blocks-->
