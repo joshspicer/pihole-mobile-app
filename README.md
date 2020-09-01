@@ -12,6 +12,21 @@ The idea of this app is to provide "quick toggles" and display information that 
 
 Feel free to [open an issue](https://github.com/joshspicer/pihole-mobile-app/issues) for any ideas/concerns, after checking out the [feature road map](https://github.com/joshspicer/pihole-mobile-app/projects/1).  **Pull requests are welcomed and encouraged!**
 
+### Version 1.4
+<kbd>
+  <img width=250 src="Screenshots/4.png">
+</kbd>
+<kbd>
+  <img width=250 src="Screenshots/5.png">
+</kbd>
+<kbd>
+  <img width=250 src="Screenshots/6.png">
+</kbd>
+<kbd>
+  <img width=250 src="Screenshots/7.png">
+</kbd>
+
+### Version 1.0-1.3
 <kbd>
   <img width=250 src="Screenshots/1.png">
 </kbd>
