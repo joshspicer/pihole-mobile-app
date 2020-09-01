@@ -25,6 +25,9 @@ Feel free to [open an issue](https://github.com/joshspicer/pihole-mobile-app/iss
 <kbd>
   <img width=250 src="Screenshots/7.png">
 </kbd>
+<kbd>
+  <img width=250 src="Screenshots/8.png">
+</kbd>
 
 ### Version 1.0-1.3
 <kbd>
