@@ -49,7 +49,10 @@
 
             <Style TargetType="Button" ApplyToDerivedTypes="True">
                 <Setter Property="FontFamily" Value="jose" />
-                <Setter Property="TextColor" Value="White"/>
+                 <Setter Property="TextColor"
+                        Value="{AppThemeBinding
+                        Dark={StaticResource lightColor},
+                        Light={StaticResource darkColor}}"/> 
             </Style>
 
             <Style TargetType="RadioButton">

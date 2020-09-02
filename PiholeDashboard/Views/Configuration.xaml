@@ -47,17 +47,14 @@
 
                 <!-- Help Menu -->
                 <StackLayout Padding="15,0,0,60" >
-                    <Label FontAttributes="Bold" Margin="0"  Padding="0,0,0,0" Text="Having Trouble?"/>
                     <Button x:Name="helpButton" FontSize="16" Text="Toggle Help" Margin="0" Clicked="OpenHelp_Clicked" HorizontalOptions="Start"/>
                 </StackLayout>
 
                 <!-- Credits -->
                 <StackLayout VerticalOptions="EndAndExpand" HorizontalOptions="Center">
                     <Label FontAttributes="Bold" Margin="0"   HorizontalTextAlignment="Center" FontSize="12" Padding="0,0,0,0" Text="(c) Josh Spicer"/>
-                    <Label x:Name="github" FontAttributes="Bold" Margin="0"   HorizontalTextAlignment="Center" FontSize="12" Padding="0,0,0,0" Text="Open Source on GitHub"/>
-
+                    <Label x:Name="github" FontAttributes="Bold" Margin="0"   HorizontalTextAlignment="Center" FontSize="12" Padding="0,0,0,0" Text="Open Source on GitHub (visit)"/>
                 </StackLayout>
-
             </StackLayout>
         </Grid>
     </ContentPage.Content>

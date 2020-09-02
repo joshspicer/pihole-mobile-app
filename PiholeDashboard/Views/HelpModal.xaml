@@ -21,29 +21,23 @@
                            Padding="10,10,0,0"
                            Text="Pi-Hole Uri" />
                         <Label x:Name="uriHelpDetail"
-                           FontSize="Header"
-                            TextType="Html"
+                            TextType="Text"
+                               FontSize="Small"
                            Padding="10,10,0,0">
                             <Label.Text>
 The Pi-Hole URI is the beginning of whatever you use to connect to the Pi-Hole web interface. For example if you enter:
 
-&lt;br&gt;&lt;br&gt;
 
-&lt;code&gt; http://192.168.1.200:8181/admin &lt;/code&gt;
-
-&lt;br&gt;&lt;br&gt;
+http://192.168.1.200:8181/admin
+                                
 
 to access the web interface, you should enter:
 
-&lt;br&gt;&lt;br&gt;
 
-&lt;code&gt; http://192.168.1.200:8181 &lt;/code&gt; 
+http://192.168.1.200:8181
 
-&lt;br&gt;&lt;br&gt;
 
 into PiContrHOLE.
-
-&lt;br&gt;&lt;br&gt;
 
 Ensure you're entering the correct protocol (HTTP/HTTPS) and (if necessary) ports.
 
@@ -51,36 +45,27 @@ Ensure you're entering the correct protocol (HTTP/HTTPS) and (if necessary) port
                         </Label>
 
                         <Label x:Name="uriHelpDetail2"
-                           FontSize="Header"
-                            TextType="Html"
+                           FontSize="Small"
                            Padding="10,10,0,0">
                             <Label.Text>
-If your web interface is hosted over port 80 (the default) you do not need to specify it.
 
-&lt;br&gt;&lt;br&gt;
+If your web interface is hosted over port 80 (the default) you do not need to specify it.
 
 You can test the API by visiting:
 
-&lt;br&gt;&lt;br&gt;
 
-&lt;code&gt; http://YOUR_PI_IP/admin/api.php?summary &lt;/code&gt;
-
+http://YOUR_PI_IP/admin/api.php?summary
 
                             </Label.Text>
                         </Label>
 
                         <Label x:Name="uriHelpDetail3"
-                           FontSize="Header"
-                            TextType="Html"
+                           FontSize="Small"
                            Padding="10,10,0,0">
                             <Label.Text>
 If you see data on the screen, your pi-hole is setup correctly!
 
-&lt;br&gt;&lt;br&gt;
-
 If the page does not load, please first fix the configuration of your pi-hole and check your firewall settings.
-
-&lt;br&gt;&lt;br&gt;
 
 Note that if you are accessing your pi-hole outside of your local network, you must communicate over HTTPS (An iOS rule).
 
@@ -103,32 +88,25 @@ Note that if you are accessing your pi-hole outside of your local network, you m
                            Padding="10,10,0,0"
                            Text="WEBPASSWORD (API Key)" />
                         <Label x:Name="apiHelpDetail"
-                           FontSize="Header"
-                           TextType="Html"
+                           FontSize="Small"
                            Padding="10,10,0,0"
                            >
                             <Label.Text>
 One of the simplest ways to acquire the API Key is to, in the pi-hole webapp open:
 
-&lt;br&gt;&lt;br&gt;
 
-&lt;code&gt; Settings > API/Web Interface > Show API Token &lt;/code&gt;
+Settings > API/Web Interface > Show API Token
 
-&lt;br&gt;&lt;br&gt;
 
 If this doesn't work - there's an alternative! You'll need to connect to your pi-hole over SSH (or physically), browse to the file:
 
-&lt;br&gt;&lt;br&gt;
 
-&lt;code&gt; /etc/pihole/setupVars.conf &lt;/code&gt;
+/etc/pihole/setupVars.conf
 
-&lt;br&gt;&lt;br&gt;
 
 and copy the WEBPASSWORD entry.
 
-&lt;br&gt;&lt;br&gt;
-
-Enter *just* the part *after* the &lt;code&gt; WEBPASSWORD= &lt;/code&gt;
+Enter *just* the part *after* the WEBPASSWORD= .
                             </Label.Text>
                         </Label>
 
@@ -143,22 +121,49 @@ Enter *just* the part *after* the &lt;code&gt; WEBPASSWORD= &lt;/code&gt;
                        IsClippedToBounds="True"
                        >
                     <StackLayout>
+                        <Label x:Name="uiHelpHeader"
+                           FontSize="Header"
+                           FontAttributes="Bold"
+                           Padding="10,10,0,0"
+                           Text="Quick Tips" />
+                        <Label x:Name="uiHelpDetail"
+                           FontSize="Small"
+                           Padding="10,10,0,0"
+                          >
+                            <Label.Text>
+This app supports Dark mode!  Toggle your iPhone's system dark mode setting to toggle.
+
+
+Long press (3D Touch) the app icon from your home screen to quickly enable/disable your primary pi-hole.
+
+
+                            </Label.Text>
+                        </Label>
+                    </StackLayout>
+                </Frame>
+                <Frame CornerRadius="10"
+                       HasShadow="False"
+                       x:Name="helpView4"
+                       HorizontalOptions="CenterAndExpand"
+                       Margin="15,20,15,0"
+                       BorderColor="DarkGray"
+                       IsClippedToBounds="True"
+                       >
+                    <StackLayout>
                         <Label x:Name="moreInfoHelpHeader"
                            FontSize="Header"
                            FontAttributes="Bold"
                            Padding="10,10,0,0"
                            Text="Raise an Issue" />
                         <Label x:Name="moreInfoHelpDetail"
-                           FontSize="Header"
-                           TextType="Html"
+                           FontSize="Small"
                            Padding="10,10,0,0"
                           >
                             <Label.Text>
-This app has been tested against Pi-Hole v4.4 and (briefly) v5.0.
+This app has been tested against Pi-Hole v4.4 and v5.0.
 
-&lt;br&gt;&lt;br&gt;
 
-Visit &lt;code&gt;github.com/joshspicer/pihole-mobile-app &lt;/code&gt;for additional resources and to open an issue!  Thanks!
+The best way to report a bug or request a feature is by visiting github.com/joshspicer/pihole-mobile-app and opening an issue. Thanks!
 
 
                             </Label.Text>
