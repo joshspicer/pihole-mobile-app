@@ -20,14 +20,14 @@
         <StackLayout>
 
             <StackLayout x:Name="radioButtons" Padding="5,0,0,0" Orientation="Horizontal" HorizontalOptions="Center">
-                <RadioButton Text="Primary" GroupName="mode" IsChecked="True" />
-                <RadioButton Text="Backup" GroupName="mode" CheckedChanged="RadioButton_CheckedChanged" />
+                <RadioButton Text="Primary" TextColor="White" GroupName="mode" IsChecked="True" />
+                <RadioButton Text="Backup"  TextColor="White" GroupName="mode" CheckedChanged="RadioButton_CheckedChanged" />
             </StackLayout>
 
-            <Button Margin="0,15,0,0"  Text="Enable Pi-Hole" Clicked="Enable_Clicked" BackgroundColor="{StaticResource green}" />
-            <Button Margin="0,10,0,20"  Text="Disable Pi-Hole" Clicked="Disable_Clicked" BackgroundColor="{d:StaticResource red}"  />
-            <Button Margin="0,10,0,0" Text="Disable for 10 Seconds" Clicked="Disable10_Clicked" BackgroundColor="{StaticResource blue}" />
-            <Button Margin="0,10,0,0" Text="Disable for 60 Seconds" Clicked="Disable60_Clicked" BackgroundColor="{StaticResource blue}"  />
-            <Button Margin="0,10,0,0" Text="Disable for 5 Minutes"  Clicked="Disable300_Clicked" BackgroundColor="{StaticResource blue}" />
+            <Button Margin="0,15,0,0"  TextColor="White" Text="Enable Pi-Hole" Clicked="Enable_Clicked" BackgroundColor="{StaticResource green}" />
+            <Button Margin="0,10,0,20" TextColor="White" Text="Disable Pi-Hole" Clicked="Disable_Clicked" BackgroundColor="{d:StaticResource red}"  />
+            <Button Margin="0,10,0,0"  TextColor="White" Text="Disable for 10 Seconds" Clicked="Disable10_Clicked" BackgroundColor="{StaticResource blue}" />
+            <Button Margin="0,10,0,0"  TextColor="White" Text="Disable for 60 Seconds" Clicked="Disable60_Clicked" BackgroundColor="{StaticResource blue}"  />
+            <Button Margin="0,10,0,0"  TextColor="White" Text="Disable for 5 Minutes"  Clicked="Disable300_Clicked" BackgroundColor="{StaticResource blue}" />
         </StackLayout>
 </ContentPage>
