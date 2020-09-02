@@ -20,8 +20,8 @@
         <StackLayout>
 
             <StackLayout x:Name="radioButtons" Padding="5,0,0,0" Orientation="Horizontal" HorizontalOptions="Center">
-                <RadioButton Text="Primary" TextColor="White" GroupName="mode" IsChecked="True" />
-                <RadioButton Text="Backup"  TextColor="White" GroupName="mode" CheckedChanged="RadioButton_CheckedChanged" />
+                <RadioButton Text="Primary" GroupName="mode" IsChecked="True" />
+                <RadioButton Text="Backup"  GroupName="mode" CheckedChanged="RadioButton_CheckedChanged" />
             </StackLayout>
 
             <Button Margin="0,15,0,0"  TextColor="White" Text="Enable Pi-Hole" Clicked="Enable_Clicked" BackgroundColor="{StaticResource green}" />
