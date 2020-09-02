@@ -7,9 +7,9 @@
 	<key>CFBundleIdentifier</key>
 	<string>com.joshspicer.piholedashboard</string>
 	<key>CFBundleShortVersionString</key>
-	<string>1.4</string>
+	<string>1.4.1</string>
 	<key>CFBundleVersion</key>
-	<string>4</string>
+	<string>1</string>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
 	<key>UIApplicationShortcutItems</key>

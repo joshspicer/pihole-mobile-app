@@ -53,22 +53,25 @@ namespace PiholeDashboard.Views
         {
             var scanPage = new ZXingScannerPage();
 
-            scanPage.OnScanResult += (result) =>
+            scanPage.OnScanResult += async (result) =>
             {
                 // Stop scanning
                 scanPage.IsScanning = false;
+                scanPage.IsAnalyzing = false;
 
                 // Pop the page and show the result
                 Device.BeginInvokeOnMainThread(async () =>
                 {
-                    await Navigation.PopAsync();
+                    await Shell.Current.GoToAsync("///configuration");
+
                     if (isBackupSelected)
-                        config.PrimaryApiKey = result.Text;
-                    else
                         config.BackupApiKey = result.Text;
+                    else
+                        config.PrimaryApiKey = result.Text;
 
                     ApiKeyLabel.Text = result.Text;
                 });
+
             };
 
             // Navigate to our scanner page
