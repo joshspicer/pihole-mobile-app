@@ -50,6 +50,8 @@ This app is available on the iOS app store under the name [Pi ContrHOLE](https:/
 
 Download, [Visual Studio 2019 (Mac/Windows)](https://visualstudio.microsoft.com/), open the `.sln` file, and build for the appropriate device (ios/android).
 
+Although this app is technically cross platform, I haven't been actively testing the Android version (and as such there might be some minor issues with it).
+
 ### Note
 
 You will need an API key for anything in that requires authorization. For more details check [here](./help.md). 
